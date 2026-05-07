@@ -516,6 +516,17 @@ def _badge_html(article: dict) -> str:
     return " ".join(badges) if badges else '<span class="text-on-surface-variant font-label-sm text-label-sm">—</span>'
 
 
+def _level_badge_html(level: str) -> str:
+    """用語のレベルバッジHTMLを返す（初級=緑、中級=黄、上級=赤）"""
+    config = {
+        "初級": ("bg-green-100 text-green-700 border-green-200", "初級"),
+        "中級": ("bg-yellow-100 text-yellow-700 border-yellow-200", "中級"),
+        "上級": ("bg-red-100 text-red-700 border-red-200", "上級"),
+    }
+    cls, label = config.get(level, ("bg-gray-100 text-gray-600 border-gray-200", level or "中級"))
+    return f'<span class="{cls} px-2 py-0.5 rounded font-label-sm text-label-sm border">{label}</span>'
+
+
 def _category_chart_html(articles: list[dict]) -> str:
     """カテゴリ別横棒グラフHTMLを返す"""
     from collections import Counter
@@ -594,10 +605,17 @@ def generate_daily_html(articles: list[dict], target_date: date) -> str:
             val = details.get(key, 0)
             score_rows += f'<li class="flex justify-between"><span class="text-on-surface-variant">{label}:</span><span class="text-brand-blue font-bold">{val}/5</span></li>'
 
-        # タグ
-        tags = a.get("tags") or a.get("new_terms") or []
-        if isinstance(tags, list):
-            tag_html = " ".join(f'<span class="bg-surface-variant text-on-surface px-2 py-0.5 rounded font-label-sm text-label-sm">{_escape_html(str(t))}</span>' for t in tags[:6])
+        # タグ（new_terms が list[dict] の場合も term 文字列を取り出す）
+        raw_tags = a.get("tags") or []
+        if not raw_tags:
+            raw_new_terms = a.get("new_terms") or []
+            raw_tags = [
+                (t.get("term", "") if isinstance(t, dict) else str(t))
+                for t in raw_new_terms
+                if (t.get("term", "") if isinstance(t, dict) else str(t))
+            ]
+        if isinstance(raw_tags, list):
+            tag_html = " ".join(f'<span class="bg-surface-variant text-on-surface px-2 py-0.5 rounded font-label-sm text-label-sm">{_escape_html(str(t))}</span>' for t in raw_tags[:6])
         else:
             tag_html = ""
 
@@ -646,13 +664,15 @@ def generate_daily_html(articles: list[dict], target_date: date) -> str:
   </div>
 </article>"""
 
-    # 新出用語テーブル
+    # 新出用語テーブル（list[dict] または list[str] 両フォーマット対応）
     new_terms = []
     for a in articles:
         terms = a.get("new_terms") or []
         if isinstance(terms, list):
             for t in terms:
-                new_terms.append({"term": str(t), "source": a.get("source_name", ""), "score": a.get("score", 0)})
+                term_str = t.get("term", "") if isinstance(t, dict) else str(t)
+                if term_str:
+                    new_terms.append({"term": term_str, "source": a.get("source_name", ""), "score": a.get("score", 0)})
     term_rows = ""
     seen_terms: set = set()
     for t in new_terms:
@@ -790,7 +810,10 @@ def generate_index_html(recent: list[tuple[date, list[dict]]]) -> str:
     for a in today_articles:
         terms = a.get("new_terms") or []
         if isinstance(terms, list):
-            new_terms_all.extend(str(t) for t in terms)
+            for t in terms:
+                s = t.get("term", "") if isinstance(t, dict) else str(t)
+                if s:
+                    new_terms_all.append(s)
     new_terms_unique = list(dict.fromkeys(new_terms_all))  # 重複除去・順序保持
 
     # KPI カード（Stitch v2: アイコン付き正方形バッジスタイル）
@@ -1028,6 +1051,8 @@ def generate_weekly_html(latest_date=None) -> str:
 
 def generate_glossary_html(latest_date=None) -> str:
     """AI用語図鑑 HTML を生成する（terms/glossary.md を読み込む）"""
+    import json as _json
+
     glossary_path = ROOT / "terms" / "glossary.md"
     if not glossary_path.exists():
         content = '<p class="font-body-md text-body-md text-on-surface-variant">用語集がまだ作成されていません。</p>'
@@ -1035,11 +1060,17 @@ def generate_glossary_html(latest_date=None) -> str:
 
     raw_md = glossary_path.read_text(encoding="utf-8")
 
+    def _url_from_md_link(s: str) -> str:
+        """[title](url) → url を抽出"""
+        m = re.search(r'\(([^)]+)\)', s)
+        return m.group(1) if m else ""
+
     # `## 用語名` セクションを解析してカード形式で表示
     sections = re.split(r'\n(?=## )', raw_md)
-    # 凡例・ヘッダーセクションをスキップ（"## 凡例" など）
     term_cards = ""
     term_count = 0
+    glossary_rows: list[dict] = []  # CSV出力用
+
     for sec in sections:
         lines = sec.strip().split("\n")
         if not lines:
@@ -1051,14 +1082,18 @@ def generate_glossary_html(latest_date=None) -> str:
         if term_name in ("凡例", "用語名"):
             continue
         body_lines = lines[1:]
-        # 初出日・出典・定義を抽出
+
+        # フィールド抽出（レベル追加）
         init_date = ""
         source_link = ""
         definition = ""
+        level = "中級"  # 旧エントリのデフォルト
         for bl in body_lines:
             bl = bl.strip()
             if bl.startswith("- 初出日:"):
                 init_date = bl[6:].strip()
+            elif bl.startswith("- レベル:"):
+                level = bl[6:].strip()
             elif bl.startswith("- 出典:"):
                 source_link = bl[5:].strip()
             elif bl.startswith("- 定義:"):
@@ -1067,36 +1102,112 @@ def generate_glossary_html(latest_date=None) -> str:
                 if not definition:
                     definition = bl
 
-        term_cards += f"""<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow">
+        # 「（要追記）」はブランク扱い
+        if definition in ("（要追記）", "（要追記）"):
+            definition = ""
+
+        level_badge = _level_badge_html(level)
+        def_html = _inline_md(_escape_html(definition)) if definition else '<em class="text-on-surface-variant/60">定義未登録</em>'
+
+        term_cards += f"""<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-level="{_escape_html(level)}">
   <div class="flex items-start justify-between gap-md mb-sm">
-    <h3 class="font-h3 text-h3 text-primary font-bold">{_escape_html(term_name)}</h3>
+    <div class="flex items-center gap-xs flex-wrap">
+      <h3 class="font-h3 text-h3 text-primary font-bold">{_escape_html(term_name)}</h3>
+      {level_badge}
+    </div>
     <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full flex-shrink-0">{_escape_html(init_date)}</span>
   </div>
-  <p class="font-body-md text-body-md text-on-surface-variant mb-sm">{_inline_md(_escape_html(definition)) if definition else "<em>定義未登録</em>"}</p>
+  <p class="font-body-md text-body-md text-on-surface mb-sm leading-relaxed">{def_html}</p>
   {"<p class='font-label-sm text-label-sm text-on-surface-variant'>" + _inline_md(source_link) + "</p>" if source_link else ""}
 </div>"""
+        glossary_rows.append({
+            "term": term_name,
+            "level": level,
+            "definition": definition,
+            "date": init_date,
+            "url": _url_from_md_link(source_link),
+        })
         term_count += 1
 
     if not term_cards:
         term_cards = '<p class="font-body-md text-body-md text-on-surface-variant">用語はまだ登録されていません。</p>'
 
+    glossary_data_json = _json.dumps(glossary_rows, ensure_ascii=False)
+
     content = f"""
-<div class="flex items-center justify-between mb-md">
-  <p class="font-body-md text-body-md text-on-surface-variant">全 <strong>{term_count}</strong> 用語</p>
-  <input type="text" id="glossary-search" placeholder="用語を検索..."
-    oninput="filterGlossary(this.value)"
-    class="bg-surface border border-outline-variant text-on-surface font-body-md text-body-md rounded-md px-md py-sm outline-none w-64 focus:border-primary">
+<div class="flex flex-col gap-md mb-lg">
+  <div class="flex items-center justify-between gap-md flex-wrap">
+    <p class="font-body-md text-body-md text-on-surface-variant">全 <strong id="glossary-count">{term_count}</strong> 用語</p>
+    <div class="flex items-center gap-sm flex-wrap">
+      <input type="text" id="glossary-search" placeholder="用語を検索..."
+        oninput="filterGlossary()"
+        class="bg-surface border border-outline-variant text-on-surface font-body-md text-body-md rounded-md px-md py-sm outline-none w-48 focus:border-primary">
+      <button onclick="downloadCSV()"
+        class="flex items-center gap-xs px-md py-sm bg-primary text-on-primary rounded-md font-label-sm text-label-sm hover:opacity-90 transition-opacity">
+        <span class="material-symbols-outlined text-[16px]">download</span>
+        CSVダウンロード
+      </button>
+    </div>
+  </div>
+  <div class="flex items-center gap-sm flex-wrap">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">レベル:</span>
+    <button onclick="filterByLevel('all')" id="level-all"
+      class="px-md py-xs bg-primary text-on-primary rounded-full font-label-sm text-label-sm transition-all">すべて</button>
+    <button onclick="filterByLevel('初級')" id="level-初級"
+      class="px-md py-xs bg-green-100 text-green-700 border border-green-200 rounded-full font-label-sm text-label-sm hover:bg-green-200 transition-all">初級</button>
+    <button onclick="filterByLevel('中級')" id="level-中級"
+      class="px-md py-xs bg-yellow-100 text-yellow-700 border border-yellow-200 rounded-full font-label-sm text-label-sm hover:bg-yellow-200 transition-all">中級</button>
+    <button onclick="filterByLevel('上級')" id="level-上級"
+      class="px-md py-xs bg-red-100 text-red-700 border border-red-200 rounded-full font-label-sm text-label-sm hover:bg-red-200 transition-all">上級</button>
+  </div>
 </div>
 <div id="glossary-grid" class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
 {term_cards}
 </div>
 <script>
-function filterGlossary(q) {{
+const glossaryData = {glossary_data_json};
+let currentLevel = 'all';
+
+function filterGlossary() {{
+  const q = document.getElementById('glossary-search').value.toLowerCase();
   const cards = document.querySelectorAll('#glossary-grid > div');
-  q = q.toLowerCase();
+  let visible = 0;
   cards.forEach(c => {{
-    c.style.display = c.textContent.toLowerCase().includes(q) ? '' : 'none';
+    const matchText = c.textContent.toLowerCase().includes(q);
+    const matchLevel = currentLevel === 'all' || c.dataset.level === currentLevel;
+    const show = matchText && matchLevel;
+    c.style.display = show ? '' : 'none';
+    if (show) visible++;
   }});
+  document.getElementById('glossary-count').textContent = visible;
+}}
+
+function filterByLevel(level) {{
+  currentLevel = level;
+  ['all','初級','中級','上級'].forEach(l => {{
+    const btn = document.getElementById('level-' + l);
+    if (!btn) return;
+    if (l === level) {{
+      btn.classList.add('ring-2', 'ring-offset-1', 'ring-primary');
+    }} else {{
+      btn.classList.remove('ring-2', 'ring-offset-1', 'ring-primary');
+    }}
+  }});
+  filterGlossary();
+}}
+
+function downloadCSV() {{
+  const BOM = '﻿';
+  const header = '用語,レベル,定義,初出日,出典URL\n';
+  const esc = s => '"' + (s || '').replace(/"/g, '""') + '"';
+  const rows = glossaryData.map(d =>
+    [esc(d.term), esc(d.level), esc(d.definition), esc(d.date), esc(d.url)].join(',')
+  ).join('\n');
+  const blob = new Blob([BOM + header + rows], {{type: 'text/csv;charset=utf-8;'}});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ai-glossary.csv';
+  a.click();
 }}
 </script>"""
     return _page_shell("AI用語図鑑", "menu_book", "glossary", content, latest_date)

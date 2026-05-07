@@ -112,6 +112,28 @@ def _default_score_data() -> dict:
     }
 
 
+def _normalize_key_terms(raw: list) -> list[dict]:
+    """key_terms を [{term, level, definition}] 形式に正規化する（旧フォーマット互換）"""
+    result = []
+    valid_levels = {"初級", "中級", "上級"}
+    for item in raw:
+        if isinstance(item, str):
+            # 旧フォーマット互換：文字列 → dict に昇格
+            term = item.strip()
+            if term:
+                result.append({"term": term, "level": "中級", "definition": ""})
+        elif isinstance(item, dict):
+            term = str(item.get("term", "")).strip()
+            if not term:
+                continue
+            level = item.get("level", "中級")
+            if level not in valid_levels:
+                level = "中級"
+            definition = str(item.get("definition", ""))
+            result.append({"term": term, "level": level, "definition": definition})
+    return result
+
+
 def _apply_score(article: Article, score_data: dict, weights: dict) -> Article:
     """スコアデータをArticleに適用して重み付きスコアを計算する"""
     score_keys = ["importance", "novelty", "business_value", "learning_value", "primary_source_score"]
@@ -140,7 +162,7 @@ def _apply_score(article: Article, score_data: dict, weights: dict) -> Article:
     article.score_details = details
     article.summary_ja = score_data.get("summary_ja", "")
     article.tags = score_data.get("tags", [])
-    article.new_terms = score_data.get("key_terms", [])
+    article.new_terms = _normalize_key_terms(score_data.get("key_terms", []))
     article.target_clients = score_data.get("target_clients", [])
     article.content_potential = score_data.get("content_potential", {})
 
@@ -240,7 +262,7 @@ class ClaudeScorer(BaseScorer):
     def _call_api(self, user_prompt: str) -> str:
         response = self.client.messages.create(
             model=self.model,
-            max_tokens=512,
+            max_tokens=800,
             system=self.system_prompt,
             messages=[{"role": "user", "content": user_prompt}],
         )
@@ -264,7 +286,7 @@ class GeminiScorer(BaseScorer):
             self.genai = genai
             self.generation_config = GenerationConfig(
                 response_mime_type="application/json",
-                max_output_tokens=512,
+                max_output_tokens=800,
             )
             logger.info(f"GeminiScorer 初期化完了: モデル={model}")
         except ImportError:

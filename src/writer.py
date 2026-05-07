@@ -72,14 +72,21 @@ def update_glossary(articles: list[Article], today: datetime) -> int:
                 existing_terms.add(line[3:].strip())
 
     # 新出用語を収集
-    new_entries: list[tuple[str, str, str]] = []  # (term, source_title, url)
+    new_entries: list[tuple[str, str, str, str, str]] = []  # (term, level, definition, source_title, url)
     seen_terms: set[str] = set()
     for article in articles:
-        for term in article.new_terms:
-            term = term.strip()
-            if term and term not in existing_terms and term not in seen_terms:
-                new_entries.append((term, article.title, article.url))
-                seen_terms.add(term)
+        for item in article.new_terms:
+            if isinstance(item, dict):
+                term_str = item.get("term", "").strip()
+                level = item.get("level", "中級")
+                definition = item.get("definition", "")
+            else:
+                term_str = str(item).strip()
+                level = "中級"
+                definition = ""
+            if term_str and term_str not in existing_terms and term_str not in seen_terms:
+                new_entries.append((term_str, level, definition, article.title, article.url))
+                seen_terms.add(term_str)
 
     if not new_entries:
         return 0
@@ -87,11 +94,12 @@ def update_glossary(articles: list[Article], today: datetime) -> int:
     # 追記
     today_str = today.strftime("%Y-%m-%d")
     lines = []
-    for term, src_title, src_url in new_entries:
+    for term, level, definition, src_title, src_url in new_entries:
         lines.append(f"\n## {term}")
         lines.append(f"- 初出日: {today_str}")
+        lines.append(f"- レベル: {level}")
+        lines.append(f"- 定義: {definition if definition else '（要追記）'}")
         lines.append(f"- 出典: [{src_title[:60]}]({src_url})")
-        lines.append("- 定義: （要追記）")
 
     try:
         with open(GLOSSARY_FILE, "a", encoding="utf-8") as f:
@@ -182,8 +190,13 @@ def _build_article_section(article: Article, rank: int) -> str:
 
     # 新出用語
     if article.new_terms:
-        terms_str = " / ".join(article.new_terms[:5])
-        lines.append(f"\n🆕 **新出用語**: {terms_str}")
+        term_strs = []
+        for item in article.new_terms[:5]:
+            t = item.get("term", "") if isinstance(item, dict) else str(item)
+            if t:
+                term_strs.append(t)
+        if term_strs:
+            lines.append(f"\n🆕 **新出用語**: {' / '.join(term_strs)}")
 
     # 対象クライアント
     if article.target_clients:
@@ -243,10 +256,13 @@ def write_daily(articles: list[Article], target_date: datetime | None = None) ->
     content_count = sum(1 for a in articles if a.is_content_candidate)
     x_post_count = sum(1 for a in articles if a.is_x_post_candidate)
 
-    # 新出用語
+    # 新出用語（list[dict] または list[str] の両フォーマット対応）
     all_terms = []
     for a in articles:
-        all_terms.extend(a.new_terms)
+        for item in a.new_terms:
+            t = item.get("term", "") if isinstance(item, dict) else str(item)
+            if t:
+                all_terms.append(t)
     unique_terms = list(dict.fromkeys(all_terms))  # 重複排除・順序保持
 
     # カテゴリ集計
@@ -305,9 +321,15 @@ def write_daily(articles: list[Article], target_date: datetime | None = None) ->
         lines.append("## 🆕 新出AI用語")
         lines.append("")
         for term in unique_terms[:15]:
-            # 出典記事を探す
+            # 出典記事を探す（list[dict] または list[str] 両対応）
+            def _term_in_new_terms(a, term):
+                for item in a.new_terms:
+                    t = item.get("term", "") if isinstance(item, dict) else str(item)
+                    if t == term:
+                        return True
+                return False
             source_article = next(
-                (a for a in articles if term in a.new_terms), None
+                (a for a in articles if _term_in_new_terms(a, term)), None
             )
             if source_article:
                 lines.append(f"- **{term}**: [{source_article.source_name}]({source_article.url})")

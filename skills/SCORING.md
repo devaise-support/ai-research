@@ -49,7 +49,15 @@ final_score = min(5.0, raw_score × category_boost)
 追加情報:
 - summary_ja: 日本語での3行以内の要約
 - tags: 記事に関連するキーワード3〜7個（英語・日本語混在可）
-- key_terms: 記事に登場する新出AI用語のみ（既知用語は除く）
+- key_terms: 記事に登場する新出AI専門用語を**単語・略語単位**（1〜3語）で抽出。
+  長い説明的フレーズ（"voice-driven AI agents" のような複数単語の句）は不可。
+  各用語を以下のオブジェクト形式で返すこと:
+    term: 用語（例: "LLM", "RAG", "エージェント", "MCP"）
+    level: "初級" / "中級" / "上級" のいずれか
+      初級: IT初心者でも理解できる基礎語（例: AI, ディープラーニング, チャットボット）
+      中級: IT従事者が知っておくべき語（例: LLM, ファインチューニング, プロンプト, RAG）
+      上級: 研究者・エンジニア向け専門語（例: RLHF, MoE, マルチモーダル, MCP）
+    definition: 日本語で1〜2文の簡潔な定義（略語の場合は正式名称も含める）
 - target_clients: 活用できそうな業種（例: 美容院, 不動産, 飲食店）
 - is_primary: 一次情報かどうか（true/false）
 - primary_reason: 一次情報と判断した理由（または非一次情報の理由）
@@ -71,7 +79,10 @@ final_score = min(5.0, raw_score × category_boost)
   "primary_source_score": 5,
   "summary_ja": "...",
   "tags": ["GPT-5", "OpenAI", "マルチモーダル"],
-  "key_terms": ["MCP", "vibe coding"],
+  "key_terms": [
+    {"term": "LLM", "level": "中級", "definition": "Large Language Model。大量のテキストを学習し自然言語の生成・理解を行うAI。"},
+    {"term": "MCP", "level": "上級", "definition": "Model Context Protocol。AIエージェントが外部ツールと連携するための標準通信規格。"}
+  ],
   "target_clients": ["美容院", "不動産"],
   "is_primary": true,
   "primary_reason": "OpenAI公式ブログからの発表記事",
