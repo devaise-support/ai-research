@@ -1198,11 +1198,11 @@ function filterByLevel(level) {{
 
 function downloadCSV() {{
   const BOM = '﻿';
-  const header = '用語,レベル,定義,初出日,出典URL\n';
+  const header = '用語,レベル,定義,初出日,出典URL\\n';
   const esc = s => '"' + (s || '').replace(/"/g, '""') + '"';
   const rows = glossaryData.map(d =>
     [esc(d.term), esc(d.level), esc(d.definition), esc(d.date), esc(d.url)].join(',')
-  ).join('\n');
+  ).join('\\n');
   const blob = new Blob([BOM + header + rows], {{type: 'text/csv;charset=utf-8;'}});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);

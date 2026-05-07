@@ -101,7 +101,7 @@ tailwind.config = {
     <span class="material-symbols-outlined text-[20px]">menu_book</span>
   </div>
   <h1 class="font-h3 text-h3 font-bold text-on-surface">AI用語図鑑</h1>
-  <span class="ml-auto font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-05-07 19:10 UTC</span>
+  <span class="ml-auto font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-05-07 19:39 UTC</span>
 </header>
 <div class="p-margin flex flex-col gap-xl max-w-5xl mx-auto w-full">
 
@@ -248,13 +248,11 @@ function filterByLevel(level) {
 
 function downloadCSV() {
   const BOM = '﻿';
-  const header = '用語,レベル,定義,初出日,出典URL
-';
+  const header = '用語,レベル,定義,初出日,出典URL\n';
   const esc = s => '"' + (s || '').replace(/"/g, '""') + '"';
   const rows = glossaryData.map(d =>
     [esc(d.term), esc(d.level), esc(d.definition), esc(d.date), esc(d.url)].join(',')
-  ).join('
-');
+  ).join('\n');
   const blob = new Blob([BOM + header + rows], {type: 'text/csv;charset=utf-8;'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -263,7 +261,7 @@ function downloadCSV() {
 }
 </script>
   <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
-    ai-research システムにより自動生成 | 2026-05-07 19:10 UTC
+    ai-research システムにより自動生成 | 2026-05-07 19:39 UTC
   </footer>
 </div>
 </main>
