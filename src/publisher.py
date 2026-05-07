@@ -255,96 +255,8 @@ def send_line_notification(articles: list[dict], target_date: date, dry_run: boo
 
 
 # ---------------------------------------------------------------------------
-# 2. GitHub Pages 生成
+# 2. GitHub Pages 生成（Google Stitch デザイン）
 # ---------------------------------------------------------------------------
-
-_HTML_DAILY_TEMPLATE = """\
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI情報 {date} | ai-research</title>
-  <style>
-    body {{ font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
-           max-width: 860px; margin: 0 auto; padding: 16px; color: #333; }}
-    h1 {{ font-size: 1.4rem; border-bottom: 2px solid #0066CC; padding-bottom: 8px; }}
-    h2 {{ font-size: 1.1rem; margin-top: 24px; }}
-    .meta {{ font-size: 0.8rem; color: #888; margin-bottom: 4px; }}
-    .score {{ color: #f5a623; font-weight: bold; }}
-    .card {{ border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px;
-             margin-bottom: 14px; background: #fafafa; }}
-    .card h2 {{ margin: 0 0 6px; font-size: 1rem; }}
-    .flags {{ font-size: 0.75rem; }}
-    .flag-weekly {{ background:#e8f4fd; color:#0066CC; padding:2px 6px;
-                   border-radius:4px; margin-right:4px; }}
-    .flag-monthly {{ background:#e8fdf0; color:#28a745; padding:2px 6px;
-                    border-radius:4px; margin-right:4px; }}
-    .flag-content {{ background:#fff3e0; color:#e65100; padding:2px 6px;
-                    border-radius:4px; margin-right:4px; }}
-    .summary {{ font-size: 0.9rem; color: #555; margin-top: 8px; }}
-    .source-link {{ font-size: 0.8rem; }}
-    nav {{ margin-bottom: 20px; font-size: 0.85rem; }}
-    nav a {{ color: #0066CC; text-decoration: none; margin-right: 12px; }}
-    footer {{ margin-top: 40px; font-size: 0.75rem; color: #aaa;
-              border-top: 1px solid #e0e0e0; padding-top: 12px; }}
-  </style>
-</head>
-<body>
-  <nav><a href="../index.html">← トップへ戻る</a></nav>
-  <h1>AI情報まとめ — {date}</h1>
-  <p class="meta">収集件数: {count}件 | 週次候補: {weekly}件 | コンテンツ候補: {content}件</p>
-  {cards}
-  <footer>ai-research システムにより自動生成 | {generated_at}</footer>
-</body>
-</html>
-"""
-
-_HTML_CARD_TEMPLATE = """\
-<div class="card">
-  <div class="meta">{source} | {published}</div>
-  <h2><a href="{url}" target="_blank" rel="noopener">{title}</a></h2>
-  <div class="score">{stars} {score:.1f}</div>
-  <div class="flags">{flags}</div>
-  <p class="summary">{summary}</p>
-</div>
-"""
-
-_HTML_INDEX_TEMPLATE = """\
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI情報ダッシュボード | ai-research</title>
-  <style>
-    body {{ font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
-           max-width: 860px; margin: 0 auto; padding: 16px; color: #333; }}
-    h1 {{ font-size: 1.5rem; border-bottom: 2px solid #0066CC; padding-bottom: 8px; }}
-    .day-section {{ margin-bottom: 28px; }}
-    .day-header {{ display: flex; align-items: baseline; gap: 12px; }}
-    .day-title {{ font-size: 1.1rem; font-weight: bold; }}
-    .day-link {{ font-size: 0.82rem; color: #0066CC; text-decoration: none; }}
-    .article-list {{ list-style: none; padding: 0; margin: 8px 0 0; }}
-    .article-list li {{ padding: 6px 0; border-bottom: 1px solid #f0f0f0;
-                       font-size: 0.9rem; display: flex; gap: 8px; }}
-    .article-list li a {{ color: #222; text-decoration: none; flex: 1; }}
-    .article-list li a:hover {{ color: #0066CC; }}
-    .score-badge {{ font-size: 0.75rem; color: #f5a623; white-space: nowrap; }}
-    .category-badge {{ font-size: 0.72rem; color: #888; white-space: nowrap; }}
-    footer {{ margin-top: 40px; font-size: 0.75rem; color: #aaa;
-              border-top: 1px solid #e0e0e0; padding-top: 12px; }}
-  </style>
-</head>
-<body>
-  <h1>AI情報ダッシュボード</h1>
-  <p style="font-size:0.85rem;color:#666;">毎朝6時JST自動更新 | 最新{days}日分</p>
-  {day_sections}
-  <footer>ai-research システムにより自動生成 | {generated_at}</footer>
-</body>
-</html>
-"""
-
 
 def _escape_html(text: str) -> str:
     return (text
@@ -354,82 +266,538 @@ def _escape_html(text: str) -> str:
             .replace('"', "&quot;"))
 
 
-def _stars_html(score: float) -> str:
-    full = min(int(score), 5)
-    empty = max(0, 5 - full)
-    return "★" * full + "☆" * empty
+def _stitch_head(title: str) -> str:
+    """Stitch デザイン共通 <head> セクションを返す"""
+    return f"""<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>{_escape_html(title)}</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {{
+  darkMode: "class",
+  theme: {{
+    extend: {{
+      colors: {{
+        "brand-blue": "#4F8EF7",
+        "surface-dim": "#d8d9e2", "on-secondary": "#ffffff",
+        "secondary-fixed": "#d3e4fe", "on-primary-fixed": "#001a40",
+        "surface-container-low": "#f2f3fc", "on-error": "#ffffff",
+        "on-tertiary-container": "#fffbff", "tertiary": "#894e00",
+        "on-secondary-container": "#54647a", "surface-bright": "#f9f9ff",
+        "on-primary-container": "#fefcff", "surface-variant": "#e1e2eb",
+        "surface-container-high": "#e7e8f1", "primary": "#0059ba",
+        "tertiary-fixed": "#ffdcbf", "on-secondary-fixed-variant": "#38485d",
+        "on-primary-fixed-variant": "#004492", "error": "#ba1a1a",
+        "outline": "#727784", "primary-container": "#2c72d9",
+        "secondary-container": "#d0e1fb", "inverse-surface": "#2e3037",
+        "surface-container-lowest": "#ffffff", "inverse-primary": "#acc7ff",
+        "surface-container": "#ecedf6", "on-primary": "#ffffff",
+        "on-surface": "#191c22", "surface": "#f9f9ff",
+        "on-tertiary-fixed": "#2d1600", "outline-variant": "#c2c6d5",
+        "inverse-on-surface": "#eff0f9", "on-background": "#191c22",
+        "primary-fixed": "#d7e2ff", "on-secondary-fixed": "#0b1c30",
+        "on-tertiary-fixed-variant": "#6a3b00", "secondary": "#505f76",
+        "surface-tint": "#005bbf", "error-container": "#ffdad6",
+        "primary-fixed-dim": "#acc7ff", "on-tertiary": "#ffffff",
+        "background": "#f9f9ff", "tertiary-container": "#ac6300",
+        "secondary-fixed-dim": "#b7c8e1", "on-surface-variant": "#424753",
+        "surface-container-highest": "#e1e2eb", "on-error-container": "#93000a",
+        "tertiary-fixed-dim": "#ffb873"
+      }},
+      borderRadius: {{ DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" }},
+      spacing: {{ xs: "4px", xl: "32px", sm: "8px", margin: "24px", md: "16px", gutter: "20px", unit: "4px", lg: "24px" }},
+      fontFamily: {{
+        "body-md": ["Noto Sans JP","Inter","sans-serif"],
+        "data-mono": ["Inter","sans-serif"],
+        "h2": ["Noto Sans JP","Inter","sans-serif"],
+        "label-sm": ["Noto Sans JP","Inter","sans-serif"],
+        "body-lg": ["Noto Sans JP","Inter","sans-serif"],
+        "h1": ["Noto Sans JP","Inter","sans-serif"],
+        "h3": ["Noto Sans JP","Inter","sans-serif"]
+      }},
+      fontSize: {{
+        "body-md": ["14px", {{"lineHeight":"20px","fontWeight":"400"}}],
+        "data-mono": ["14px", {{"lineHeight":"20px","fontWeight":"500"}}],
+        "h2": ["24px", {{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}}],
+        "label-sm": ["12px", {{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}}],
+        "body-lg": ["16px", {{"lineHeight":"24px","fontWeight":"400"}}],
+        "h1": ["30px", {{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}}],
+        "h3": ["20px", {{"lineHeight":"28px","fontWeight":"600"}}]
+      }}
+    }}
+  }}
+}}
+</script>
+</head>"""
+
+
+def _sidebar_html(active: str = "dashboard", back_prefix: str = "") -> str:
+    """サイドバーナビゲーションを返す。active='dashboard' or 'daily'"""
+    def nav_item(icon: str, label: str, href: str, is_active: bool) -> str:
+        if is_active:
+            return (f'<a class="flex items-center gap-md text-brand-blue font-bold '
+                    f'bg-[#4F8EF7]/10 rounded-lg px-4 py-2 border border-brand-blue/20" href="{href}">'
+                    f'<span class="material-symbols-outlined" style="font-variation-settings:\'FILL\' 1;">{icon}</span>'
+                    f'<span class="font-body-md text-body-md">{label}</span></a>')
+        return (f'<a class="flex items-center gap-md text-on-surface-variant px-4 py-2 '
+                f'hover:bg-surface-container-high transition-all rounded-lg" href="{href}">'
+                f'<span class="material-symbols-outlined">{icon}</span>'
+                f'<span class="font-body-md text-body-md">{label}</span></a>')
+
+    index_href = f"{back_prefix}index.html"
+    daily_href = "#"
+    return f"""<nav class="bg-surface-container-low border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col gap-sm p-md z-50 hidden md:flex">
+<div class="mb-lg px-xs">
+  <h1 class="font-h3 text-h3 font-bold text-primary">AI Research JP</h1>
+  <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Analytical Dashboard</p>
+</div>
+<div class="flex-1 flex flex-col gap-xs">
+  {nav_item("dashboard","ダッシュボード", index_href, active=="dashboard")}
+  {nav_item("article","今日の最新レポート", daily_href, active=="daily")}
+  {nav_item("calendar_view_week","今週のまとめ","#", False)}
+  {nav_item("menu_book","AI用語図鑑","#", False)}
+  {nav_item("trending_up","トレンド分析","#", False)}
+  {nav_item("business","業界への影響","#", False)}
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant px-xs">
+  <p class="font-label-sm text-label-sm text-on-surface-variant">ai-research / devaise-support</p>
+</div>
+</nav>"""
+
+
+def _score_circle_html(score: float, size: str = "md") -> str:
+    """スコアに応じた色のスコアサークルを返す"""
+    if score >= 4.0:
+        color = "primary"
+    elif score >= 3.5:
+        color = "tertiary"
+    else:
+        color = "secondary"
+    sz = "w-16 h-16 text-lg" if size == "lg" else "w-12 h-12 text-base"
+    return (f'<div class="flex-shrink-0 flex items-center justify-center {sz} rounded-full '
+            f'border-[3px] border-{color} bg-{color}/10 shadow-sm">'
+            f'<span class="font-bold text-{color}">{score:.1f}</span></div>')
+
+
+def _badge_html(article: dict) -> str:
+    """記事の候補フラグをバッジHTMLで返す"""
+    badges = []
+    if article.get("is_weekly_candidate"):
+        badges.append('<span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span>')
+    if article.get("is_monthly_candidate"):
+        badges.append('<span class="bg-green-100 text-green-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-green-200">月次候補</span>')
+    if article.get("is_content_candidate"):
+        badges.append('<span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-orange-200">コンテンツ候補</span>')
+    if article.get("is_x_post_candidate"):
+        badges.append('<span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-purple-200">X投稿候補</span>')
+    if article.get("is_primary_source"):
+        badges.append('<span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-label-sm text-label-sm border border-gray-200">一次情報</span>')
+    return " ".join(badges) if badges else '<span class="text-on-surface-variant font-label-sm text-label-sm">—</span>'
+
+
+def _category_chart_html(articles: list[dict]) -> str:
+    """カテゴリ別横棒グラフHTMLを返す"""
+    from collections import Counter
+    counts = Counter(a.get("category", "その他") for a in articles)
+    total = max(sum(counts.values()), 1)
+    colors = ["primary", "primary-container", "secondary", "tertiary", "outline"]
+    rows = ""
+    for i, (cat, cnt) in enumerate(counts.most_common(5)):
+        pct = int(cnt / total * 100)
+        color = colors[i % len(colors)]
+        rows += f"""<div class="flex items-center gap-sm">
+  <div class="w-28 font-label-sm text-label-sm text-on-surface-variant truncate">{_escape_html(cat)}</div>
+  <div class="flex-1 h-5 bg-surface-variant rounded-full overflow-hidden">
+    <div class="h-full bg-{color} rounded-full" style="width:{pct}%"></div>
+  </div>
+  <div class="w-12 text-right font-data-mono text-data-mono text-on-surface-variant">{cnt}件</div>
+</div>"""
+    return rows
 
 
 def generate_daily_html(articles: list[dict], target_date: date) -> str:
-    """日次レポートHTMLを生成する"""
-    cards_html = ""
-    weekly = 0
-    content_count = 0
+    """日次レポートHTML（Stitch デザイン）を生成する"""
+    sorted_arts = sorted(articles, key=lambda x: x.get("score", 0), reverse=True)
+    weekly_count = sum(1 for a in articles if a.get("is_weekly_candidate"))
+    content_count = sum(1 for a in articles if a.get("is_content_candidate"))
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
-    for a in sorted(articles, key=lambda x: x.get("score", 0), reverse=True):
-        flags = ""
-        if a.get("is_weekly_candidate"):
-            flags += '<span class="flag-weekly">週次候補</span>'
-            weekly += 1
-        if a.get("is_monthly_candidate"):
-            flags += '<span class="flag-monthly">月次候補</span>'
-        if a.get("is_content_candidate"):
-            flags += '<span class="flag-content">コンテンツ候補</span>'
-            content_count += 1
+    # 日付表示（曜日付き）
+    weekdays = ["月", "火", "水", "木", "金", "土", "日"]
+    wd = weekdays[target_date.weekday()]
+    date_ja = f"{target_date.year}年{target_date.month}月{target_date.day}日（{wd}）"
 
+    # カテゴリ集計（フィルタ用）
+    from collections import Counter
+    cats = list(Counter(a.get("category", "その他") for a in articles).keys())
+
+    # カテゴリフィルタ pills
+    cat_pills = '<button onclick="filterArticles(\'all\')" id="filter-all" class="px-md py-sm bg-brand-blue text-white rounded-full font-label-sm text-label-sm shadow-sm">すべて</button>'
+    for cat in cats[:4]:
+        cat_pills += (f'<button onclick="filterArticles(\'{_escape_html(cat)}\')" '
+                      f'class="px-md py-sm bg-surface text-on-surface border border-outline-variant rounded-full '
+                      f'font-label-sm text-label-sm hover:border-brand-blue hover:text-brand-blue transition-colors">'
+                      f'{_escape_html(cat)}</button>')
+
+    # 記事カード
+    article_cards = ""
+    for a in sorted_arts:
+        score = a.get("score", 0)
+        title = _escape_html(a.get("title", "（タイトルなし）"))
+        url = _escape_html(a.get("url", "#"))
+        source = _escape_html(a.get("source_name", ""))
         pub = (a.get("published_at") or "")[:10]
-        cards_html += _HTML_CARD_TEMPLATE.format(
-            source=_escape_html(a.get("source_name", "")),
-            published=_escape_html(pub),
-            url=_escape_html(a.get("url", "#")),
-            title=_escape_html(a.get("title", "（タイトルなし）")),
-            stars=_stars_html(a.get("score", 0)),
-            score=a.get("score", 0),
-            flags=flags or "—",
-            summary=_escape_html((a.get("summary_raw") or "")[:200]),
-        )
+        category = _escape_html(a.get("category", ""))
+        summary = _escape_html((a.get("summary_raw") or "")[:200])
+        badges = _badge_html(a)
+        circle = _score_circle_html(score, "lg")
+        card_id = f"card-{_escape_html(a.get('id', ''))}"
 
-    return _HTML_DAILY_TEMPLATE.format(
-        date=target_date.isoformat(),
-        count=len(articles),
-        weekly=weekly,
-        content=content_count,
-        cards=cards_html,
-        generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
-    )
+        # スコア内訳
+        details = a.get("score_details", {})
+        score_rows = ""
+        label_map = {"importance":"重要度","novelty":"新規性","business_value":"ビジネス価値","learning_value":"学習価値","primary_source_score":"一次情報度"}
+        for key, label in label_map.items():
+            val = details.get(key, 0)
+            score_rows += f'<li class="flex justify-between"><span class="text-on-surface-variant">{label}:</span><span class="text-brand-blue font-bold">{val}/5</span></li>'
+
+        # タグ
+        tags = a.get("tags") or a.get("new_terms") or []
+        if isinstance(tags, list):
+            tag_html = " ".join(f'<span class="bg-surface-variant text-on-surface px-2 py-0.5 rounded font-label-sm text-label-sm">{_escape_html(str(t))}</span>' for t in tags[:6])
+        else:
+            tag_html = ""
+
+        article_cards += f"""<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="{category}" data-score="{score}">
+  <div class="flex gap-lg items-start">
+    {circle}
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
+            <a href="{url}" target="_blank" rel="noopener">{title}</a>
+          </h3>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">{source} · {pub} · {category}</p>
+          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">{summary}</p>
+        </div>
+        <button onclick="toggleDetails('{card_id}')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+          <span class="material-symbols-outlined" id="icon-{card_id}">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap">{badges}</div>
+      <div id="{card_id}" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1">{score_rows}</ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs">{tag_html}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>"""
+
+    # 新出用語テーブル
+    new_terms = []
+    for a in articles:
+        terms = a.get("new_terms") or []
+        if isinstance(terms, list):
+            for t in terms:
+                new_terms.append({"term": str(t), "source": a.get("source_name", "")})
+    term_rows = ""
+    seen_terms: set = set()
+    for t in new_terms:
+        if t["term"] not in seen_terms:
+            seen_terms.add(t["term"])
+            term_rows += f"""<tr class="hover:bg-surface-container-low transition-colors">
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">{_escape_html(t["term"])}</td>
+  <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">{_escape_html(t["source"])}</td>
+</tr>"""
+
+    terms_section = ""
+    if term_rows:
+        terms_section = f"""<section class="mt-xl">
+  <div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-sm">
+    <span class="material-symbols-outlined text-brand-blue">new_releases</span>
+    <h2 class="font-h3 text-h3 text-on-surface">🆕 本日の新出AI用語</h2>
+  </div>
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden shadow-sm">
+    <table class="w-full text-left border-collapse">
+      <thead><tr class="bg-surface-container-low border-b border-outline-variant">
+        <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">用語</th>
+        <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">初出ソース</th>
+      </tr></thead>
+      <tbody class="divide-y divide-outline-variant">{term_rows}</tbody>
+    </table>
+  </div>
+</section>"""
+
+    head = _stitch_head(f"AI情報まとめ — {date_ja} | ai-research")
+    sidebar = _sidebar_html(active="daily", back_prefix="../")
+
+    return f"""{head}
+<body class="bg-background text-on-background min-h-screen flex">
+{sidebar}
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen bg-surface w-full">
+<header class="bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center w-full h-16 px-margin sticky top-0 z-40">
+  <div class="flex items-center gap-md">
+    <a class="flex items-center gap-xs text-on-surface-variant hover:text-brand-blue transition-colors" href="../index.html">
+      <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+      <span class="font-label-sm text-label-sm">ダッシュボードへ</span>
+    </a>
+    <div class="h-6 w-px bg-outline-variant mx-sm"></div>
+    <h2 class="font-h3 text-h3 font-bold text-on-surface hidden sm:block">📰 AI情報まとめ — {date_ja}</h2>
+  </div>
+  <span class="font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: {now_str}</span>
+</header>
+<div class="bg-surface-container-lowest/90 backdrop-blur-sm border-b border-outline-variant sticky top-16 z-30 px-margin py-md flex flex-wrap items-center justify-between gap-md">
+  <div class="flex items-center gap-sm flex-wrap">
+    {cat_pills}
+  </div>
+  <div class="flex items-center gap-sm">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">スコア:</span>
+    <select onchange="filterByScore(this.value)" class="bg-surface border border-outline-variant text-on-surface font-body-md text-body-md rounded-md px-sm py-xs outline-none">
+      <option value="0">すべて</option>
+      <option value="4.0">4.0以上</option>
+      <option value="3.5">3.5以上</option>
+      <option value="3.0">3.0以上</option>
+    </select>
+    <span id="article-count" class="font-label-sm text-label-sm text-on-surface-variant">{len(articles)}件表示中</span>
+  </div>
+</div>
+<div class="p-margin flex flex-col gap-xl max-w-5xl mx-auto w-full">
+  <p class="font-body-md text-body-md text-on-surface-variant">
+    収集{len(articles)}件 · 週次候補{weekly_count}件 · コンテンツ候補{content_count}件
+  </p>
+  <section id="articles-list" class="flex flex-col gap-lg">
+    {article_cards}
+  </section>
+  {terms_section}
+  <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+    ai-research システムにより自動生成 | {now_str}
+  </footer>
+</div>
+</main>
+<script>
+function toggleDetails(id) {{
+  const el = document.getElementById(id);
+  const icon = document.getElementById('icon-' + id);
+  if (el.classList.contains('hidden')) {{
+    el.classList.remove('hidden');
+    el.classList.add('flex');
+    icon.textContent = 'expand_less';
+  }} else {{
+    el.classList.add('hidden');
+    el.classList.remove('flex');
+    icon.textContent = 'expand_more';
+  }}
+}}
+let currentCat = 'all', currentScore = 0;
+function applyFilters() {{
+  const articles = document.querySelectorAll('#articles-list article');
+  let visible = 0;
+  articles.forEach(a => {{
+    const cat = a.dataset.category;
+    const score = parseFloat(a.dataset.score);
+    const show = (currentCat === 'all' || cat === currentCat) && score >= currentScore;
+    a.style.display = show ? '' : 'none';
+    if (show) visible++;
+  }});
+  document.getElementById('article-count').textContent = visible + '件表示中';
+}}
+function filterArticles(cat) {{
+  currentCat = cat;
+  document.querySelectorAll('[onclick^="filterArticles"]').forEach(b => {{
+    b.className = b.className.replace('bg-brand-blue text-white', 'bg-surface text-on-surface border border-outline-variant');
+  }});
+  event.target.className = event.target.className.replace('bg-surface text-on-surface border border-outline-variant', 'bg-brand-blue text-white');
+  applyFilters();
+}}
+function filterByScore(val) {{ currentScore = parseFloat(val); applyFilters(); }}
+</script>
+</body></html>"""
 
 
 def generate_index_html(recent: list[tuple[date, list[dict]]]) -> str:
-    """GitHub Pages トップページHTMLを生成する"""
-    day_sections = ""
-    for d, articles in recent:
-        sorted_arts = sorted(articles, key=lambda x: x.get("score", 0), reverse=True)
-        daily_url = f"daily/{d.isoformat()}.html"
-        items = ""
-        for a in sorted_arts[:5]:
-            items += (
-                f'<li>'
-                f'<a href="{_escape_html(a.get("url","#"))}" target="_blank" rel="noopener">'
-                f'{_escape_html(a.get("title","")[:60])}</a>'
-                f'<span class="score-badge">{_stars_html(a.get("score",0))} {a.get("score",0):.1f}</span>'
-                f'<span class="category-badge">{_escape_html(a.get("category",""))}</span>'
-                f'</li>'
-            )
-        day_sections += (
-            f'<div class="day-section">'
-            f'<div class="day-header">'
-            f'<span class="day-title">{d.isoformat()}</span>'
-            f'<a class="day-link" href="{daily_url}">全{len(articles)}件を見る →</a>'
-            f'</div>'
-            f'<ul class="article-list">{items}</ul>'
-            f'</div>'
-        )
+    """GitHub Pages ダッシュボードHTML（Stitch デザイン）を生成する"""
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
-    return _HTML_INDEX_TEMPLATE.format(
-        days=len(recent),
-        day_sections=day_sections,
-        generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
-    )
+    # 直近1日分のデータを統計に使う
+    today_date, today_articles = recent[0] if recent else (date.today(), [])
+    total = len(today_articles)
+    weekly_count = sum(1 for a in today_articles if a.get("is_weekly_candidate"))
+    content_count = sum(1 for a in today_articles if a.get("is_content_candidate"))
+    new_terms_all: list[str] = []
+    for a in today_articles:
+        terms = a.get("new_terms") or []
+        if isinstance(terms, list):
+            new_terms_all.extend(str(t) for t in terms)
+    new_terms_unique = list(dict.fromkeys(new_terms_all))  # 重複除去・順序保持
+
+    # KPI カード
+    kpi_cards = f"""<section class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
+  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">本日の収集記事</span>
+    <div class="flex items-baseline gap-sm">
+      <span class="font-h1 text-h1 text-on-surface">{total}</span>
+      <span class="material-symbols-outlined text-primary text-sm">article</span>
+    </div>
+  </div>
+  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">週次候補</span>
+    <div class="flex items-baseline gap-sm">
+      <span class="font-h1 text-h1 text-on-surface">{weekly_count}</span>
+      <span class="material-symbols-outlined text-secondary text-sm">stars</span>
+    </div>
+  </div>
+  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">コンテンツ候補</span>
+    <div class="flex items-baseline gap-sm">
+      <span class="font-h1 text-h1 text-on-surface">{content_count}</span>
+      <span class="material-symbols-outlined text-secondary text-sm">edit_document</span>
+    </div>
+  </div>
+  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">新出AI用語</span>
+    <div class="flex items-baseline gap-sm">
+      <span class="font-h1 text-h1 text-on-surface">{len(new_terms_unique)}</span>
+      <span class="material-symbols-outlined text-tertiary text-sm">library_books</span>
+    </div>
+  </div>
+</section>"""
+
+    # トップ記事カード（左カラム）
+    top_articles_html = ""
+    for a in sorted(today_articles, key=lambda x: x.get("score", 0), reverse=True)[:5]:
+        score = a.get("score", 0)
+        circle = _score_circle_html(score, "md")
+        title = _escape_html(a.get("title", "（タイトルなし）"))
+        url = _escape_html(a.get("url", "#"))
+        source = _escape_html(a.get("source_name", ""))
+        category = _escape_html(a.get("category", ""))
+        summary = _escape_html((a.get("summary_raw") or "")[:100])
+        badges = _badge_html(a)
+        top_articles_html += f"""<div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
+  {circle}
+  <div class="flex-1 min-w-0">
+    <div class="flex justify-between items-start mb-xs gap-sm">
+      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+        <a href="{url}" target="_blank" rel="noopener">{title}</a>
+      </h4>
+      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">{category}</span>
+    </div>
+    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">{summary}</p>
+    <div class="flex items-center gap-xs flex-wrap">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">{source}</span>
+      <span class="text-outline-variant">·</span>
+      {badges}
+    </div>
+  </div>
+</div>"""
+
+    # カテゴリグラフ
+    chart_rows = _category_chart_html(today_articles)
+
+    # 新出用語チップ
+    term_chips = " ".join(
+        f'<span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">{_escape_html(t)}</span>'
+        for t in new_terms_unique[:10]
+    ) or '<span class="font-body-md text-body-md text-on-surface-variant">（本日の新出用語なし）</span>'
+
+    # 直近レポート テーブル
+    timeline_rows = ""
+    for d, arts in recent[:7]:
+        sorted_arts = sorted(arts, key=lambda x: x.get("score", 0), reverse=True)
+        top = sorted_arts[0] if sorted_arts else None
+        top_title = _escape_html((top.get("title", "") if top else "")[:40])
+        top_url = _escape_html(top.get("url", "#") if top else "#")
+        weekly = sum(1 for a in arts if a.get("is_weekly_candidate"))
+        monthly = sum(1 for a in arts if a.get("is_monthly_candidate"))
+        daily_link = f'daily/{d.isoformat()}.html'
+        timeline_rows += f"""<tr class="hover:bg-surface-container-lowest transition-colors">
+  <td class="p-md font-data-mono text-data-mono">
+    <a href="{daily_link}" class="text-primary hover:underline">{d.isoformat()}</a>
+  </td>
+  <td class="p-md text-on-surface">{len(arts)}件</td>
+  <td class="p-md text-on-surface">{weekly}件</td>
+  <td class="p-md text-on-surface">{monthly}件</td>
+  <td class="p-md text-on-surface-variant font-body-md text-body-md">
+    <a href="{top_url}" target="_blank" rel="noopener" class="hover:text-primary transition-colors">{top_title}{"…" if top_title else ""}</a>
+  </td>
+</tr>"""
+
+    head = _stitch_head("AI Research JP - Dashboard | ai-research")
+    sidebar = _sidebar_html(active="dashboard", back_prefix="")
+
+    return f"""{head}
+<body class="flex min-h-screen bg-surface-container-lowest font-body-md text-on-surface">
+{sidebar}
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<header class="flex justify-between items-center w-full h-16 px-margin bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-10">
+  <div class="flex items-center gap-md lg:hidden">
+    <span class="material-symbols-outlined text-on-surface cursor-pointer">menu</span>
+    <span class="font-h3 text-h3 font-bold text-primary">ai-research</span>
+  </div>
+  <div class="hidden lg:flex items-center"></div>
+  <div class="flex items-center gap-margin">
+    <span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline-block">最終更新: {now_str}</span>
+  </div>
+</header>
+<div class="p-margin flex flex-col gap-xl w-full max-w-7xl mx-auto">
+  {kpi_cards}
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+    <div class="lg:col-span-7 flex flex-col gap-md">
+      <h3 class="font-h3 text-h3 text-on-surface border-b border-outline-variant pb-xs">
+        🏆 本日のトップ記事
+        <a href="daily/{today_date.isoformat()}.html" class="text-brand-blue font-label-sm text-label-sm ml-sm hover:underline">全{total}件を見る →</a>
+      </h3>
+      <div class="flex flex-col gap-sm">{top_articles_html}</div>
+    </div>
+    <div class="lg:col-span-5 flex flex-col gap-lg">
+      <div class="bg-surface border border-outline-variant rounded-lg p-md">
+        <h3 class="font-h3 text-h3 text-on-surface mb-md">カテゴリ別内訳</h3>
+        <div class="flex flex-col gap-sm">{chart_rows}</div>
+      </div>
+      <div class="bg-surface border border-outline-variant rounded-lg p-md">
+        <h3 class="font-h3 text-h3 text-on-surface mb-md">🆕 新出AI用語</h3>
+        <div class="flex flex-wrap gap-xs">{term_chips}</div>
+      </div>
+    </div>
+  </section>
+  <section class="mt-md">
+    <h3 class="font-h3 text-h3 text-on-surface border-b border-outline-variant pb-xs mb-md">📅 直近のレポート履歴</h3>
+    <div class="bg-surface border border-outline-variant rounded-lg overflow-hidden">
+      <table class="w-full text-left border-collapse">
+        <thead><tr class="bg-surface-container-low border-b border-outline-variant">
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">日付</th>
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">収集</th>
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">週次候補</th>
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">月次候補</th>
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">トップ記事</th>
+        </tr></thead>
+        <tbody class="font-body-md text-body-md text-on-surface divide-y divide-outline-variant">
+          {timeline_rows}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+    ai-research システムにより自動生成 | {now_str}
+  </footer>
+</div>
+</main>
+</body></html>"""
 
 
 def publish_github_pages(target_date: date, dry_run: bool = False) -> bool:

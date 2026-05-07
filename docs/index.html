@@ -1,32 +1,288 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI情報ダッシュボード | ai-research</title>
-  <style>
-    body { font-family: 'Noto Sans JP', 'Helvetica Neue', Arial, sans-serif;
-           max-width: 860px; margin: 0 auto; padding: 16px; color: #333; }
-    h1 { font-size: 1.5rem; border-bottom: 2px solid #0066CC; padding-bottom: 8px; }
-    .day-section { margin-bottom: 28px; }
-    .day-header { display: flex; align-items: baseline; gap: 12px; }
-    .day-title { font-size: 1.1rem; font-weight: bold; }
-    .day-link { font-size: 0.82rem; color: #0066CC; text-decoration: none; }
-    .article-list { list-style: none; padding: 0; margin: 8px 0 0; }
-    .article-list li { padding: 6px 0; border-bottom: 1px solid #f0f0f0;
-                       font-size: 0.9rem; display: flex; gap: 8px; }
-    .article-list li a { color: #222; text-decoration: none; flex: 1; }
-    .article-list li a:hover { color: #0066CC; }
-    .score-badge { font-size: 0.75rem; color: #f5a623; white-space: nowrap; }
-    .category-badge { font-size: 0.72rem; color: #888; white-space: nowrap; }
-    footer { margin-top: 40px; font-size: 0.75rem; color: #aaa;
-              border-top: 1px solid #e0e0e0; padding-top: 12px; }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Research JP - Dashboard | ai-research</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "brand-blue": "#4F8EF7",
+        "surface-dim": "#d8d9e2", "on-secondary": "#ffffff",
+        "secondary-fixed": "#d3e4fe", "on-primary-fixed": "#001a40",
+        "surface-container-low": "#f2f3fc", "on-error": "#ffffff",
+        "on-tertiary-container": "#fffbff", "tertiary": "#894e00",
+        "on-secondary-container": "#54647a", "surface-bright": "#f9f9ff",
+        "on-primary-container": "#fefcff", "surface-variant": "#e1e2eb",
+        "surface-container-high": "#e7e8f1", "primary": "#0059ba",
+        "tertiary-fixed": "#ffdcbf", "on-secondary-fixed-variant": "#38485d",
+        "on-primary-fixed-variant": "#004492", "error": "#ba1a1a",
+        "outline": "#727784", "primary-container": "#2c72d9",
+        "secondary-container": "#d0e1fb", "inverse-surface": "#2e3037",
+        "surface-container-lowest": "#ffffff", "inverse-primary": "#acc7ff",
+        "surface-container": "#ecedf6", "on-primary": "#ffffff",
+        "on-surface": "#191c22", "surface": "#f9f9ff",
+        "on-tertiary-fixed": "#2d1600", "outline-variant": "#c2c6d5",
+        "inverse-on-surface": "#eff0f9", "on-background": "#191c22",
+        "primary-fixed": "#d7e2ff", "on-secondary-fixed": "#0b1c30",
+        "on-tertiary-fixed-variant": "#6a3b00", "secondary": "#505f76",
+        "surface-tint": "#005bbf", "error-container": "#ffdad6",
+        "primary-fixed-dim": "#acc7ff", "on-tertiary": "#ffffff",
+        "background": "#f9f9ff", "tertiary-container": "#ac6300",
+        "secondary-fixed-dim": "#b7c8e1", "on-surface-variant": "#424753",
+        "surface-container-highest": "#e1e2eb", "on-error-container": "#93000a",
+        "tertiary-fixed-dim": "#ffb873"
+      },
+      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+      spacing: { xs: "4px", xl: "32px", sm: "8px", margin: "24px", md: "16px", gutter: "20px", unit: "4px", lg: "24px" },
+      fontFamily: {
+        "body-md": ["Noto Sans JP","Inter","sans-serif"],
+        "data-mono": ["Inter","sans-serif"],
+        "h2": ["Noto Sans JP","Inter","sans-serif"],
+        "label-sm": ["Noto Sans JP","Inter","sans-serif"],
+        "body-lg": ["Noto Sans JP","Inter","sans-serif"],
+        "h1": ["Noto Sans JP","Inter","sans-serif"],
+        "h3": ["Noto Sans JP","Inter","sans-serif"]
+      },
+      fontSize: {
+        "body-md": ["14px", {"lineHeight":"20px","fontWeight":"400"}],
+        "data-mono": ["14px", {"lineHeight":"20px","fontWeight":"500"}],
+        "h2": ["24px", {"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],
+        "label-sm": ["12px", {"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],
+        "body-lg": ["16px", {"lineHeight":"24px","fontWeight":"400"}],
+        "h1": ["30px", {"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],
+        "h3": ["20px", {"lineHeight":"28px","fontWeight":"600"}]
+      }
+    }
+  }
+}
+</script>
 </head>
-<body>
-  <h1>AI情報ダッシュボード</h1>
-  <p style="font-size:0.85rem;color:#666;">毎朝6時JST自動更新 | 最新2日分</p>
-  <div class="day-section"><div class="day-header"><span class="day-title">2026-05-07</span><a class="day-link" href="daily/2026-05-07.html">全11件を見る →</a></div><ul class="article-list"><li><a href="https://openai.com/index/parloa" target="_blank" rel="noopener">Parloa builds service agents customers want to talk to</a><span class="score-badge">★★★★☆ 4.7</span><span class="category-badge">ビジネス活用事例</span></li><li><a href="https://zenn.dev/nascimento_qa/articles/916dd983e10add" target="_blank" rel="noopener">AI時代のQAは『書いて回す』から『生成・解釈・判断する』へ ─ 仕様駆動 × 探索駆動の二刀流</a><span class="score-badge">★★★★☆ 4.2</span><span class="category-badge">ビジネス活用事例</span></li><li><a href="https://zenn.dev/kenimo49/articles/vibe-coding-fails-document-first-6-mds" target="_blank" rel="noopener">Vibe Codingが3回目で破綻する理由 6つの定義書と3つの記憶ファイルで「いい感じ」をやめる</a><span class="score-badge">★★★☆☆ 3.9</span><span class="category-badge">ビジネス活用事例</span></li><li><a href="https://zenn.dev/sktt_panda/articles/claude-code-rate-limit-relax-2026-05" target="_blank" rel="noopener">【2026/5/7】Claude Code 5時間制限が2倍化、SpaceX 300MW提携で全プラン緩和</a><span class="score-badge">★★★☆☆ 3.9</span><span class="category-badge">ニュース・動向</span></li><li><a href="https://www.itmedia.co.jp/enterprise/articles/2605/07/news113.html" target="_blank" rel="noopener">M365 Copilotの定着に万全なサポートは逆効果？　社内利用率95％の企業が実践する5つの鉄則</a><span class="score-badge">★★★☆☆ 3.5</span><span class="category-badge">ビジネス活用事例</span></li></ul></div><div class="day-section"><div class="day-header"><span class="day-title">2026-05-06</span><a class="day-link" href="daily/2026-05-06.html">全10件を見る →</a></div><ul class="article-list"><li><a href="https://openai.com/index/delivering-low-latency-voice-ai-at-scale" target="_blank" rel="noopener">How OpenAI delivers low-latency voice AI at scale</a><span class="score-badge">★★★☆☆ 3.8</span><span class="category-badge">ニュース・動向</span></li><li><a href="https://arxiv.org/abs/2605.01032" target="_blank" rel="noopener">Algebraic Semantics of Governed Execution: Monoidal Categori</a><span class="score-badge">★★★☆☆ 3.6</span><span class="category-badge">ニュース・動向</span></li><li><a href="https://arxiv.org/abs/2605.01100" target="_blank" rel="noopener">A Knowledge-Driven LLM-Based Decision-Support System for Exp</a><span class="score-badge">★★★☆☆ 3.5</span><span class="category-badge">ニュース・動向</span></li><li><a href="https://arxiv.org/abs/2605.01101" target="_blank" rel="noopener">Virtual Speech Therapist: A Clinician-in-the-Loop AI Speech </a><span class="score-badge">★★★☆☆ 3.4</span><span class="category-badge">ニュース・動向</span></li><li><a href="https://techcrunch.com/2026/05/06/3-days-left-to-lock-in-50-off-a-second-ticket-to-techcrunch-disrupt-2026/" target="_blank" rel="noopener">3 days left to lock in 50% off a second ticket to TechCrunch</a><span class="score-badge">★★★☆☆ 3.4</span><span class="category-badge">ニュース・動向</span></li></ul></div>
-  <footer>ai-research システムにより自動生成 | 2026-05-07 14:53 UTC</footer>
-</body>
-</html>
+<body class="flex min-h-screen bg-surface-container-lowest font-body-md text-on-surface">
+<nav class="bg-surface-container-low border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col gap-sm p-md z-50 hidden md:flex">
+<div class="mb-lg px-xs">
+  <h1 class="font-h3 text-h3 font-bold text-primary">AI Research JP</h1>
+  <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Analytical Dashboard</p>
+</div>
+<div class="flex-1 flex flex-col gap-xs">
+  <a class="flex items-center gap-md text-brand-blue font-bold bg-[#4F8EF7]/10 rounded-lg px-4 py-2 border border-brand-blue/20" href="index.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">dashboard</span><span class="font-body-md text-body-md">ダッシュボード</span></a>
+  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">article</span><span class="font-body-md text-body-md">今日の最新レポート</span></a>
+  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">calendar_view_week</span><span class="font-body-md text-body-md">今週のまとめ</span></a>
+  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">menu_book</span><span class="font-body-md text-body-md">AI用語図鑑</span></a>
+  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">trending_up</span><span class="font-body-md text-body-md">トレンド分析</span></a>
+  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">business</span><span class="font-body-md text-body-md">業界への影響</span></a>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant px-xs">
+  <p class="font-label-sm text-label-sm text-on-surface-variant">ai-research / devaise-support</p>
+</div>
+</nav>
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<header class="flex justify-between items-center w-full h-16 px-margin bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-10">
+  <div class="flex items-center gap-md lg:hidden">
+    <span class="material-symbols-outlined text-on-surface cursor-pointer">menu</span>
+    <span class="font-h3 text-h3 font-bold text-primary">ai-research</span>
+  </div>
+  <div class="hidden lg:flex items-center"></div>
+  <div class="flex items-center gap-margin">
+    <span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline-block">最終更新: 2026-05-07 15:46 UTC</span>
+  </div>
+</header>
+<div class="p-margin flex flex-col gap-xl w-full max-w-7xl mx-auto">
+  <section class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
+  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">本日の収集記事</span>
+    <div class="flex items-baseline gap-sm">
+      <span class="font-h1 text-h1 text-on-surface">11</span>
+      <span class="material-symbols-outlined text-primary text-sm">article</span>
+    </div>
+  </div>
+  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">週次候補</span>
+    <div class="flex items-baseline gap-sm">
+      <span class="font-h1 text-h1 text-on-surface">5</span>
+      <span class="material-symbols-outlined text-secondary text-sm">stars</span>
+    </div>
+  </div>
+  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">コンテンツ候補</span>
+    <div class="flex items-baseline gap-sm">
+      <span class="font-h1 text-h1 text-on-surface">2</span>
+      <span class="material-symbols-outlined text-secondary text-sm">edit_document</span>
+    </div>
+  </div>
+  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">新出AI用語</span>
+    <div class="flex items-baseline gap-sm">
+      <span class="font-h1 text-h1 text-on-surface">8</span>
+      <span class="material-symbols-outlined text-tertiary text-sm">library_books</span>
+    </div>
+  </div>
+</section>
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+    <div class="lg:col-span-7 flex flex-col gap-md">
+      <h3 class="font-h3 text-h3 text-on-surface border-b border-outline-variant pb-xs">
+        🏆 本日のトップ記事
+        <a href="daily/2026-05-07.html" class="text-brand-blue font-label-sm text-label-sm ml-sm hover:underline">全11件を見る →</a>
+      </h3>
+      <div class="flex flex-col gap-sm"><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
+  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-primary bg-primary/10 shadow-sm"><span class="font-bold text-primary">4.7</span></div>
+  <div class="flex-1 min-w-0">
+    <div class="flex justify-between items-start mb-xs gap-sm">
+      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+        <a href="https://openai.com/index/parloa" target="_blank" rel="noopener">Parloa builds service agents customers want to talk to</a>
+      </h4>
+      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ビジネス活用事例</span>
+    </div>
+    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">Parloa leverages OpenAI models to power scalable, voice-driven AI customer service agents, enabling </p>
+    <div class="flex items-center gap-xs flex-wrap">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">OpenAI Blog</span>
+      <span class="text-outline-variant">·</span>
+      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span> <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-green-200">月次候補</span> <span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-orange-200">コンテンツ候補</span> <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-purple-200">X投稿候補</span> <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-label-sm text-label-sm border border-gray-200">一次情報</span>
+    </div>
+  </div>
+</div><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
+  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-primary bg-primary/10 shadow-sm"><span class="font-bold text-primary">4.2</span></div>
+  <div class="flex-1 min-w-0">
+    <div class="flex justify-between items-start mb-xs gap-sm">
+      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+        <a href="https://zenn.dev/nascimento_qa/articles/916dd983e10add" target="_blank" rel="noopener">AI時代のQAは『書いて回す』から『生成・解釈・判断する』へ ─ 仕様駆動 × 探索駆動の二刀流</a>
+      </h4>
+      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ビジネス活用事例</span>
+    </div>
+    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">はじめに QAエンジニアの仕事は「テストケースを手で起こし、手で回し、結果を Excel に貼る」だった時代から、ここ1〜2年で大きく形を変えつつあります。Playwright のような自動化基盤、C</p>
+    <div class="flex items-center gap-xs flex-wrap">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">Zenn AI トピック</span>
+      <span class="text-outline-variant">·</span>
+      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span> <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-green-200">月次候補</span> <span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-orange-200">コンテンツ候補</span>
+    </div>
+  </div>
+</div><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
+  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-tertiary bg-tertiary/10 shadow-sm"><span class="font-bold text-tertiary">3.9</span></div>
+  <div class="flex-1 min-w-0">
+    <div class="flex justify-between items-start mb-xs gap-sm">
+      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+        <a href="https://zenn.dev/kenimo49/articles/vibe-coding-fails-document-first-6-mds" target="_blank" rel="noopener">Vibe Codingが3回目で破綻する理由 6つの定義書と3つの記憶ファイルで「いい感じ」をやめる</a>
+      </h4>
+      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ビジネス活用事例</span>
+    </div>
+    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">「いい感じに作って」と言って、3回目で破綻する Claude Codeに「いい感じにログイン画面を作って」と頼む。それなりのコードが出てくる。動く。ここまでは気持ちいい瞬間です。 問題は2回目の修正か</p>
+    <div class="flex items-center gap-xs flex-wrap">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">Zenn AI トピック</span>
+      <span class="text-outline-variant">·</span>
+      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span>
+    </div>
+  </div>
+</div><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
+  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-tertiary bg-tertiary/10 shadow-sm"><span class="font-bold text-tertiary">3.9</span></div>
+  <div class="flex-1 min-w-0">
+    <div class="flex justify-between items-start mb-xs gap-sm">
+      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+        <a href="https://zenn.dev/sktt_panda/articles/claude-code-rate-limit-relax-2026-05" target="_blank" rel="noopener">【2026/5/7】Claude Code 5時間制限が2倍化、SpaceX 300MW提携で全プラン緩和</a>
+      </h4>
+      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ニュース・動向</span>
+    </div>
+    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">2026年5月7日（米国時間 5/6）、Anthropic が SpaceX とのコンピュート提携と、Claude Code の使用上限を一斉に引き上げる発表を行った。Pro / Max / Team</p>
+    <div class="flex items-center gap-xs flex-wrap">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">Zenn AI トピック</span>
+      <span class="text-outline-variant">·</span>
+      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span>
+    </div>
+  </div>
+</div><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
+  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-tertiary bg-tertiary/10 shadow-sm"><span class="font-bold text-tertiary">3.5</span></div>
+  <div class="flex-1 min-w-0">
+    <div class="flex justify-between items-start mb-xs gap-sm">
+      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+        <a href="https://www.itmedia.co.jp/enterprise/articles/2605/07/news113.html" target="_blank" rel="noopener">M365 Copilotの定着に万全なサポートは逆効果？　社内利用率95％の企業が実践する5つの鉄則</a>
+      </h4>
+      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ビジネス活用事例</span>
+    </div>
+    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">務効率化が期待されるMicrosoft 365 Copilot。だが、実際は従業員の間で利用に差が生じ、思うように活用が進まないことも。本ブックレットでは、導入事例と専門家の解説を通じ、運用の盲点と定</p>
+    <div class="flex items-center gap-xs flex-wrap">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">ITmedia AI</span>
+      <span class="text-outline-variant">·</span>
+      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span>
+    </div>
+  </div>
+</div></div>
+    </div>
+    <div class="lg:col-span-5 flex flex-col gap-lg">
+      <div class="bg-surface border border-outline-variant rounded-lg p-md">
+        <h3 class="font-h3 text-h3 text-on-surface mb-md">カテゴリ別内訳</h3>
+        <div class="flex flex-col gap-sm"><div class="flex items-center gap-sm">
+  <div class="w-28 font-label-sm text-label-sm text-on-surface-variant truncate">ビジネス活用事例</div>
+  <div class="flex-1 h-5 bg-surface-variant rounded-full overflow-hidden">
+    <div class="h-full bg-primary rounded-full" style="width:54%"></div>
+  </div>
+  <div class="w-12 text-right font-data-mono text-data-mono text-on-surface-variant">6件</div>
+</div><div class="flex items-center gap-sm">
+  <div class="w-28 font-label-sm text-label-sm text-on-surface-variant truncate">ニュース・動向</div>
+  <div class="flex-1 h-5 bg-surface-variant rounded-full overflow-hidden">
+    <div class="h-full bg-primary-container rounded-full" style="width:36%"></div>
+  </div>
+  <div class="w-12 text-right font-data-mono text-data-mono text-on-surface-variant">4件</div>
+</div><div class="flex items-center gap-sm">
+  <div class="w-28 font-label-sm text-label-sm text-on-surface-variant truncate">動画・チュートリアル</div>
+  <div class="flex-1 h-5 bg-surface-variant rounded-full overflow-hidden">
+    <div class="h-full bg-secondary rounded-full" style="width:9%"></div>
+  </div>
+  <div class="w-12 text-right font-data-mono text-data-mono text-on-surface-variant">1件</div>
+</div></div>
+      </div>
+      <div class="bg-surface border border-outline-variant rounded-lg p-md">
+        <h3 class="font-h3 text-h3 text-on-surface mb-md">🆕 新出AI用語</h3>
+        <div class="flex flex-wrap gap-xs"><span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">voice-driven AI agents</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">service agent simulation</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">仕様駆動 × 探索駆動</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Claude スキル群</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Model Context Protocol活用したテスト</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Vibe Coding</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Claude Code レート制限</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Opus API レート制限</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="mt-md">
+    <h3 class="font-h3 text-h3 text-on-surface border-b border-outline-variant pb-xs mb-md">📅 直近のレポート履歴</h3>
+    <div class="bg-surface border border-outline-variant rounded-lg overflow-hidden">
+      <table class="w-full text-left border-collapse">
+        <thead><tr class="bg-surface-container-low border-b border-outline-variant">
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">日付</th>
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">収集</th>
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">週次候補</th>
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">月次候補</th>
+          <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">トップ記事</th>
+        </tr></thead>
+        <tbody class="font-body-md text-body-md text-on-surface divide-y divide-outline-variant">
+          <tr class="hover:bg-surface-container-lowest transition-colors">
+  <td class="p-md font-data-mono text-data-mono">
+    <a href="daily/2026-05-07.html" class="text-primary hover:underline">2026-05-07</a>
+  </td>
+  <td class="p-md text-on-surface">11件</td>
+  <td class="p-md text-on-surface">5件</td>
+  <td class="p-md text-on-surface">2件</td>
+  <td class="p-md text-on-surface-variant font-body-md text-body-md">
+    <a href="https://openai.com/index/parloa" target="_blank" rel="noopener" class="hover:text-primary transition-colors">Parloa builds service agents customers w…</a>
+  </td>
+</tr><tr class="hover:bg-surface-container-lowest transition-colors">
+  <td class="p-md font-data-mono text-data-mono">
+    <a href="daily/2026-05-06.html" class="text-primary hover:underline">2026-05-06</a>
+  </td>
+  <td class="p-md text-on-surface">10件</td>
+  <td class="p-md text-on-surface">3件</td>
+  <td class="p-md text-on-surface">0件</td>
+  <td class="p-md text-on-surface-variant font-body-md text-body-md">
+    <a href="https://openai.com/index/delivering-low-latency-voice-ai-at-scale" target="_blank" rel="noopener" class="hover:text-primary transition-colors">How OpenAI delivers low-latency voice AI…</a>
+  </td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+    ai-research システムにより自動生成 | 2026-05-07 15:46 UTC
+  </footer>
+</div>
+</main>
+</body></html>
