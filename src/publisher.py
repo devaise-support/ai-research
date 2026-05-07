@@ -266,6 +266,100 @@ def _escape_html(text: str) -> str:
             .replace('"', "&quot;"))
 
 
+def _inline_md(text: str) -> str:
+    """インライン Markdown（**bold**・[link](url)・`code`）を HTML に変換する"""
+    # Bold
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong class="font-bold text-on-surface">\1</strong>', text)
+    # Italic
+    text = re.sub(r'\*(.+?)\*', r'<em>\1</em>', text)
+    # Code
+    text = re.sub(r'`(.+?)`', r'<code class="bg-surface-container-high px-1 rounded font-data-mono text-data-mono text-sm">\1</code>', text)
+    # Link
+    text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" target="_blank" rel="noopener" class="text-primary hover:underline">\1</a>', text)
+    return text
+
+
+def _md_section_to_html(md_text: str) -> str:
+    """Markdown テキストを Stitch スタイルの簡易 HTML に変換する"""
+    lines = md_text.split("\n")
+    html_parts: list[str] = []
+    in_table = False
+    header_done = False
+    in_list = False
+
+    for raw in lines:
+        line = raw.rstrip()
+
+        # テーブル行
+        if line.startswith("|"):
+            cells = [c.strip() for c in line.strip("|").split("|")]
+            if not in_table:
+                in_table = True
+                header_done = False
+                html_parts.append('<div class="overflow-x-auto mb-md"><table class="w-full text-left border-collapse">')
+                html_parts.append('<thead><tr class="bg-surface-container-low border-b border-outline-variant">')
+                for c in cells:
+                    html_parts.append(f'<th class="p-sm font-label-sm text-label-sm text-on-surface-variant font-medium">{_inline_md(c)}</th>')
+                html_parts.append('</tr></thead>')
+                continue
+            # セパレータ行 (|---|---|)
+            if all(set(c) <= set("-:|") for c in cells if c):
+                if not header_done:
+                    html_parts.append('<tbody class="divide-y divide-outline-variant">')
+                    header_done = True
+                continue
+            # データ行
+            row = '<tr class="hover:bg-surface-container-lowest transition-colors">'
+            for c in cells:
+                row += f'<td class="p-sm font-body-md text-body-md text-on-surface">{_inline_md(c)}</td>'
+            row += '</tr>'
+            html_parts.append(row)
+            continue
+        else:
+            if in_table:
+                html_parts.append('</tbody></table></div>')
+                in_table = False
+                header_done = False
+
+        # リスト終端チェック
+        if in_list and not (line.startswith("- ") or line.startswith("* ")):
+            html_parts.append('</ul>')
+            in_list = False
+
+        # 見出し
+        if line.startswith("### "):
+            html_parts.append(f'<h3 class="font-h3 text-h3 text-on-surface mt-lg mb-sm">{_inline_md(line[4:])}</h3>')
+        elif line.startswith("## "):
+            html_parts.append(f'<h2 class="font-h2 text-h2 text-on-surface mt-xl mb-md pt-sm border-b border-outline-variant pb-xs">{_inline_md(line[3:])}</h2>')
+        elif line.startswith("# "):
+            html_parts.append(f'<h1 class="font-h1 text-h1 text-on-background mb-lg">{_inline_md(line[2:])}</h1>')
+        # リスト
+        elif line.startswith("- ") or line.startswith("* "):
+            if not in_list:
+                html_parts.append('<ul class="list-disc pl-6 space-y-1 mb-sm">')
+                in_list = True
+            html_parts.append(f'<li class="font-body-md text-body-md text-on-surface-variant">{_inline_md(line[2:])}</li>')
+        # 引用
+        elif line.startswith("> "):
+            html_parts.append(f'<blockquote class="border-l-4 border-primary/30 pl-md text-on-surface-variant italic my-sm font-body-md text-body-md">{_inline_md(line[2:])}</blockquote>')
+        # 区切り線
+        elif line.strip() == "---":
+            html_parts.append('<hr class="border-outline-variant my-lg">')
+        # 空行
+        elif line.strip() == "":
+            html_parts.append("")
+        # 通常段落
+        else:
+            html_parts.append(f'<p class="font-body-md text-body-md text-on-surface mb-sm">{_inline_md(line)}</p>')
+
+    if in_table:
+        html_parts.append('</tbody></table></div>')
+    if in_list:
+        html_parts.append('</ul>')
+
+    return "\n".join(html_parts)
+
+
 def _stitch_head(title: str) -> str:
     """Stitch デザイン共通 <head> セクションを返す"""
     return f"""<!DOCTYPE html>
@@ -339,8 +433,11 @@ tailwind.config = {{
 </head>"""
 
 
-def _sidebar_html(active: str = "dashboard", back_prefix: str = "") -> str:
-    """サイドバーナビゲーションを返す。active='dashboard' or 'daily'"""
+def _sidebar_html(active: str = "dashboard", back_prefix: str = "", latest_date=None) -> str:
+    """サイドバーナビゲーションを返す。
+    active: 'dashboard' | 'daily' | 'weekly' | 'glossary' | 'trends' | 'industry'
+    latest_date: 最新日次レポートの date オブジェクト（None の場合は # になる）
+    """
     def nav_item(icon: str, label: str, href: str, is_active: bool) -> str:
         if is_active:
             return (f'<a class="flex items-center gap-3 px-4 py-3 text-primary bg-secondary-container/30 '
@@ -352,8 +449,14 @@ def _sidebar_html(active: str = "dashboard", back_prefix: str = "") -> str:
                 f'<span class="material-symbols-outlined">{icon}</span>'
                 f'<span class="font-body-md text-body-md">{label}</span></a>')
 
-    index_href = f"{back_prefix}index.html"
-    daily_href = "#"
+    bp = back_prefix
+    index_href    = f"{bp}index.html"
+    daily_href    = f"{bp}daily/{latest_date.isoformat()}.html" if latest_date else f"{bp}daily/"
+    weekly_href   = f"{bp}weekly.html"
+    glossary_href = f"{bp}glossary.html"
+    trends_href   = f"{bp}trends.html"
+    industry_href = f"{bp}industry.html"
+
     return f"""<aside class="bg-surface-container-lowest border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col py-6 z-20 hidden md:flex">
 <div class="px-6 mb-8">
   <div class="flex items-center gap-3 mb-1">
@@ -365,12 +468,12 @@ def _sidebar_html(active: str = "dashboard", back_prefix: str = "") -> str:
   <p class="font-label-sm text-label-sm text-on-surface-variant">Analytical Intelligence</p>
 </div>
 <nav class="flex-1 flex flex-col space-y-1 px-2">
-  {nav_item("dashboard","ダッシュボード", index_href, active=="dashboard")}
-  {nav_item("description","今日の最新レポート", daily_href, active=="daily")}
-  {nav_item("calendar_view_week","今週のまとめ","#", False)}
-  {nav_item("menu_book","AI用語図鑑","#", False)}
-  {nav_item("trending_up","トレンド分析","#", False)}
-  {nav_item("business","業界への影響","#", False)}
+  {nav_item("dashboard",       "ダッシュボード",      index_href,    active=="dashboard")}
+  {nav_item("description",     "今日の最新レポート",  daily_href,    active=="daily")}
+  {nav_item("calendar_view_week","今週のまとめ",      weekly_href,   active=="weekly")}
+  {nav_item("menu_book",       "AI用語図鑑",          glossary_href, active=="glossary")}
+  {nav_item("trending_up",     "トレンド分析",        trends_href,   active=="trends")}
+  {nav_item("business",        "業界への影響",        industry_href, active=="industry")}
 </nav>
 <div class="mt-auto pt-4 border-t border-outline-variant px-4">
   <div class="flex items-center gap-2">
@@ -567,7 +670,7 @@ def generate_daily_html(articles: list[dict], target_date: date) -> str:
 </section>"""
 
     head = _stitch_head(f"AI情報まとめ — {date_ja} | ai-research")
-    sidebar = _sidebar_html(active="daily", back_prefix="../")
+    sidebar = _sidebar_html(active="daily", back_prefix="../", latest_date=target_date)
 
     return f"""{head}
 <body class="bg-background text-on-background min-h-screen flex">
@@ -769,7 +872,8 @@ def generate_index_html(recent: list[tuple[date, list[dict]]]) -> str:
 </tr>"""
 
     head = _stitch_head("AI Research JP - Dashboard | ai-research")
-    sidebar = _sidebar_html(active="dashboard", back_prefix="")
+    latest_d = recent[0][0] if recent else None
+    sidebar = _sidebar_html(active="dashboard", back_prefix="", latest_date=latest_d)
 
     return f"""{head}
 <body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-hidden flex h-screen">
@@ -840,35 +944,268 @@ def generate_index_html(recent: list[tuple[date, list[dict]]]) -> str:
 </body></html>"""
 
 
+def _page_shell(title: str, icon: str, active: str, content_html: str, latest_date=None) -> str:
+    """全ページ共通シェル（サイドバー + ヘッダー + コンテンツ）"""
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    head = _stitch_head(f"{title} | ai-research")
+    sidebar = _sidebar_html(active=active, back_prefix="", latest_date=latest_date)
+    return f"""{head}
+<body class="bg-background text-on-background min-h-screen flex">
+{sidebar}
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen bg-surface w-full">
+<header class="bg-surface-container-lowest border-b border-outline-variant flex items-center gap-md w-full h-16 px-margin sticky top-0 z-40">
+  <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+    <span class="material-symbols-outlined text-[20px]">{icon}</span>
+  </div>
+  <h1 class="font-h3 text-h3 font-bold text-on-surface">{_escape_html(title)}</h1>
+  <span class="ml-auto font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: {now_str}</span>
+</header>
+<div class="p-margin flex flex-col gap-xl max-w-5xl mx-auto w-full">
+{content_html}
+  <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+    ai-research システムにより自動生成 | {now_str}
+  </footer>
+</div>
+</main>
+</body></html>"""
+
+
+def generate_weekly_html(latest_date=None) -> str:
+    """今週のまとめページ HTML を生成する（weekly/*.md を読み込む）"""
+    weekly_dir = ROOT / "weekly"
+    md_files = sorted(weekly_dir.glob("*.md"), reverse=True) if weekly_dir.exists() else []
+
+    if not md_files:
+        content = '<p class="font-body-md text-body-md text-on-surface-variant">週次レポートはまだ生成されていません。</p>'
+        return _page_shell("今週のまとめ", "calendar_view_week", "weekly", content, latest_date)
+
+    # 最新ファイルを全文表示
+    latest_file = md_files[0]
+    latest_md = latest_file.read_text(encoding="utf-8")
+    latest_html = _md_section_to_html(latest_md)
+
+    # 過去レポートリスト
+    past_links = ""
+    for f in md_files[1:]:
+        week_label = f.stem  # 例: 2026-W19
+        past_links += (f'<li><a href="#" class="text-primary hover:underline font-body-md text-body-md">'
+                       f'{week_label}</a></li>\n')
+    past_section = ""
+    if past_links:
+        past_section = f"""<section class="mt-xl">
+  <h2 class="font-h2 text-h2 text-on-surface mb-md border-b border-outline-variant pb-xs">📂 過去のレポート</h2>
+  <ul class="list-disc pl-6 space-y-1">{past_links}</ul>
+</section>"""
+
+    content = f"""<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+{latest_html}
+</section>
+{past_section}"""
+    return _page_shell("今週のまとめ", "calendar_view_week", "weekly", content, latest_date)
+
+
+def generate_glossary_html(latest_date=None) -> str:
+    """AI用語図鑑 HTML を生成する（terms/glossary.md を読み込む）"""
+    glossary_path = ROOT / "terms" / "glossary.md"
+    if not glossary_path.exists():
+        content = '<p class="font-body-md text-body-md text-on-surface-variant">用語集がまだ作成されていません。</p>'
+        return _page_shell("AI用語図鑑", "menu_book", "glossary", content, latest_date)
+
+    raw_md = glossary_path.read_text(encoding="utf-8")
+
+    # `## 用語名` セクションを解析してカード形式で表示
+    sections = re.split(r'\n(?=## )', raw_md)
+    # 凡例・ヘッダーセクションをスキップ（"## 凡例" など）
+    term_cards = ""
+    term_count = 0
+    for sec in sections:
+        lines = sec.strip().split("\n")
+        if not lines:
+            continue
+        heading = lines[0]
+        if not heading.startswith("## "):
+            continue
+        term_name = heading[3:].strip()
+        if term_name in ("凡例", "用語名"):
+            continue
+        body_lines = lines[1:]
+        # 初出日・出典・定義を抽出
+        init_date = ""
+        source_link = ""
+        definition = ""
+        for bl in body_lines:
+            bl = bl.strip()
+            if bl.startswith("- 初出日:"):
+                init_date = bl[6:].strip()
+            elif bl.startswith("- 出典:"):
+                source_link = bl[5:].strip()
+            elif bl.startswith("- 定義:"):
+                definition = bl[5:].strip()
+            elif bl and not bl.startswith("-"):
+                if not definition:
+                    definition = bl
+
+        term_cards += f"""<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow">
+  <div class="flex items-start justify-between gap-md mb-sm">
+    <h3 class="font-h3 text-h3 text-primary font-bold">{_escape_html(term_name)}</h3>
+    <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full flex-shrink-0">{_escape_html(init_date)}</span>
+  </div>
+  <p class="font-body-md text-body-md text-on-surface-variant mb-sm">{_inline_md(_escape_html(definition)) if definition else "<em>定義未登録</em>"}</p>
+  {"<p class='font-label-sm text-label-sm text-on-surface-variant'>" + _inline_md(source_link) + "</p>" if source_link else ""}
+</div>"""
+        term_count += 1
+
+    if not term_cards:
+        term_cards = '<p class="font-body-md text-body-md text-on-surface-variant">用語はまだ登録されていません。</p>'
+
+    content = f"""
+<div class="flex items-center justify-between mb-md">
+  <p class="font-body-md text-body-md text-on-surface-variant">全 <strong>{term_count}</strong> 用語</p>
+  <input type="text" id="glossary-search" placeholder="用語を検索..."
+    oninput="filterGlossary(this.value)"
+    class="bg-surface border border-outline-variant text-on-surface font-body-md text-body-md rounded-md px-md py-sm outline-none w-64 focus:border-primary">
+</div>
+<div id="glossary-grid" class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+{term_cards}
+</div>
+<script>
+function filterGlossary(q) {{
+  const cards = document.querySelectorAll('#glossary-grid > div');
+  q = q.toLowerCase();
+  cards.forEach(c => {{
+    c.style.display = c.textContent.toLowerCase().includes(q) ? '' : 'none';
+  }});
+}}
+</script>"""
+    return _page_shell("AI用語図鑑", "menu_book", "glossary", content, latest_date)
+
+
+def generate_trends_html(latest_date=None) -> str:
+    """トレンド分析ページ HTML を生成する（knowledge/trends/*.md を読み込む）"""
+    trends_dir = ROOT / "knowledge" / "trends"
+    rising_path = trends_dir / "rising.md"
+    declining_path = trends_dir / "declining.md"
+
+    rising_html = ""
+    declining_html = ""
+
+    if rising_path.exists():
+        rising_html = _md_section_to_html(rising_path.read_text(encoding="utf-8"))
+    if declining_path.exists():
+        declining_html = _md_section_to_html(declining_path.read_text(encoding="utf-8"))
+
+    content = f"""<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+  <section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+    <div class="flex items-center gap-sm mb-md pb-sm border-b border-outline-variant">
+      <span class="material-symbols-outlined text-primary">trending_up</span>
+      <h2 class="font-h3 text-h3 text-on-surface font-bold">急上昇トピック</h2>
+    </div>
+    {rising_html or '<p class="font-body-md text-body-md text-on-surface-variant">データ蓄積中（2週以上で検出開始）</p>'}
+  </section>
+  <section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+    <div class="flex items-center gap-sm mb-md pb-sm border-b border-outline-variant">
+      <span class="material-symbols-outlined text-tertiary">trending_down</span>
+      <h2 class="font-h3 text-h3 text-on-surface font-bold">衰退トレンド</h2>
+    </div>
+    {declining_html or '<p class="font-body-md text-body-md text-on-surface-variant">データ蓄積中（2週以上で検出開始）</p>'}
+  </section>
+</div>"""
+    return _page_shell("トレンド分析", "trending_up", "trends", content, latest_date)
+
+
+def generate_industry_html(latest_date=None) -> str:
+    """業界への影響ページ HTML を生成する（knowledge/industry-impact/*.md を読み込む）"""
+    industry_dir = ROOT / "knowledge" / "industry-impact"
+    industry_labels = {
+        "beauty": ("美容・サロン", "face"),
+        "real-estate": ("不動産", "home"),
+        "healthcare": ("医療・ヘルスケア", "medical_services"),
+        "finance": ("金融・ファイナンス", "account_balance"),
+    }
+
+    tabs_html = ""
+    panels_html = ""
+    for i, (stem, (label, icon)) in enumerate(industry_labels.items()):
+        md_path = (industry_dir / f"{stem}.md") if industry_dir.exists() else None
+        if md_path and md_path.exists():
+            panel_content = _md_section_to_html(md_path.read_text(encoding="utf-8"))
+        else:
+            panel_content = f'<p class="font-body-md text-body-md text-on-surface-variant">{label}のデータはまだ蓄積されていません。</p>'
+
+        active_tab = "text-primary border-b-2 border-primary" if i == 0 else "text-on-surface-variant hover:text-on-surface"
+        tabs_html += (f'<button onclick="switchTab(\'{stem}\')" id="tab-{stem}" '
+                      f'class="flex items-center gap-xs px-lg py-sm font-label-sm text-label-sm transition-colors {active_tab}">'
+                      f'<span class="material-symbols-outlined text-[18px]">{icon}</span>{_escape_html(label)}</button>')
+
+        display = "" if i == 0 else "hidden"
+        panels_html += f'<div id="panel-{stem}" class="{display}">{panel_content}</div>'
+
+    content = f"""<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+  <div class="flex border-b border-outline-variant overflow-x-auto">{tabs_html}</div>
+  <div class="p-lg">{panels_html}</div>
+</div>
+<script>
+function switchTab(id) {{
+  document.querySelectorAll('[id^="panel-"]').forEach(p => p.classList.add('hidden'));
+  document.querySelectorAll('[id^="tab-"]').forEach(t => {{
+    t.classList.remove('text-primary','border-b-2','border-primary');
+    t.classList.add('text-on-surface-variant');
+  }});
+  document.getElementById('panel-' + id).classList.remove('hidden');
+  const tb = document.getElementById('tab-' + id);
+  tb.classList.remove('text-on-surface-variant');
+  tb.classList.add('text-primary','border-b-2','border-primary');
+}}
+</script>"""
+    return _page_shell("業界への影響", "business", "industry", content, latest_date)
+
+
 def publish_github_pages(target_date: date, dry_run: bool = False) -> bool:
-    """GitHub Pages 用の HTML ファイルを生成する"""
+    """GitHub Pages 用の HTML ファイルを全ページ生成する"""
     articles = load_articles_for_date(target_date)
     if not articles:
         logger.warning(f"GitHub Pages: {target_date} のスコアデータなし")
         return False
+
+    # 最新記事データ（サイドバーの今日リンク用）
+    recent = load_recent_articles(days=10)
+    latest_d = recent[0][0] if recent else target_date
 
     # 日次HTML
     daily_html = generate_daily_html(articles, target_date)
     daily_path = DOCS_DIR / "daily" / f"{target_date.isoformat()}.html"
 
     # インデックスHTML
-    recent = load_recent_articles(days=10)
     index_html = generate_index_html(recent)
     index_path = DOCS_DIR / "index.html"
 
+    # サブページHTML（サイドバーリンク先）
+    weekly_html   = generate_weekly_html(latest_date=latest_d)
+    glossary_html = generate_glossary_html(latest_date=latest_d)
+    trends_html   = generate_trends_html(latest_date=latest_d)
+    industry_html = generate_industry_html(latest_date=latest_d)
+
     if dry_run:
-        logger.info(f"[dry-run] GitHub Pages 生成スキップ: {daily_path.name} + index.html")
+        logger.info(f"[dry-run] GitHub Pages 生成スキップ: {daily_path.name} + 5ページ")
         return True
 
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
     (DOCS_DIR / "daily").mkdir(parents=True, exist_ok=True)
 
-    with open(daily_path, "w", encoding="utf-8") as f:
-        f.write(daily_html)
-    with open(index_path, "w", encoding="utf-8") as f:
-        f.write(index_html)
+    pages = [
+        (daily_path, daily_html),
+        (index_path, index_html),
+        (DOCS_DIR / "weekly.html",   weekly_html),
+        (DOCS_DIR / "glossary.html", glossary_html),
+        (DOCS_DIR / "trends.html",   trends_html),
+        (DOCS_DIR / "industry.html", industry_html),
+    ]
+    for path, html in pages:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(html)
 
-    logger.info(f"GitHub Pages 生成完了: {daily_path} / {index_path}")
+    generated = ", ".join(p.name for p, _ in pages)
+    logger.info(f"GitHub Pages 生成完了: {generated}")
     return True
 
 

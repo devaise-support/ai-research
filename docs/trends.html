@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>トレンド分析 | ai-research</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; } body { line-height: 1.8; } p, li, td, th { line-height: 1.8; }</style>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "brand-blue": "#4F8EF7",
+        "surface-dim": "#d8d9e2", "on-secondary": "#ffffff",
+        "secondary-fixed": "#d3e4fe", "on-primary-fixed": "#001a40",
+        "surface-container-low": "#f2f3fc", "on-error": "#ffffff",
+        "on-tertiary-container": "#fffbff", "tertiary": "#894e00",
+        "on-secondary-container": "#54647a", "surface-bright": "#f9f9ff",
+        "on-primary-container": "#fefcff", "surface-variant": "#e1e2eb",
+        "surface-container-high": "#e7e8f1", "primary": "#0059ba",
+        "tertiary-fixed": "#ffdcbf", "on-secondary-fixed-variant": "#38485d",
+        "on-primary-fixed-variant": "#004492", "error": "#ba1a1a",
+        "outline": "#727784", "primary-container": "#2c72d9",
+        "secondary-container": "#d0e1fb", "inverse-surface": "#2e3037",
+        "surface-container-lowest": "#ffffff", "inverse-primary": "#acc7ff",
+        "surface-container": "#ecedf6", "on-primary": "#ffffff",
+        "on-surface": "#191c22", "surface": "#f9f9ff",
+        "on-tertiary-fixed": "#2d1600", "outline-variant": "#c2c6d5",
+        "inverse-on-surface": "#eff0f9", "on-background": "#191c22",
+        "primary-fixed": "#d7e2ff", "on-secondary-fixed": "#0b1c30",
+        "on-tertiary-fixed-variant": "#6a3b00", "secondary": "#505f76",
+        "surface-tint": "#005bbf", "error-container": "#ffdad6",
+        "primary-fixed-dim": "#acc7ff", "on-tertiary": "#ffffff",
+        "background": "#f8f7f6", "tertiary-container": "#ac6300",
+        "secondary-fixed-dim": "#b7c8e1", "on-surface-variant": "#424753",
+        "surface-container-highest": "#e1e2eb", "on-error-container": "#93000a",
+        "tertiary-fixed-dim": "#ffb873"
+      },
+      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+      spacing: { xs: "4px", xl: "32px", sm: "8px", margin: "24px", md: "16px", gutter: "20px", unit: "4px", lg: "24px" },
+      fontFamily: {
+        "body-md": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "data-mono": ["Inter", "sans-serif"],
+        "h2": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "label-sm": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "body-lg": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "h1": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "h3": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"]
+      },
+      fontSize: {
+        "body-md": ["14px", {"lineHeight":"20px","fontWeight":"400"}],
+        "data-mono": ["14px", {"lineHeight":"20px","fontWeight":"500"}],
+        "h2": ["24px", {"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],
+        "label-sm": ["12px", {"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],
+        "body-lg": ["16px", {"lineHeight":"24px","fontWeight":"400"}],
+        "h1": ["30px", {"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],
+        "h3": ["20px", {"lineHeight":"28px","fontWeight":"600"}]
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<aside class="bg-surface-container-lowest border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col py-6 z-20 hidden md:flex">
+<div class="px-6 mb-8">
+  <div class="flex items-center gap-3 mb-1">
+    <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+    </div>
+    <span class="font-h2 text-h2 font-bold tracking-tight text-primary">ai-research</span>
+  </div>
+  <p class="font-label-sm text-label-sm text-on-surface-variant">Analytical Intelligence</p>
+</div>
+<nav class="flex-1 flex flex-col space-y-1 px-2">
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="index.html"><span class="material-symbols-outlined">dashboard</span><span class="font-body-md text-body-md">ダッシュボード</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="daily/2026-05-07.html"><span class="material-symbols-outlined">description</span><span class="font-body-md text-body-md">今日の最新レポート</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="weekly.html"><span class="material-symbols-outlined">calendar_view_week</span><span class="font-body-md text-body-md">今週のまとめ</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="glossary.html"><span class="material-symbols-outlined">menu_book</span><span class="font-body-md text-body-md">AI用語図鑑</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-primary bg-secondary-container/30 font-bold border-r-4 border-primary" href="trends.html"><span class="material-symbols-outlined">trending_up</span><span class="font-body-md text-body-md">トレンド分析</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="industry.html"><span class="material-symbols-outlined">business</span><span class="font-body-md text-body-md">業界への影響</span></a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant px-4">
+  <div class="flex items-center gap-2">
+    <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center">
+      <span class="material-symbols-outlined text-primary">science</span>
+    </div>
+    <span class="font-label-sm text-label-sm text-on-surface-variant">devaise-support</span>
+  </div>
+</div>
+</aside>
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen bg-surface w-full">
+<header class="bg-surface-container-lowest border-b border-outline-variant flex items-center gap-md w-full h-16 px-margin sticky top-0 z-40">
+  <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+    <span class="material-symbols-outlined text-[20px]">trending_up</span>
+  </div>
+  <h1 class="font-h3 text-h3 font-bold text-on-surface">トレンド分析</h1>
+  <span class="ml-auto font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-05-07 18:39 UTC</span>
+</header>
+<div class="p-margin flex flex-col gap-xl max-w-5xl mx-auto w-full">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+  <section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+    <div class="flex items-center gap-sm mb-md pb-sm border-b border-outline-variant">
+      <span class="material-symbols-outlined text-primary">trending_up</span>
+      <h2 class="font-h3 text-h3 text-on-surface font-bold">急上昇トピック</h2>
+    </div>
+    <h1 class="font-h1 text-h1 text-on-background mb-lg">急上昇トピック</h1>
+
+<blockquote class="border-l-4 border-primary/30 pl-md text-on-surface-variant italic my-sm font-body-md text-body-md">週次更新: 2026-05-07 14:23 UTC</blockquote>
+
+<p class="font-body-md text-body-md text-on-surface mb-sm">直近4週と前4週を比較して、出現頻度が+50%以上増加したキーワードです。</p>
+
+<p class="font-body-md text-body-md text-on-surface mb-sm"><em>急上昇キーワードは検出されませんでした。</em></p>
+
+<p class="font-body-md text-body-md text-on-surface mb-sm">（データ蓄積週数: 1週 / 検出には2週以上必要）</p>
+
+<h2 class="font-h2 text-h2 text-on-surface mt-xl mb-md pt-sm border-b border-outline-variant pb-xs">直近4週のキーワード推移</h2>
+
+<div class="overflow-x-auto mb-md"><table class="w-full text-left border-collapse">
+<thead><tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="p-sm font-label-sm text-label-sm text-on-surface-variant font-medium">週</th>
+<th class="p-sm font-label-sm text-label-sm text-on-surface-variant font-medium">トップキーワード</th>
+</tr></thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-lowest transition-colors"><td class="p-sm font-body-md text-body-md text-on-surface">2026-W19</td><td class="p-sm font-body-md text-body-md text-on-surface">—</td></tr>
+</tbody></table></div>
+
+<hr class="border-outline-variant my-lg">
+<p class="font-body-md text-body-md text-on-surface mb-sm"><em>本ページは ai-research システムにより自動生成されました。</em></p>
+  </section>
+  <section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+    <div class="flex items-center gap-sm mb-md pb-sm border-b border-outline-variant">
+      <span class="material-symbols-outlined text-tertiary">trending_down</span>
+      <h2 class="font-h3 text-h3 text-on-surface font-bold">衰退トレンド</h2>
+    </div>
+    <h1 class="font-h1 text-h1 text-on-background mb-lg">衰退トピック</h1>
+
+<blockquote class="border-l-4 border-primary/30 pl-md text-on-surface-variant italic my-sm font-body-md text-body-md">週次更新: 2026-05-07 14:23 UTC</blockquote>
+
+<p class="font-body-md text-body-md text-on-surface mb-sm">前4週に多く出現していたが、直近4週に50%以上減少したキーワードです。</p>
+
+<p class="font-body-md text-body-md text-on-surface mb-sm"><em>衰退キーワードは検出されませんでした。</em></p>
+
+<hr class="border-outline-variant my-lg">
+<p class="font-body-md text-body-md text-on-surface mb-sm"><em>本ページは ai-research システムにより自動生成されました。</em></p>
+  </section>
+</div>
+  <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+    ai-research システムにより自動生成 | 2026-05-07 18:39 UTC
+  </footer>
+</div>
+</main>
+</body></html>
