@@ -1,0 +1,26 @@
+# Google Stitch プロジェクト設定
+# このファイルは stitch_sync.py と skills/DESIGN_SYNC.md から参照される
+
+project_id: "15799005587672629940"
+
+# DESIGN.md 参照パス（絶対パスまたは ~ 展開あり）
+design_sources:
+  fonts: "~/.claude/design-md-jp/zenn/DESIGN.md"
+  grays: "~/.claude/design-md-jp/smarthr/DESIGN.md"
+
+# DESIGN.md から抽出した適用ルール（キャッシュ済み）
+# 更新時は stitch_sync.py --update-rules で再抽出
+design_rules:
+  # Zenn DESIGN.md section 3.3 より
+  japanese_font_stack:
+    - "Hiragino Kaku Gothic ProN"
+    - "Hiragino Sans"
+    - "Meiryo"
+  # Zenn DESIGN.md section 1 より（本文行間）
+  body_line_height: 1.8
+  # SmartHR DESIGN.md section 2 "Stone 01" より
+  background_color: "#f8f7f6"
+  # SmartHR DESIGN.md section 2 "Stone 02" より（テーブルヘッダー）
+  stone_02: "#edebe8"
+  # SmartHR DESIGN.md section 2 "Text Black" より
+  text_primary: "#23221e"

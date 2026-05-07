@@ -9,7 +9,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
+<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; } body { line-height: 1.8; } p, li, td, th { line-height: 1.8; }</style>
 <script id="tailwind-config">
 tailwind.config = {
   darkMode: "class",
@@ -37,7 +37,7 @@ tailwind.config = {
         "on-tertiary-fixed-variant": "#6a3b00", "secondary": "#505f76",
         "surface-tint": "#005bbf", "error-container": "#ffdad6",
         "primary-fixed-dim": "#acc7ff", "on-tertiary": "#ffffff",
-        "background": "#f9f9ff", "tertiary-container": "#ac6300",
+        "background": "#f8f7f6", "tertiary-container": "#ac6300",
         "secondary-fixed-dim": "#b7c8e1", "on-surface-variant": "#424753",
         "surface-container-highest": "#e1e2eb", "on-error-container": "#93000a",
         "tertiary-fixed-dim": "#ffb873"
@@ -45,13 +45,13 @@ tailwind.config = {
       borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
       spacing: { xs: "4px", xl: "32px", sm: "8px", margin: "24px", md: "16px", gutter: "20px", unit: "4px", lg: "24px" },
       fontFamily: {
-        "body-md": ["Inter","sans-serif"],
-        "data-mono": ["Inter","sans-serif"],
-        "h2": ["Inter","sans-serif"],
-        "label-sm": ["Inter","sans-serif"],
-        "body-lg": ["Inter","sans-serif"],
-        "h1": ["Inter","sans-serif"],
-        "h3": ["Inter","sans-serif"]
+        "body-md": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "data-mono": ["Inter", "sans-serif"],
+        "h2": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "label-sm": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "body-lg": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "h1": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "h3": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"]
       },
       fontSize: {
         "body-md": ["14px", {"lineHeight":"20px","fontWeight":"400"}],
@@ -105,7 +105,7 @@ tailwind.config = {
     <div class="h-6 w-px bg-outline-variant mx-sm"></div>
     <h2 class="font-h3 text-h3 font-bold text-on-surface hidden sm:block">📰 AI情報まとめ — 2026年5月7日（木）</h2>
   </div>
-  <span class="font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-05-07 17:33 UTC</span>
+  <span class="font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-05-07 18:32 UTC</span>
 </header>
 <div class="bg-surface-container-lowest/90 backdrop-blur-sm border-b border-outline-variant sticky top-16 z-30 px-margin py-md flex flex-wrap items-center justify-between gap-md">
   <div class="flex items-center gap-sm flex-wrap">
@@ -519,7 +519,7 @@ tailwind.config = {
   </div>
 </section>
   <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
-    ai-research システムにより自動生成 | 2026-05-07 17:33 UTC
+    ai-research システムにより自動生成 | 2026-05-07 18:32 UTC
   </footer>
 </div>
 </main>
