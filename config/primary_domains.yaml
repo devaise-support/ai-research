@@ -1,0 +1,63 @@
+# 一次情報ドメインリスト
+# URLのドメインがここに含まれる場合、is_primary_source=True と判定
+
+primary_domains:
+  # AI企業公式
+  - "anthropic.com"
+  - "openai.com"
+  - "deepmind.google"
+  - "deepmind.com"
+  - "huggingface.co"
+  - "ai.google"
+  - "research.google"
+  - "ai.meta.com"
+  - "mistral.ai"
+  - "cohere.com"
+  - "stability.ai"
+  # 学術・研究
+  - "arxiv.org"
+  - "paperswithcode.com"
+  - "semanticscholar.org"
+  - "nature.com"
+  - "science.org"
+  # 政府・公的機関
+  - "digital.go.jp"
+  - "meti.go.jp"
+  - "soumu.go.jp"
+  - "nist.gov"
+  - "whitehouse.gov"
+  # 大手テック企業公式ブログ
+  - "blogs.microsoft.com"
+  - "techblog.yahoo.co.jp"
+  - "aws.amazon.com"
+  - "cloud.google.com"
+  - "azure.microsoft.com"
+
+# 一次情報と判定するキーワード（タイトル or 要約に含まれる場合）
+# ドメイン判定と OR 条件
+primary_keywords_ja:
+  - "実際に試した"
+  - "検証した"
+  - "使ってみた"
+  - "測定した"
+  - "構築した"
+  - "発表"
+  - "リリース"
+  - "公開"
+  - "実装した"
+  - "作ってみた"
+
+primary_keywords_en:
+  - "I tested"
+  - "benchmark"
+  - "hands-on"
+  - "step by step"
+  - "built"
+  - "announce"
+  - "release"
+  - "introduce"
+  - "launch"
+  - "paper"
+  - "research"
+  - "we present"
+  - "our model"

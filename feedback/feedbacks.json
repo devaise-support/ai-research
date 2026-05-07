@@ -1,0 +1,42 @@
+{
+  "feedbacks": [
+    {
+      "article_id": "5c3d93bd7160",
+      "title": "How OpenAI delivers low-latency voice AI at scale",
+      "type": "like",
+      "category": "ニュース・動向",
+      "tags": [
+        "mock",
+        "test"
+      ],
+      "score": 3.78,
+      "timestamp": "2026-05-06T17:25:18.380826+00:00"
+    },
+    {
+      "article_id": "a08d2526e446",
+      "title": "Algebraic Semantics of Governed Execution: Monoidal Categories, Effect Algebras, and Coterminous Boundaries",
+      "type": "sellable",
+      "category": "ニュース・動向",
+      "tags": [
+        "mock",
+        "test"
+      ],
+      "score": 3.63,
+      "timestamp": "2026-05-06T17:25:18.531826+00:00"
+    },
+    {
+      "article_id": "4327772378b1",
+      "title": "A Knowledge-Driven LLM-Based Decision-Support System for Explainable Defect Analysis and Mitigation Guidance in Laser Powder Bed Fusion",
+      "type": "educational",
+      "category": "ニュース・動向",
+      "tags": [
+        "mock",
+        "test"
+      ],
+      "score": 3.52,
+      "timestamp": "2026-05-06T17:25:18.722824+00:00"
+    }
+  ],
+  "last_recalculated_at": "2026-05-06T17:25:27.333955+00:00",
+  "processed_count": 3
+}

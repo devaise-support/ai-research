@@ -1,0 +1,70 @@
+# RSSフィード設定
+# 1フィードあたり最大 max_per_feed 件収集
+# 全体上限は total_limit 件（published_at 降順）
+
+feeds:
+  - name: "Anthropic Blog"
+    url: "https://www.anthropic.com/news/rss"
+    category: "LLM・基盤モデル"
+    language: "en"
+    is_primary: true
+
+  - name: "OpenAI Blog"
+    url: "https://openai.com/blog/rss.xml"
+    category: "LLM・基盤モデル"
+    language: "en"
+    is_primary: true
+
+  - name: "Google DeepMind Blog"
+    url: "https://deepmind.google/blog/rss.xml"
+    category: "LLM・基盤モデル"
+    language: "en"
+    is_primary: true
+
+  - name: "Hugging Face Blog"
+    url: "https://huggingface.co/blog/feed.xml"
+    category: "ツール・サービス"
+    language: "en"
+    is_primary: true
+
+  - name: "Zenn AI トピック"
+    url: "https://zenn.dev/topics/ai/feed"
+    category: "日本国内AI動向"
+    language: "ja"
+    is_primary: false
+
+  - name: "ITmedia AI"
+    url: "https://rss.itmedia.co.jp/rss/2.0/aiplus.xml"
+    category: "日本国内AI動向"
+    language: "ja"
+    is_primary: false
+
+  - name: "arXiv cs.AI"
+    url: "http://arxiv.org/rss/cs.AI"
+    category: "論文・研究"
+    language: "en"
+    is_primary: true
+
+  - name: "TechCrunch AI"
+    url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+    category: "ニュース・動向"
+    language: "en"
+    is_primary: false
+
+  - name: "Papers With Code"
+    url: "https://paperswithcode.com/latest.xml"
+    category: "論文・研究"
+    language: "en"
+    is_primary: true
+
+  - name: "デジタル庁"
+    url: "https://www.digital.go.jp/news/feed/"
+    category: "規制・倫理・政策"
+    language: "ja"
+    is_primary: true
+
+# 収集設定
+max_per_feed: 3       # 1フィードあたりの最大収集件数
+total_limit: 10       # RSS全体の上限件数
+timeout_seconds: 10   # HTTPタイムアウト（秒）
+max_age_days: 14      # これより古い記事は除外

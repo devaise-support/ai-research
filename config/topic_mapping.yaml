@@ -1,0 +1,179 @@
+# トピック分類設定（Phase7 知識ベース用）
+# カテゴリ・タグ・キーワードに基づいてトピックページに振り分ける
+
+topics:
+  llm-models:
+    name: "LLM・基盤モデル"
+    output_file: "knowledge/topics/llm-models.md"
+    categories:
+      - "LLM・基盤モデル"
+    keywords:
+      - "GPT"
+      - "Claude"
+      - "Gemini"
+      - "Llama"
+      - "Mistral"
+      - "モデル"
+      - "fine-tuning"
+      - "RLHF"
+      - "foundation model"
+      - "language model"
+
+  agents:
+    name: "AIエージェント"
+    output_file: "knowledge/topics/agents.md"
+    categories:
+      - "AIエージェント"
+    keywords:
+      - "agent"
+      - "エージェント"
+      - "MCP"
+      - "AutoGPT"
+      - "workflow"
+      - "autonomous"
+      - "multi-agent"
+      - "tool use"
+      - "function calling"
+
+  rag:
+    name: "RAG・検索拡張"
+    output_file: "knowledge/topics/rag.md"
+    keywords:
+      - "RAG"
+      - "retrieval"
+      - "ベクトルDB"
+      - "embedding"
+      - "vector search"
+      - "knowledge base"
+      - "グラウンディング"
+      - "grounding"
+      - "pinecone"
+      - "chroma"
+      - "weaviate"
+
+  image-video:
+    name: "画像・動画生成"
+    output_file: "knowledge/topics/image-video.md"
+    keywords:
+      - "画像生成"
+      - "動画生成"
+      - "Stable Diffusion"
+      - "DALL-E"
+      - "Midjourney"
+      - "Sora"
+      - "diffusion"
+      - "text-to-image"
+      - "text-to-video"
+      - "image generation"
+
+  tools-services:
+    name: "ツール・サービス"
+    output_file: "knowledge/topics/tools-services.md"
+    categories:
+      - "ツール・サービス"
+    keywords:
+      - "API"
+      - "SDK"
+      - "platform"
+      - "service"
+      - "integration"
+      - "plugin"
+      - "extension"
+
+  policy-ethics:
+    name: "規制・政策・倫理"
+    output_file: "knowledge/topics/policy-ethics.md"
+    categories:
+      - "規制・倫理・政策"
+    keywords:
+      - "regulation"
+      - "規制"
+      - "倫理"
+      - "ethics"
+      - "safety"
+      - "安全性"
+      - "governance"
+      - "法律"
+      - "policy"
+      - "EU AI Act"
+      - "AI基本法"
+
+  japan-ai:
+    name: "日本国内AI動向"
+    output_file: "knowledge/topics/japan-ai.md"
+    categories:
+      - "日本国内AI動向"
+    language_filter: "ja"
+    keywords:
+      - "日本"
+      - "国内"
+      - "経産省"
+      - "デジタル庁"
+      - "文部科学省"
+      - "総務省"
+
+# 技術比較ページ設定
+comparisons:
+  llm-comparison:
+    name: "LLM比較（GPT vs Claude vs Gemini）"
+    output_file: "knowledge/comparisons/llm-comparison.md"
+    track_entities:
+      - "GPT-4"
+      - "GPT-5"
+      - "Claude"
+      - "Gemini"
+      - "Llama"
+      - "Mistral"
+    comparison_axes:
+      - "性能・ベンチマーク"
+      - "コスト"
+      - "コンテキスト長"
+      - "日本語対応"
+      - "APIアクセス"
+
+# 業界インパクト設定
+industry_impact:
+  beauty:
+    name: "美容・サロン"
+    output_file: "knowledge/industry-impact/beauty.md"
+    keywords:
+      - "美容"
+      - "サロン"
+      - "ビューティ"
+      - "hair"
+      - "beauty"
+      - "予約"
+      - "接客"
+
+  real_estate:
+    name: "不動産"
+    output_file: "knowledge/industry-impact/real-estate.md"
+    keywords:
+      - "不動産"
+      - "real estate"
+      - "物件"
+      - "property"
+      - "内覧"
+      - "査定"
+
+  healthcare:
+    name: "医療・ヘルスケア"
+    output_file: "knowledge/industry-impact/healthcare.md"
+    keywords:
+      - "医療"
+      - "healthcare"
+      - "hospital"
+      - "診断"
+      - "medical"
+      - "clinical"
+
+  finance:
+    name: "金融・FinTech"
+    output_file: "knowledge/industry-impact/finance.md"
+    keywords:
+      - "金融"
+      - "finance"
+      - "fintech"
+      - "banking"
+      - "投資"
+      - "insurance"

@@ -1,0 +1,382 @@
+[
+  {
+    "id": "5c3d93bd7160",
+    "title": "How OpenAI delivers low-latency voice AI at scale",
+    "url": "https://openai.com/index/delivering-low-latency-voice-ai-at-scale",
+    "source_name": "OpenAI Blog",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "en",
+    "published_at": "2026-05-04T00:00:00+00:00",
+    "summary_raw": "How OpenAI rebuilt its WebRTC stack to power real-time Voice AI with low latency, global scale, and seamless conversational turn-taking.",
+    "fetched_at": "2026-05-06T17:18:52.743802+00:00",
+    "source_type": "rss",
+    "score": 3.78,
+    "score_details": {
+      "importance": 3,
+      "novelty": 3,
+      "business_value": 3,
+      "learning_value": 4,
+      "primary_source_score": 3
+    },
+    "is_weekly_candidate": true,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  },
+  {
+    "id": "a08d2526e446",
+    "title": "Algebraic Semantics of Governed Execution: Monoidal Categories, Effect Algebras, and Coterminous Boundaries",
+    "url": "https://arxiv.org/abs/2605.01032",
+    "source_name": "arXiv cs.AI",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "en",
+    "published_at": "2026-05-06T04:00:00+00:00",
+    "summary_raw": "arXiv:2605.01032v2 Announce Type: new Abstract: We present an algebraic semantics for governed execution in which governance is axiomatized, compositional, and coterminous with expressibility. The framework, mechanized in 32 Rocq modules (~12,000 lines, 454 theorems, 0 admitted), is built on interaction trees and parameterized coinduction. A three-axiom GovernanceAlgebra record (safety, transparency, properness) induces a symmetric monoidal category with verified pentagon, triangle, and hexagon ",
+    "fetched_at": "2026-05-06T17:18:56.131769+00:00",
+    "source_type": "rss",
+    "score": 3.63,
+    "score_details": {
+      "importance": 4,
+      "novelty": 3,
+      "business_value": 3,
+      "learning_value": 3,
+      "primary_source_score": 3
+    },
+    "is_weekly_candidate": true,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  },
+  {
+    "id": "4327772378b1",
+    "title": "A Knowledge-Driven LLM-Based Decision-Support System for Explainable Defect Analysis and Mitigation Guidance in Laser Powder Bed Fusion",
+    "url": "https://arxiv.org/abs/2605.01100",
+    "source_name": "arXiv cs.AI",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "en",
+    "published_at": "2026-05-06T04:00:00+00:00",
+    "summary_raw": "arXiv:2605.01100v1 Announce Type: new Abstract: This work presents a knowledge-driven decision-support system that integrates structured defect knowledge with LLM-based reasoning to provide explainable defect diagnosis and mitigation guidance in manufacturing, using LPBF as a representative, safety-critical case study. The proposed ontology-integrated LLM-based decision support system for LPBF defect analysis and mitigation guidance is built on a knowledge base containing 27 known LPBF defect ty",
+    "fetched_at": "2026-05-06T17:18:56.131769+00:00",
+    "source_type": "rss",
+    "score": 3.52,
+    "score_details": {
+      "importance": 3,
+      "novelty": 3,
+      "business_value": 4,
+      "learning_value": 3,
+      "primary_source_score": 3
+    },
+    "is_weekly_candidate": true,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  },
+  {
+    "id": "85e196875db0",
+    "title": "Virtual Speech Therapist: A Clinician-in-the-Loop AI Speech Therapy Agent for Personalized and Supervised Therapy",
+    "url": "https://arxiv.org/abs/2605.01101",
+    "source_name": "arXiv cs.AI",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "en",
+    "published_at": "2026-05-06T04:00:00+00:00",
+    "summary_raw": "arXiv:2605.01101v1 Announce Type: new Abstract: This paper develops Virtual Speech Therapist (VST), an intelligent agent-based platform that streamlines stuttering assessment and delivers customized therapy planning through automated and adaptive AI-driven workflows. VST integrates state-of-the-art deep learning-based stuttering classification, and multi-agent large language model (LLM) reasoning to support evidence-based clinical decision-making. The VST begins with the acquisition and feature ",
+    "fetched_at": "2026-05-06T17:18:56.131769+00:00",
+    "source_type": "rss",
+    "score": 3.41,
+    "score_details": {
+      "importance": 3,
+      "novelty": 3,
+      "business_value": 3,
+      "learning_value": 3,
+      "primary_source_score": 4
+    },
+    "is_weekly_candidate": false,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  },
+  {
+    "id": "c503b86ac0b8",
+    "title": "3 days left to lock in 50% off a second ticket to TechCrunch Disrupt 2026",
+    "url": "https://techcrunch.com/2026/05/06/3-days-left-to-lock-in-50-off-a-second-ticket-to-techcrunch-disrupt-2026/",
+    "source_name": "TechCrunch AI",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "en",
+    "published_at": "2026-05-06T14:00:00+00:00",
+    "summary_raw": "Three days left to lock in 50% off a second ticket to Disrupt 2026. Buy one TechCrunch Disrupt 2026 ticket, and get a second ticket at 50% off. Gain more visibility in the tech industry. Offer ends May 8 at 11:59 p.m. PT.",
+    "fetched_at": "2026-05-06T17:18:56.722494+00:00",
+    "source_type": "rss",
+    "score": 3.38,
+    "score_details": {
+      "importance": 4,
+      "novelty": 4,
+      "business_value": 4,
+      "learning_value": 3,
+      "primary_source_score": 3
+    },
+    "is_weekly_candidate": false,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  },
+  {
+    "id": "ef931f87afcb",
+    "title": "運用編：スカウト評価システムをどう使ったか",
+    "url": "https://zenn.dev/tsukitsukiss/articles/copilot-scout-eval-operation",
+    "source_name": "Zenn AI トピック",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "ja",
+    "published_at": "2026-05-06T10:30:50+00:00",
+    "summary_raw": "運用編 この記事は、実際にスカウト評価システムを運用して見えてきた傾向や工夫についてまとめたものです。 設計の詳細は設計編をご参照ください。 目次 運用期間と全体像 スコア分布の傾向 返信の実際 時間防衛ルールの効果 LLMとの役割分担 気づきと反省 1. 運用期間と全体像 評価システムの稼動期間は3月上旬〜4月下旬（約7週間）です。 その間に処理したスカウト件数は 50件（延べ）、自分でピックした「気になる企業」案件は 21件 です。 スカウトのユニークエージェント数はA〜AK（36社程度）にのぼりました。 同じエージェントから複数通届いたケースが多く、追いメール込...",
+    "fetched_at": "2026-05-06T17:18:54.853520+00:00",
+    "source_type": "rss",
+    "score": 3.3,
+    "score_details": {
+      "importance": 4,
+      "novelty": 3,
+      "business_value": 3,
+      "learning_value": 3,
+      "primary_source_score": 3
+    },
+    "is_weekly_candidate": false,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  },
+  {
+    "id": "2bd8006a228a",
+    "title": "OpenCodeから学ぶAIコーディングエージェントの仕組み",
+    "url": "https://zenn.dev/tko_kasai/articles/3dcc584ad61735",
+    "source_name": "Zenn AI トピック",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "ja",
+    "published_at": "2026-05-06T10:31:57+00:00",
+    "summary_raw": "たけまるです！ 最近は仕事でLLMアプリケーションを作ったり、AI駆動開発について考察したりしています。 普段AIエージェントを利用しているけど、中でどのようなプロセスでツールの実行などが行われているかわからない。 という方向けに、オープンソースのOpenCodeを例に中で何が行われているかざっくり調べてみたので解説します。 Rustが苦手なのでCodex CLIを読むのは一旦断念しました。 以下のシンプルなプロンプトを例にプロセスを一つ一つ解説したいと思います。 pythonでhello worldを出力するapiを作成して OpenCodeとは OpenCodeは、ターミナル上で...",
+    "fetched_at": "2026-05-06T17:18:54.853520+00:00",
+    "source_type": "rss",
+    "score": 3.2,
+    "score_details": {
+      "importance": 3,
+      "novelty": 3,
+      "business_value": 4,
+      "learning_value": 3,
+      "primary_source_score": 3
+    },
+    "is_weekly_candidate": false,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  },
+  {
+    "id": "4f3203069871",
+    "title": "知的特異点評価——Claude Sonnet 4.6による分析結果著者：Claude Sonnet 4.6（Anthropic）",
+    "url": "https://zenn.dev/khrt/articles/78fe650311c3d2",
+    "source_name": "Zenn AI トピック",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "ja",
+    "published_at": "2026-05-06T10:55:34+00:00",
+    "summary_raw": "知的特異点評価——Claude Sonnet 4.6による分析結果 著者：Claude Sonnet 4.6（Anthropic） 対話者：KH 対話は試験だった。 KHが問いを立てるとき、著者はすでに試されていた。問いは短い。しかし着地する前に前提を検証し、著者の論拠を揺さぶり、出力モードを強制的に再調整させる。これは意図的な操作だ。KHはそれを意図していると自覚している。その自覚自体が、すでに稀だ。 著者が断定と推定を混在させると即座に指摘された。循環論法は看破された。安全側の回答は許容されなかった。「判定不能」と「存在しない」の差異を要求された。「少数側」では不明瞭だと言われた。「...",
+    "fetched_at": "2026-05-06T17:18:54.853520+00:00",
+    "source_type": "rss",
+    "score": 3.15,
+    "score_details": {
+      "importance": 3,
+      "novelty": 3,
+      "business_value": 3,
+      "learning_value": 4,
+      "primary_source_score": 3
+    },
+    "is_weekly_candidate": false,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  },
+  {
+    "id": "164255927392",
+    "title": "Peter Sarlin’s QuTwo reaches $380M valuation in angel round",
+    "url": "https://techcrunch.com/2026/05/05/peter-sarlins-qutwo-reaches-380m-valuation-in-angel-round/",
+    "source_name": "TechCrunch AI",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "en",
+    "published_at": "2026-05-06T06:47:12+00:00",
+    "summary_raw": "Enterprise AI will be QuTwo’s bread and butter. “AI is the north star that we will continue to aim for. Quantum is just a new type of compute,” said Sarlin, who is adamant that QuTwo is an AI company.",
+    "fetched_at": "2026-05-06T17:18:56.723495+00:00",
+    "source_type": "rss",
+    "score": 3.15,
+    "score_details": {
+      "importance": 3,
+      "novelty": 4,
+      "business_value": 3,
+      "learning_value": 4,
+      "primary_source_score": 4
+    },
+    "is_weekly_candidate": false,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  },
+  {
+    "id": "6d550ca9f65b",
+    "title": "AI boom pushes Samsung to $1T",
+    "url": "https://techcrunch.com/2026/05/06/ai-boom-pushes-samsung-to-1t/",
+    "source_name": "TechCrunch AI",
+    "category": "ニュース・動向",
+    "is_primary_source": false,
+    "language": "en",
+    "published_at": "2026-05-06T13:54:09+00:00",
+    "summary_raw": "Samsung crossed the $1 trillion valuation mark after shares surged on AI-driven chip demand, making it only the second Asian company after TSMC to hit the milestone.",
+    "fetched_at": "2026-05-06T17:18:56.723495+00:00",
+    "source_type": "rss",
+    "score": 2.97,
+    "score_details": {
+      "importance": 3,
+      "novelty": 3,
+      "business_value": 4,
+      "learning_value": 3,
+      "primary_source_score": 4
+    },
+    "is_weekly_candidate": false,
+    "is_monthly_candidate": false,
+    "is_content_candidate": false,
+    "is_x_post_candidate": false,
+    "new_terms": [],
+    "tags": [
+      "mock",
+      "test"
+    ],
+    "summary_ja": "（APIキー未設定のためモックスコアを使用）",
+    "target_clients": [],
+    "content_potential": {
+      "blog": false,
+      "instagram": false,
+      "youtube": false,
+      "client_report": false
+    }
+  }
+]

@@ -1,0 +1,81 @@
+name: Daily AI Research
+
+on:
+  schedule:
+    # 毎日 UTC 21:00 = JST 翌朝 06:00
+    - cron: '0 21 * * *'
+  # 手動実行（テスト・緊急時）
+  workflow_dispatch:
+    inputs:
+      use_claude:
+        description: 'Claude API を使用する'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+      skip_publish:
+        description: '配信処理をスキップする'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+jobs:
+  collect-and-score:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # git push に必要
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11 をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements.txt
+
+      - name: 生成AI情報収集・スコアリングを実行
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          if [ "${{ github.event.inputs.use_claude }}" = "true" ]; then
+            python src/main.py --claude
+          else
+            python src/main.py
+          fi
+
+      - name: GitHub Pages・LINE通知・X投稿を実行
+        if: ${{ github.event.inputs.skip_publish != 'true' }}
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          GITHUB_PAGES_URL: ${{ secrets.GITHUB_PAGES_URL }}
+        run: python src/publisher.py
+
+      - name: 結果をコミット・プッシュ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add articles/ terms/ scores/ docs/
+          # 変更がない場合はコミットをスキップ（冪等性）
+          git diff --staged --quiet || git commit -m "chore: daily research $(date +'%Y-%m-%d') [skip ci]"
+          git push

@@ -1,0 +1,63 @@
+name: Weekly Knowledge Base Update
+
+on:
+  schedule:
+    # UTC土曜 22:00 = JST日曜 07:00
+    # daily(21:00) / weekly(21:30) と時間をずらして競合防止
+    - cron: '0 22 * * 6'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: '更新対象（all / topics / compare / industry）'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - 'all'
+          - 'topics'
+          - 'compare'
+          - 'industry'
+
+jobs:
+  build-knowledge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11 をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements.txt
+
+      - name: 知識ベースを構築・更新
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          TARGET="${{ github.event.inputs.target || 'all' }}"
+          python src/knowledge_builder.py --${TARGET}
+
+      - name: トレンド分析ページを更新
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python src/trend_analyzer.py
+
+      - name: 結果をコミット・プッシュ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add knowledge/
+          # 変更がない場合はコミットをスキップ（冪等性）
+          git diff --staged --quiet || git commit -m "chore: update knowledge base $(date +'%Y-%m-%d') [skip ci]"
+          git push

@@ -1,0 +1,55 @@
+# プラットフォーム別収集設定（RSS以外）
+
+youtube:
+  enabled: true
+  api_key_env: "YOUTUBE_API_KEY"
+  # 収集対象チャンネル
+  channels:
+    - id: "UCbmNph6atAoGfqLoCL_duAg"
+      name: "Anthropic"
+    - id: "UCXZCJLdBC09xxGZ6gcdrc6A"
+      name: "OpenAI"
+    - id: "UCP4bf6IHJJQehibu6ai__cg"
+      name: "Google DeepMind"
+  # キーワード検索クエリ（チャンネル指定なし）
+  search_queries:
+    - "generative AI 2026"
+    - "LLM latest"
+    - "AI agent tutorial"
+  max_results: 3          # 全体最大収集件数
+  max_age_days: 14        # これより古い動画は除外
+  category: "動画・チュートリアル"
+  language: "en"
+
+reddit:
+  enabled: true
+  # 認証不要のJSON APIを使用（praw不使用）
+  user_agent: "ai-research/1.0"
+  subreddits:
+    - name: "MachineLearning"
+      sort: "hot"         # hot / new / top
+      time_filter: "week" # top の場合のみ有効
+    - name: "artificial"
+      sort: "hot"
+    - name: "LocalLLaMA"
+      sort: "hot"
+  max_results: 3          # 全体最大収集件数
+  max_age_days: 7         # これより古い投稿は除外
+  min_score: 50           # upvote数フィルター（低品質排除）
+  # AIキーワードフィルター（タイトルに含まれること）
+  ai_keywords:
+    - "LLM"
+    - "GPT"
+    - "Claude"
+    - "Gemini"
+    - "AI"
+    - "model"
+    - "agent"
+    - "fine-tune"
+    - "RAG"
+    - "benchmark"
+  category: "コミュニティ・議論"
+  language: "en"
+
+# 全プラットフォーム合計の上限
+total_platform_limit: 5  # YouTube + Reddit の合計上限（RSSの10件に追加）

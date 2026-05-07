@@ -1,0 +1,30 @@
+{
+  "_comment": "スコアリング重み設定。feedback.pyが自動更新する。",
+  "weights": {
+    "importance": 0.3,
+    "novelty": 0.25,
+    "business_value": 0.2,
+    "learning_value": 0.15,
+    "primary_source_score": 0.1
+  },
+  "category_boost": {
+    "LLM・基盤モデル": 1.2,
+    "論文・研究": 1.1,
+    "AIエージェント": 1.1,
+    "ツール・サービス": 1.0,
+    "ビジネス活用事例": 1.0,
+    "日本国内AI動向": 1.0,
+    "ニュース・動向": 0.95,
+    "規制・倫理・政策": 0.9,
+    "動画・チュートリアル": 0.9,
+    "コミュニティ・議論": 0.8
+  },
+  "thresholds": {
+    "weekly_candidate": 3.5,
+    "monthly_candidate": 4.0,
+    "content_candidate": 4.0,
+    "x_post_candidate": 4.5
+  },
+  "version": 2,
+  "updated_at": "2026-05-06T17:25:27.333955+00:00"
+}

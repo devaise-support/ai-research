@@ -1,0 +1,67 @@
+name: Weekly AI Research Summary
+
+on:
+  schedule:
+    # UTC土曜 21:30 = JST日曜 06:30（daily.yml の UTC 21:00 と 30分ずらして競合防止）
+    - cron: '30 21 * * 6'
+  # 手動実行（テスト・緊急時）
+  workflow_dispatch:
+    inputs:
+      force_monthly:
+        description: '月次レポートを強制生成する'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+jobs:
+  weekly-summary:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # git push に必要
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11 をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements.txt
+
+      - name: 週次集約レポートを生成
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: python src/aggregator.py --weekly
+
+      - name: 月次集約レポートを生成（月初7日以内 または 手動強制）
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: |
+          DAY=$(date +'%d')
+          FORCE="${{ github.event.inputs.force_monthly }}"
+          if [ "$DAY" -le 7 ] || [ "$FORCE" = "true" ]; then
+            echo "月次レポートを生成します（day=${DAY}, force=${FORCE}）"
+            python src/aggregator.py --monthly
+          else
+            echo "月初ではないため月次レポートをスキップします（day=${DAY}）"
+          fi
+
+      - name: 結果をコミット・プッシュ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add weekly/ monthly/ trends/
+          # 変更がない場合はコミットをスキップ（冪等性）
+          git diff --staged --quiet || git commit -m "chore: weekly summary $(date +'%Y-%m-%d') [skip ci]"
+          git push
