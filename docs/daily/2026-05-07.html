@@ -105,7 +105,7 @@ tailwind.config = {
     <div class="h-6 w-px bg-outline-variant mx-sm"></div>
     <h2 class="font-h3 text-h3 font-bold text-on-surface hidden sm:block">📰 AI情報まとめ — 2026年5月7日（木）</h2>
   </div>
-  <span class="font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-05-07 18:41 UTC</span>
+  <span class="font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-05-07 18:51 UTC</span>
 </header>
 <div class="bg-surface-container-lowest/90 backdrop-blur-sm border-b border-outline-variant sticky top-16 z-30 px-margin py-md flex flex-wrap items-center justify-between gap-md">
   <div class="flex items-center gap-sm flex-wrap">
@@ -133,13 +133,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://openai.com/index/parloa" target="_blank" rel="noopener">Parloa builds service agents customers want to talk to</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">OpenAI Blog · 2026-05-07 · ビジネス活用事例</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">Parloa leverages OpenAI models to power scalable, voice-driven AI customer service agents, enabling enterprises to design, simulate, and deploy reliable, real-time interactions.</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ビジネス活用事例</span>
+            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm border border-blue-200 flex-shrink-0">EN→JP</span>
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">ParloaがOpenAIのモデルを活用し、音声駆動型のAIカスタマーサービスエージェントを開発。企業が設計・シミュレーション・リアルタイム配置を実現する。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">Parloa builds service agents customers want to talk to</p>
+            <a href="https://openai.com/index/parloa" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">OpenAI Blog · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-fa002821b90d')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-fa002821b90d')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-fa002821b90d">expand_more</span>
         </button>
       </div>
@@ -164,13 +176,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://zenn.dev/nascimento_qa/articles/916dd983e10add" target="_blank" rel="noopener">AI時代のQAは『書いて回す』から『生成・解釈・判断する』へ ─ 仕様駆動 × 探索駆動の二刀流</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">Zenn AI トピック · 2026-05-07 · ビジネス活用事例</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">はじめに QAエンジニアの仕事は「テストケースを手で起こし、手で回し、結果を Excel に貼る」だった時代から、ここ1〜2年で大きく形を変えつつあります。Playwright のような自動化基盤、Claude Code のようなAIエージェント、そして MCP（Model Context Protocol）を通じてブラウザを操作するAI──これらが揃ったことで、テストは「人が書いて回すもの」から</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ビジネス活用事例</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">QAエンジニアの業務がAI時代に転換。従来の手動テストケース作成から、AIによるテスト生成・実行と人による解釈・判断への二層構造へシフト。Playwright、Claude Code、MCPなどを活用した実装例を紹介。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">AI時代のQAは『書いて回す』から『生成・解釈・判断する』へ ─ 仕様駆動 × 探索駆動の二刀流</p>
+            <a href="https://zenn.dev/nascimento_qa/articles/916dd983e10add" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Zenn AI トピック · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-8d21cb109d03')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-8d21cb109d03')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-8d21cb109d03">expand_more</span>
         </button>
       </div>
@@ -195,13 +219,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://zenn.dev/kenimo49/articles/vibe-coding-fails-document-first-6-mds" target="_blank" rel="noopener">Vibe Codingが3回目で破綻する理由 6つの定義書と3つの記憶ファイルで「いい感じ」をやめる</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">Zenn AI トピック · 2026-05-07 · ビジネス活用事例</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">「いい感じに作って」と言って、3回目で破綻する Claude Codeに「いい感じにログイン画面を作って」と頼む。それなりのコードが出てくる。動く。ここまでは気持ちいい瞬間です。 問題は2回目の修正からです。「ボタン位置を変えて」と頼むと、 意図とズレた変更 が混ざる。3回目には別ファイルまで触り始めて、スパゲッティ化する。5回目には「最初から作り直したほうが早い」状態。 心当たりがある方は多いと</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ビジネス活用事例</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">Claude Codeを使った「いい感じコーディング」が3回目以降に破綻する理由を分析し、6つの定義書と3つの記憶ファイルで構造化する方法を提案。AIとの効果的な協働のためには曖昧な指示ではなく明確な構造が必須。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">Vibe Codingが3回目で破綻する理由 6つの定義書と3つの記憶ファイルで「いい感じ」をやめる</p>
+            <a href="https://zenn.dev/kenimo49/articles/vibe-coding-fails-document-first-6-mds" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Zenn AI トピック · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-917a12a03bca')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-917a12a03bca')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-917a12a03bca">expand_more</span>
         </button>
       </div>
@@ -226,13 +262,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://zenn.dev/sktt_panda/articles/claude-code-rate-limit-relax-2026-05" target="_blank" rel="noopener">【2026/5/7】Claude Code 5時間制限が2倍化、SpaceX 300MW提携で全プラン緩和</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">Zenn AI トピック · 2026-05-07 · ニュース・動向</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">2026年5月7日（米国時間 5/6）、Anthropic が SpaceX とのコンピュート提携と、Claude Code の使用上限を一斉に引き上げる発表を行った。Pro / Max / Team / シートベース Enterprise の Claude Code 5時間レート制限を2倍、Pro / Max のピーク時間制限を撤廃、Claude Opus API のレート制限を大幅引き上げ。す</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">Anthropic が SpaceX とのコンピュート提携を発表し、Claude Code の5時間レート制限を2倍化、Pro/Max のピーク時間制限を撤廃。Claude Opus API のレート制限も大幅引き上げで、全プラン利用制限が緩和された。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">【2026/5/7】Claude Code 5時間制限が2倍化、SpaceX 300MW提携で全プラン緩和</p>
+            <a href="https://zenn.dev/sktt_panda/articles/claude-code-rate-limit-relax-2026-05" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Zenn AI トピック · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-64c108d0b77a')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-64c108d0b77a')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-64c108d0b77a">expand_more</span>
         </button>
       </div>
@@ -257,13 +305,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://www.itmedia.co.jp/enterprise/articles/2605/07/news113.html" target="_blank" rel="noopener">M365 Copilotの定着に万全なサポートは逆効果？　社内利用率95％の企業が実践する5つの鉄則</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">ITmedia AI · 2026-05-07 · ビジネス活用事例</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">務効率化が期待されるMicrosoft 365 Copilot。だが、実際は従業員の間で利用に差が生じ、思うように活用が進まないことも。本ブックレットでは、導入事例と専門家の解説を通じ、運用の盲点と定着のポイントを解説する。</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ビジネス活用事例</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">Microsoft 365 Copilot導入企業の95％利用率達成事例から、組織への定着を促進する5つの鉄則を紹介。過度なサポートが却って利用阻害になる実態と運用改善のポイントを解説。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">M365 Copilotの定着に万全なサポートは逆効果？　社内利用率95％の企業が実践する5つの鉄則</p>
+            <a href="https://www.itmedia.co.jp/enterprise/articles/2605/07/news113.html" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">ITmedia AI · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-ed583a9ece8f')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-ed583a9ece8f')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-ed583a9ece8f">expand_more</span>
         </button>
       </div>
@@ -288,13 +348,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://www.itmedia.co.jp/news/articles/2605/07/news110.html" target="_blank" rel="noopener">商品選びから決済までをAIでお助け──MUFGがGoogleとタッグで実現目指す　Google Cloud上にインフラ構築</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">ITmedia AI · 2026-05-07 · ビジネス活用事例</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3"></p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ビジネス活用事例</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">MUFGとGoogleが連携し、Google Cloud上に商品選びから決済までをサポートするAIシステムを構築。金融機関が顧客体験向上を目指す取り組み。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">商品選びから決済までをAIでお助け──MUFGがGoogleとタッグで実現目指す　Google Cloud上にインフラ構築</p>
+            <a href="https://www.itmedia.co.jp/news/articles/2605/07/news110.html" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">ITmedia AI · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-e2e864b569ef')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-e2e864b569ef')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-e2e864b569ef">expand_more</span>
         </button>
       </div>
@@ -319,13 +391,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://techcrunch.com/podcast/auroras-chris-urmson-on-why-self-driving-trucks-are-finally-ready-to-scale/" target="_blank" rel="noopener">Aurora’s Chris Urmson on why self-driving trucks are finally ready to scale</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">TechCrunch AI · 2026-05-07 · ビジネス活用事例</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">Self-driving has been &amp;#8220;almost here&amp;#8221; for over a decade. But somewhere between DARPA&amp;#160;challenges&amp;#160;and a handful of driverless trucks hauling freight between Dallas and Houston, Auror</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ビジネス活用事例</span>
+            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm border border-blue-200 flex-shrink-0">EN→JP</span>
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">自動運転トラック企業Auroraが商用運用を開始し、数台から数百台への急速なスケーリングを実現。自動運転業界が実装段階に移行しつつあることを示すインタビュー記事。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">Aurora’s Chris Urmson on why self-driving trucks are finally ready to scale</p>
+            <a href="https://techcrunch.com/podcast/auroras-chris-urmson-on-why-self-driving-trucks-are-finally-ready-to-scale/" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">TechCrunch AI · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-ee847d35de69')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-ee847d35de69')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-ee847d35de69">expand_more</span>
         </button>
       </div>
@@ -350,13 +434,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://www.itmedia.co.jp/aiplus/articles/2605/07/news118.html" target="_blank" rel="noopener">オープンワールドRPG「NTE」、一部で「AI使用」と明かす　ゲーム自体は「人間の創造性に基づく」</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">ITmedia AI · 2026-05-07 · ニュース・動向</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">中国のゲーム開発スタジオであるHotta Studioは、オープンワールドRPG「NTE: Neverness to Everness」（以下、NTE）の一部でAIを使用していると明かした。NTEを巡っては、既存作品に類似する素材がゲーム内に見られるなどの理由から、AIを使っているのでは、と指摘する声がX上の一部で出ていた。</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">中国のHotta Studioは、オープンワールドRPG「NTE」の一部でAIを使用していることを明かした。ゲーム自体は人間の創造性に基づいており、AIはアシスタントツールとしての役割に限定されている。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">オープンワールドRPG「NTE」、一部で「AI使用」と明かす　ゲーム自体は「人間の創造性に基づく」</p>
+            <a href="https://www.itmedia.co.jp/aiplus/articles/2605/07/news118.html" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">ITmedia AI · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-1ed727943b74')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-1ed727943b74')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-1ed727943b74">expand_more</span>
         </button>
       </div>
@@ -381,13 +477,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://www.youtube.com/watch?v=MGY_OM8u42A" target="_blank" rel="noopener">Nelson Dellis | Everyday Genius: Hacks to Boost Your Memory, Focus... | Talks at Google</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">YouTube/Anthropic · 2026-04-29 · 動画・チュートリアル</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">Six-time USA Memory Champion, two-time Guinness World Record holder, Grandmaster of Memory, keynote speaker, and ...</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">動画・チュートリアル</span>
+            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm border border-blue-200 flex-shrink-0">EN→JP</span>
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">記憶力チャンピオンNelson Dellis氏による、記憶力とフォーカス向上のためのハック・テクニックについての講演。AI業界との直接的な関連性は不明確。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">Nelson Dellis | Everyday Genius: Hacks to Boost Your Memory, Focus... | Talks at Google</p>
+            <a href="https://www.youtube.com/watch?v=MGY_OM8u42A" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">YouTube/Anthropic · 2026-04-29</p>
         </div>
-        <button onclick="toggleDetails('card-72f28014a0a6')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-72f28014a0a6')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-72f28014a0a6">expand_more</span>
         </button>
       </div>
@@ -412,13 +520,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://techcrunch.com/2026/05/07/exhibit-at-techcrunch-disrupt-2026-get-in-front-of-10000-decision-makers-before-space-runs-out/" target="_blank" rel="noopener">Exhibit at TechCrunch Disrupt 2026: Get in front of 10,000 decision-makers before space runs out</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">TechCrunch AI · 2026-05-07 · ニュース・動向</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">If startup visibility, traction, and real deals matter, you should be on the TechCrunch Disrupt 2026 exhibit floor. Get your 6' exhibit table before your competitor does.</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm border border-blue-200 flex-shrink-0">EN→JP</span>
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">TechCrunch Disrupt 2026の出展スポット募集告知。1万人以上の意思決定者に向けてスタートアップがプロモーション可能なイベント。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">Exhibit at TechCrunch Disrupt 2026: Get in front of 10,000 decision-makers before space runs out</p>
+            <a href="https://techcrunch.com/2026/05/07/exhibit-at-techcrunch-disrupt-2026-get-in-front-of-10000-decision-makers-before-space-runs-out/" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">TechCrunch AI · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-87527d93ee6d')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-87527d93ee6d')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-87527d93ee6d">expand_more</span>
         </button>
       </div>
@@ -443,13 +563,25 @@ tailwind.config = {
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="https://techcrunch.com/2026/05/07/2-days-left-get-50-off-a-second-pass-to-techcrunch-disrupt-2026/" target="_blank" rel="noopener">2 days left: Get 50% off a second pass to TechCrunch Disrupt 2026</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">TechCrunch AI · 2026-05-07 · ニュース・動向</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">Two days left to save up to $410 on your pass, and get a second one at 50% off to TechCrunch Disrupt 2026. Offer ends May 8, 11:59 p.m. PT. Register now.</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm border border-blue-200 flex-shrink-0">EN→JP</span>
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">TechCrunch Disrupt 2026のカンファレンスチケットに対する期間限定割引キャンペーン。2枚目のパスが50%オフになる促販広告。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">2 days left: Get 50% off a second pass to TechCrunch Disrupt 2026</p>
+            <a href="https://techcrunch.com/2026/05/07/2-days-left-get-50-off-a-second-pass-to-techcrunch-disrupt-2026/" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">TechCrunch AI · 2026-05-07</p>
         </div>
-        <button onclick="toggleDetails('card-87c1818146fb')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('card-87c1818146fb')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-card-87c1818146fb">expand_more</span>
         </button>
       </div>
@@ -519,7 +651,7 @@ tailwind.config = {
   </div>
 </section>
   <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
-    ai-research システムにより自動生成 | 2026-05-07 18:41 UTC
+    ai-research システムにより自動生成 | 2026-05-07 18:51 UTC
   </footer>
 </div>
 </main>

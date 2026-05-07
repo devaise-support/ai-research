@@ -571,10 +571,20 @@ def generate_daily_html(articles: list[dict], target_date: date) -> str:
         source = _escape_html(a.get("source_name", ""))
         pub = (a.get("published_at") or "")[:10]
         category = _escape_html(a.get("category", ""))
-        summary = _escape_html((a.get("summary_raw") or "")[:200])
+        lang = a.get("language", "")
         badges = _badge_html(a)
         circle = _score_circle_html(score, "lg")
         card_id = f"card-{_escape_html(a.get('id', ''))}"
+
+        # ★ 表示する要約: summary_ja を優先、エラー文字列/空の場合は summary_raw にフォールバック
+        summary_ja = a.get("summary_ja") or ""
+        if not summary_ja or (summary_ja.startswith("（") and summary_ja.endswith("）")):
+            summary_ja = a.get("summary_raw") or ""
+        summary_display = _escape_html(summary_ja)
+
+        # EN→JP バッジ（英語記事のみ表示）
+        lang_badge = ('<span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm '
+                      'border border-blue-200 flex-shrink-0">EN→JP</span>') if lang == "en" else ""
 
         # スコア内訳
         details = a.get("score_details", {})
@@ -597,13 +607,25 @@ def generate_daily_html(articles: list[dict], target_date: date) -> str:
     <div class="flex-1 flex flex-col gap-sm">
       <div class="flex items-start justify-between gap-md">
         <div class="flex-1">
-          <h3 class="font-h3 text-h3 text-on-surface mb-xs hover:text-brand-blue transition-colors">
-            <a href="{url}" target="_blank" rel="noopener">{title}</a>
-          </h3>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">{source} · {pub} · {category}</p>
-          <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">{summary}</p>
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">{category}</span>
+            {lang_badge}
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">{summary_display}</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">{title}</p>
+            <a href="{url}" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">{source} · {pub}</p>
         </div>
-        <button onclick="toggleDetails('{card_id}')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0">
+        <button onclick="toggleDetails('{card_id}')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
           <span class="material-symbols-outlined" id="icon-{card_id}">expand_more</span>
         </button>
       </div>
