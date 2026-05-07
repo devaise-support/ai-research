@@ -7,8 +7,9 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
 <script id="tailwind-config">
 tailwind.config = {
   darkMode: "class",
@@ -44,13 +45,13 @@ tailwind.config = {
       borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
       spacing: { xs: "4px", xl: "32px", sm: "8px", margin: "24px", md: "16px", gutter: "20px", unit: "4px", lg: "24px" },
       fontFamily: {
-        "body-md": ["Noto Sans JP","Inter","sans-serif"],
+        "body-md": ["Inter","sans-serif"],
         "data-mono": ["Inter","sans-serif"],
-        "h2": ["Noto Sans JP","Inter","sans-serif"],
-        "label-sm": ["Noto Sans JP","Inter","sans-serif"],
-        "body-lg": ["Noto Sans JP","Inter","sans-serif"],
-        "h1": ["Noto Sans JP","Inter","sans-serif"],
-        "h3": ["Noto Sans JP","Inter","sans-serif"]
+        "h2": ["Inter","sans-serif"],
+        "label-sm": ["Inter","sans-serif"],
+        "body-lg": ["Inter","sans-serif"],
+        "h1": ["Inter","sans-serif"],
+        "h3": ["Inter","sans-serif"]
       },
       fontSize: {
         "body-md": ["14px", {"lineHeight":"20px","fontWeight":"400"}],
@@ -67,23 +68,33 @@ tailwind.config = {
 </script>
 </head>
 <body class="bg-background text-on-background min-h-screen flex">
-<nav class="bg-surface-container-low border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col gap-sm p-md z-50 hidden md:flex">
-<div class="mb-lg px-xs">
-  <h1 class="font-h3 text-h3 font-bold text-primary">AI Research JP</h1>
-  <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Analytical Dashboard</p>
+<aside class="bg-surface-container-lowest border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col py-6 z-20 hidden md:flex">
+<div class="px-6 mb-8">
+  <div class="flex items-center gap-3 mb-1">
+    <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+    </div>
+    <span class="font-h2 text-h2 font-bold tracking-tight text-primary">ai-research</span>
+  </div>
+  <p class="font-label-sm text-label-sm text-on-surface-variant">Analytical Intelligence</p>
 </div>
-<div class="flex-1 flex flex-col gap-xs">
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="../index.html"><span class="material-symbols-outlined">dashboard</span><span class="font-body-md text-body-md">ダッシュボード</span></a>
-  <a class="flex items-center gap-md text-brand-blue font-bold bg-[#4F8EF7]/10 rounded-lg px-4 py-2 border border-brand-blue/20" href="#"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">article</span><span class="font-body-md text-body-md">今日の最新レポート</span></a>
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">calendar_view_week</span><span class="font-body-md text-body-md">今週のまとめ</span></a>
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">menu_book</span><span class="font-body-md text-body-md">AI用語図鑑</span></a>
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">trending_up</span><span class="font-body-md text-body-md">トレンド分析</span></a>
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">business</span><span class="font-body-md text-body-md">業界への影響</span></a>
-</div>
-<div class="mt-auto pt-md border-t border-outline-variant px-xs">
-  <p class="font-label-sm text-label-sm text-on-surface-variant">ai-research / devaise-support</p>
-</div>
+<nav class="flex-1 flex flex-col space-y-1 px-2">
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="../index.html"><span class="material-symbols-outlined">dashboard</span><span class="font-body-md text-body-md">ダッシュボード</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-primary bg-secondary-container/30 font-bold border-r-4 border-primary" href="#"><span class="material-symbols-outlined">description</span><span class="font-body-md text-body-md">今日の最新レポート</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#"><span class="material-symbols-outlined">calendar_view_week</span><span class="font-body-md text-body-md">今週のまとめ</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#"><span class="material-symbols-outlined">menu_book</span><span class="font-body-md text-body-md">AI用語図鑑</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#"><span class="material-symbols-outlined">trending_up</span><span class="font-body-md text-body-md">トレンド分析</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#"><span class="material-symbols-outlined">business</span><span class="font-body-md text-body-md">業界への影響</span></a>
 </nav>
+<div class="mt-auto pt-4 border-t border-outline-variant px-4">
+  <div class="flex items-center gap-2">
+    <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center">
+      <span class="material-symbols-outlined text-primary">science</span>
+    </div>
+    <span class="font-label-sm text-label-sm text-on-surface-variant">devaise-support</span>
+  </div>
+</div>
+</aside>
 <main class="flex-1 md:ml-64 flex flex-col min-h-screen bg-surface w-full">
 <header class="bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center w-full h-16 px-margin sticky top-0 z-40">
   <div class="flex items-center gap-md">
@@ -94,7 +105,7 @@ tailwind.config = {
     <div class="h-6 w-px bg-outline-variant mx-sm"></div>
     <h2 class="font-h3 text-h3 font-bold text-on-surface hidden sm:block">📰 AI情報まとめ — 2026年5月7日（木）</h2>
   </div>
-  <span class="font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-05-07 15:46 UTC</span>
+  <span class="font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-05-07 17:33 UTC</span>
 </header>
 <div class="bg-surface-container-lowest/90 backdrop-blur-sm border-b border-outline-variant sticky top-16 z-30 px-margin py-md flex flex-wrap items-center justify-between gap-md">
   <div class="flex items-center gap-sm flex-wrap">
@@ -468,38 +479,47 @@ tailwind.config = {
     <table class="w-full text-left border-collapse">
       <thead><tr class="bg-surface-container-low border-b border-outline-variant">
         <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">用語</th>
-        <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">初出ソース</th>
+        <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">意味・定義</th>
+        <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium w-24">関連度</th>
       </tr></thead>
       <tbody class="divide-y divide-outline-variant"><tr class="hover:bg-surface-container-low transition-colors">
-  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">voice-driven AI agents</td>
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold w-36">voice-driven AI agents</td>
   <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">OpenAI Blog</td>
+  <td class="py-sm px-md w-20"><span class="bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">High</span></td>
 </tr><tr class="hover:bg-surface-container-low transition-colors">
-  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">service agent simulation</td>
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold w-36">service agent simulation</td>
   <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">OpenAI Blog</td>
+  <td class="py-sm px-md w-20"><span class="bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">High</span></td>
 </tr><tr class="hover:bg-surface-container-low transition-colors">
-  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">仕様駆動 × 探索駆動</td>
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold w-36">仕様駆動 × 探索駆動</td>
   <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">Zenn AI トピック</td>
+  <td class="py-sm px-md w-20"><span class="bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">High</span></td>
 </tr><tr class="hover:bg-surface-container-low transition-colors">
-  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">Claude スキル群</td>
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold w-36">Claude スキル群</td>
   <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">Zenn AI トピック</td>
+  <td class="py-sm px-md w-20"><span class="bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">High</span></td>
 </tr><tr class="hover:bg-surface-container-low transition-colors">
-  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">Model Context Protocol活用したテスト</td>
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold w-36">Model Context Protocol活用したテスト</td>
   <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">Zenn AI トピック</td>
+  <td class="py-sm px-md w-20"><span class="bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">High</span></td>
 </tr><tr class="hover:bg-surface-container-low transition-colors">
-  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">Vibe Coding</td>
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold w-36">Vibe Coding</td>
   <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">Zenn AI トピック</td>
+  <td class="py-sm px-md w-20"><span class="bg-amber-400 text-amber-900 px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">Med</span></td>
 </tr><tr class="hover:bg-surface-container-low transition-colors">
-  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">Claude Code レート制限</td>
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold w-36">Claude Code レート制限</td>
   <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">Zenn AI トピック</td>
+  <td class="py-sm px-md w-20"><span class="bg-amber-400 text-amber-900 px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">Med</span></td>
 </tr><tr class="hover:bg-surface-container-low transition-colors">
-  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">Opus API レート制限</td>
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold w-36">Opus API レート制限</td>
   <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">Zenn AI トピック</td>
+  <td class="py-sm px-md w-20"><span class="bg-amber-400 text-amber-900 px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">Med</span></td>
 </tr></tbody>
     </table>
   </div>
 </section>
   <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
-    ai-research システムにより自動生成 | 2026-05-07 15:46 UTC
+    ai-research システムにより自動生成 | 2026-05-07 17:33 UTC
   </footer>
 </div>
 </main>

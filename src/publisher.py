@@ -277,8 +277,9 @@ def _stitch_head(title: str) -> str:
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {{ font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }}</style>
 <script id="tailwind-config">
 tailwind.config = {{
   darkMode: "class",
@@ -314,13 +315,13 @@ tailwind.config = {{
       borderRadius: {{ DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" }},
       spacing: {{ xs: "4px", xl: "32px", sm: "8px", margin: "24px", md: "16px", gutter: "20px", unit: "4px", lg: "24px" }},
       fontFamily: {{
-        "body-md": ["Noto Sans JP","Inter","sans-serif"],
+        "body-md": ["Inter","sans-serif"],
         "data-mono": ["Inter","sans-serif"],
-        "h2": ["Noto Sans JP","Inter","sans-serif"],
-        "label-sm": ["Noto Sans JP","Inter","sans-serif"],
-        "body-lg": ["Noto Sans JP","Inter","sans-serif"],
-        "h1": ["Noto Sans JP","Inter","sans-serif"],
-        "h3": ["Noto Sans JP","Inter","sans-serif"]
+        "h2": ["Inter","sans-serif"],
+        "label-sm": ["Inter","sans-serif"],
+        "body-lg": ["Inter","sans-serif"],
+        "h1": ["Inter","sans-serif"],
+        "h3": ["Inter","sans-serif"]
       }},
       fontSize: {{
         "body-md": ["14px", {{"lineHeight":"20px","fontWeight":"400"}}],
@@ -342,34 +343,44 @@ def _sidebar_html(active: str = "dashboard", back_prefix: str = "") -> str:
     """サイドバーナビゲーションを返す。active='dashboard' or 'daily'"""
     def nav_item(icon: str, label: str, href: str, is_active: bool) -> str:
         if is_active:
-            return (f'<a class="flex items-center gap-md text-brand-blue font-bold '
-                    f'bg-[#4F8EF7]/10 rounded-lg px-4 py-2 border border-brand-blue/20" href="{href}">'
-                    f'<span class="material-symbols-outlined" style="font-variation-settings:\'FILL\' 1;">{icon}</span>'
+            return (f'<a class="flex items-center gap-3 px-4 py-3 text-primary bg-secondary-container/30 '
+                    f'font-bold border-r-4 border-primary" href="{href}">'
+                    f'<span class="material-symbols-outlined">{icon}</span>'
                     f'<span class="font-body-md text-body-md">{label}</span></a>')
-        return (f'<a class="flex items-center gap-md text-on-surface-variant px-4 py-2 '
-                f'hover:bg-surface-container-high transition-all rounded-lg" href="{href}">'
+        return (f'<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant '
+                f'hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="{href}">'
                 f'<span class="material-symbols-outlined">{icon}</span>'
                 f'<span class="font-body-md text-body-md">{label}</span></a>')
 
     index_href = f"{back_prefix}index.html"
     daily_href = "#"
-    return f"""<nav class="bg-surface-container-low border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col gap-sm p-md z-50 hidden md:flex">
-<div class="mb-lg px-xs">
-  <h1 class="font-h3 text-h3 font-bold text-primary">AI Research JP</h1>
-  <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Analytical Dashboard</p>
+    return f"""<aside class="bg-surface-container-lowest border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col py-6 z-20 hidden md:flex">
+<div class="px-6 mb-8">
+  <div class="flex items-center gap-3 mb-1">
+    <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+    </div>
+    <span class="font-h2 text-h2 font-bold tracking-tight text-primary">ai-research</span>
+  </div>
+  <p class="font-label-sm text-label-sm text-on-surface-variant">Analytical Intelligence</p>
 </div>
-<div class="flex-1 flex flex-col gap-xs">
+<nav class="flex-1 flex flex-col space-y-1 px-2">
   {nav_item("dashboard","ダッシュボード", index_href, active=="dashboard")}
-  {nav_item("article","今日の最新レポート", daily_href, active=="daily")}
+  {nav_item("description","今日の最新レポート", daily_href, active=="daily")}
   {nav_item("calendar_view_week","今週のまとめ","#", False)}
   {nav_item("menu_book","AI用語図鑑","#", False)}
   {nav_item("trending_up","トレンド分析","#", False)}
   {nav_item("business","業界への影響","#", False)}
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant px-4">
+  <div class="flex items-center gap-2">
+    <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center">
+      <span class="material-symbols-outlined text-primary">science</span>
+    </div>
+    <span class="font-label-sm text-label-sm text-on-surface-variant">devaise-support</span>
+  </div>
 </div>
-<div class="mt-auto pt-md border-t border-outline-variant px-xs">
-  <p class="font-label-sm text-label-sm text-on-surface-variant">ai-research / devaise-support</p>
-</div>
-</nav>"""
+</aside>"""
 
 
 def _score_circle_html(score: float, size: str = "md") -> str:
@@ -412,12 +423,14 @@ def _category_chart_html(articles: list[dict]) -> str:
     for i, (cat, cnt) in enumerate(counts.most_common(5)):
         pct = int(cnt / total * 100)
         color = colors[i % len(colors)]
-        rows += f"""<div class="flex items-center gap-sm">
-  <div class="w-28 font-label-sm text-label-sm text-on-surface-variant truncate">{_escape_html(cat)}</div>
-  <div class="flex-1 h-5 bg-surface-variant rounded-full overflow-hidden">
-    <div class="h-full bg-{color} rounded-full" style="width:{pct}%"></div>
+        rows += f"""<div>
+  <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mb-1.5">
+    <span>{_escape_html(cat)}</span>
+    <span class="font-data-mono">{pct}%</span>
   </div>
-  <div class="w-12 text-right font-data-mono text-data-mono text-on-surface-variant">{cnt}件</div>
+  <div class="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+    <div class="bg-{color} h-2 rounded-full" style="width:{pct}%"></div>
+  </div>
 </div>"""
     return rows
 
@@ -514,15 +527,24 @@ def generate_daily_html(articles: list[dict], target_date: date) -> str:
         terms = a.get("new_terms") or []
         if isinstance(terms, list):
             for t in terms:
-                new_terms.append({"term": str(t), "source": a.get("source_name", "")})
+                new_terms.append({"term": str(t), "source": a.get("source_name", ""), "score": a.get("score", 0)})
     term_rows = ""
     seen_terms: set = set()
     for t in new_terms:
         if t["term"] not in seen_terms:
             seen_terms.add(t["term"])
+            # 関連度バッジ: スコアが4.0以上→High(red)、3.5以上→Med(amber)、他→Low(green)
+            score_val = t.get("score", 0)
+            if score_val >= 4.0:
+                rel_badge = '<span class="bg-red-500 text-white px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">High</span>'
+            elif score_val >= 3.5:
+                rel_badge = '<span class="bg-amber-400 text-amber-900 px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">Med</span>'
+            else:
+                rel_badge = '<span class="bg-green-500 text-white px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">Low</span>'
             term_rows += f"""<tr class="hover:bg-surface-container-low transition-colors">
-  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold">{_escape_html(t["term"])}</td>
+  <td class="py-sm px-md font-data-mono text-data-mono text-brand-blue font-bold w-36">{_escape_html(t["term"])}</td>
   <td class="py-sm px-md font-body-md text-body-md text-on-surface-variant">{_escape_html(t["source"])}</td>
+  <td class="py-sm px-md w-20">{rel_badge}</td>
 </tr>"""
 
     terms_section = ""
@@ -536,7 +558,8 @@ def generate_daily_html(articles: list[dict], target_date: date) -> str:
     <table class="w-full text-left border-collapse">
       <thead><tr class="bg-surface-container-low border-b border-outline-variant">
         <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">用語</th>
-        <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">初出ソース</th>
+        <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">意味・定義</th>
+        <th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium w-24">関連度</th>
       </tr></thead>
       <tbody class="divide-y divide-outline-variant">{term_rows}</tbody>
     </table>
@@ -645,73 +668,81 @@ def generate_index_html(recent: list[tuple[date, list[dict]]]) -> str:
             new_terms_all.extend(str(t) for t in terms)
     new_terms_unique = list(dict.fromkeys(new_terms_all))  # 重複除去・順序保持
 
-    # KPI カード
-    kpi_cards = f"""<section class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
-  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
-    <span class="font-label-sm text-label-sm text-on-surface-variant">本日の収集記事</span>
-    <div class="flex items-baseline gap-sm">
-      <span class="font-h1 text-h1 text-on-surface">{total}</span>
-      <span class="material-symbols-outlined text-primary text-sm">article</span>
+    # KPI カード（Stitch v2: アイコン付き正方形バッジスタイル）
+    kpi_cards = f"""<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-gutter">
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-200">
+    <div class="flex justify-between items-start mb-4">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">本日の収集記事</span>
+      <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[18px]">article</span>
+      </div>
     </div>
+    <span class="font-h1 text-h1 text-on-background">{total}</span>
   </div>
-  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
-    <span class="font-label-sm text-label-sm text-on-surface-variant">週次候補</span>
-    <div class="flex items-baseline gap-sm">
-      <span class="font-h1 text-h1 text-on-surface">{weekly_count}</span>
-      <span class="material-symbols-outlined text-secondary text-sm">stars</span>
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-200">
+    <div class="flex justify-between items-start mb-4">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">週次候補</span>
+      <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[18px]">star</span>
+      </div>
     </div>
+    <span class="font-h1 text-h1 text-on-background">{weekly_count}</span>
   </div>
-  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
-    <span class="font-label-sm text-label-sm text-on-surface-variant">コンテンツ候補</span>
-    <div class="flex items-baseline gap-sm">
-      <span class="font-h1 text-h1 text-on-surface">{content_count}</span>
-      <span class="material-symbols-outlined text-secondary text-sm">edit_document</span>
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-200">
+    <div class="flex justify-between items-start mb-4">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">コンテンツ候補</span>
+      <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[18px]">lightbulb</span>
+      </div>
     </div>
+    <span class="font-h1 text-h1 text-on-background">{content_count}</span>
   </div>
-  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
-    <span class="font-label-sm text-label-sm text-on-surface-variant">新出AI用語</span>
-    <div class="flex items-baseline gap-sm">
-      <span class="font-h1 text-h1 text-on-surface">{len(new_terms_unique)}</span>
-      <span class="material-symbols-outlined text-tertiary text-sm">library_books</span>
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-200">
+    <div class="flex justify-between items-start mb-4">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">新出AI用語</span>
+      <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[18px]">new_releases</span>
+      </div>
     </div>
+    <span class="font-h1 text-h1 text-on-background">{len(new_terms_unique)}</span>
   </div>
 </section>"""
 
-    # トップ記事カード（左カラム）
+    # トップ記事リスト行（Stitch v2: inline score pill スタイル）
     top_articles_html = ""
     for a in sorted(today_articles, key=lambda x: x.get("score", 0), reverse=True)[:5]:
         score = a.get("score", 0)
-        circle = _score_circle_html(score, "md")
         title = _escape_html(a.get("title", "（タイトルなし）"))
         url = _escape_html(a.get("url", "#"))
         source = _escape_html(a.get("source_name", ""))
+        pub = (a.get("published_at") or "")[:10]
         category = _escape_html(a.get("category", ""))
-        summary = _escape_html((a.get("summary_raw") or "")[:100])
-        badges = _badge_html(a)
-        top_articles_html += f"""<div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
-  {circle}
-  <div class="flex-1 min-w-0">
-    <div class="flex justify-between items-start mb-xs gap-sm">
-      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+        summary = _escape_html((a.get("summary_raw") or "")[:120])
+        top_articles_html += f"""<div class="p-lg hover:bg-surface-container-low transition-colors duration-150 group">
+  <div class="flex justify-between items-start gap-4 mb-2">
+    <div class="flex-1">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="bg-primary/10 text-primary font-data-mono text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">psychology</span>{score:.1f}
+        </span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">{category}</span>
+        <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">{pub}</span>
+      </div>
+      <h3 class="font-h3 text-body-lg font-semibold text-on-background group-hover:text-primary transition-colors">
         <a href="{url}" target="_blank" rel="noopener">{title}</a>
-      </h4>
-      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">{category}</span>
-    </div>
-    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">{summary}</p>
-    <div class="flex items-center gap-xs flex-wrap">
-      <span class="font-label-sm text-label-sm text-on-surface-variant">{source}</span>
-      <span class="text-outline-variant">·</span>
-      {badges}
+      </h3>
     </div>
   </div>
+  <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 w-11/12">{summary}</p>
 </div>"""
 
     # カテゴリグラフ
     chart_rows = _category_chart_html(today_articles)
 
-    # 新出用語チップ
+    # 新出用語チップ（Stitch v2: hover付き rounded-full スタイル）
     term_chips = " ".join(
-        f'<span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">{_escape_html(t)}</span>'
+        f'<span class="bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-3 py-1.5 rounded-full cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors">{_escape_html(t)}</span>'
         for t in new_terms_unique[:10]
     ) or '<span class="font-body-md text-body-md text-on-surface-variant">（本日の新出用語なし）</span>'
 
@@ -741,45 +772,54 @@ def generate_index_html(recent: list[tuple[date, list[dict]]]) -> str:
     sidebar = _sidebar_html(active="dashboard", back_prefix="")
 
     return f"""{head}
-<body class="flex min-h-screen bg-surface-container-lowest font-body-md text-on-surface">
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-hidden flex h-screen">
 {sidebar}
-<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
-<header class="flex justify-between items-center w-full h-16 px-margin bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-10">
-  <div class="flex items-center gap-md lg:hidden">
-    <span class="material-symbols-outlined text-on-surface cursor-pointer">menu</span>
-    <span class="font-h3 text-h3 font-bold text-primary">ai-research</span>
-  </div>
-  <div class="hidden lg:flex items-center"></div>
-  <div class="flex items-center gap-margin">
-    <span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline-block">最終更新: {now_str}</span>
+<div class="flex-1 ml-64 flex flex-col relative min-h-screen">
+<header class="bg-surface-bright fixed top-0 right-0 w-[calc(100%-16rem)] z-10 border-b border-outline-variant flex justify-between items-center px-6 h-16">
+  <h1 class="font-h3 text-h3 text-on-background">Dashboard</h1>
+  <div class="flex items-center gap-4">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">最終更新: {now_str}</span>
+    <div class="flex items-center gap-2">
+      <button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high">
+        <span class="material-symbols-outlined">refresh</span>
+      </button>
+      <button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+    </div>
   </div>
 </header>
-<div class="p-margin flex flex-col gap-xl w-full max-w-7xl mx-auto">
+<main class="flex-1 mt-16 p-margin overflow-y-auto">
   {kpi_cards}
-  <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-    <div class="lg:col-span-7 flex flex-col gap-md">
-      <h3 class="font-h3 text-h3 text-on-surface border-b border-outline-variant pb-xs">
-        🏆 本日のトップ記事
-        <a href="daily/{today_date.isoformat()}.html" class="text-brand-blue font-label-sm text-label-sm ml-sm hover:underline">全{total}件を見る →</a>
-      </h3>
-      <div class="flex flex-col gap-sm">{top_articles_html}</div>
-    </div>
-    <div class="lg:col-span-5 flex flex-col gap-lg">
-      <div class="bg-surface border border-outline-variant rounded-lg p-md">
-        <h3 class="font-h3 text-h3 text-on-surface mb-md">カテゴリ別内訳</h3>
-        <div class="flex flex-col gap-sm">{chart_rows}</div>
-      </div>
-      <div class="bg-surface border border-outline-variant rounded-lg p-md">
-        <h3 class="font-h3 text-h3 text-on-surface mb-md">🆕 新出AI用語</h3>
-        <div class="flex flex-wrap gap-xs">{term_chips}</div>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+    <div class="lg:col-span-8 flex flex-col gap-gutter">
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-0 overflow-hidden">
+        <div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+          <h2 class="font-h3 text-h3 text-on-background">Today's Top Articles</h2>
+          <a href="daily/{today_date.isoformat()}.html" class="font-label-sm text-label-sm text-primary hover:underline">全{total}件を見る</a>
+        </div>
+        <div class="divide-y divide-outline-variant">{top_articles_html}</div>
       </div>
     </div>
-  </section>
-  <section class="mt-md">
-    <h3 class="font-h3 text-h3 text-on-surface border-b border-outline-variant pb-xs mb-md">📅 直近のレポート履歴</h3>
-    <div class="bg-surface border border-outline-variant rounded-lg overflow-hidden">
+    <div class="lg:col-span-4 flex flex-col gap-gutter">
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+        <h2 class="font-h3 text-h3 text-on-background mb-6">Category Breakdown</h2>
+        <div class="space-y-4">{chart_rows}</div>
+      </div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex-1">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="font-h3 text-h3 text-on-background">Recent New Terms</h2>
+          <span class="material-symbols-outlined text-outline">local_offer</span>
+        </div>
+        <div class="flex flex-wrap gap-2">{term_chips}</div>
+      </div>
+    </div>
+  </div>
+  <section class="mt-gutter">
+    <h2 class="font-h3 text-h3 text-on-background mb-4">📅 直近のレポート履歴</h2>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
       <table class="w-full text-left border-collapse">
-        <thead><tr class="bg-surface-container-low border-b border-outline-variant">
+        <thead><tr class="bg-surface-bright border-b border-outline-variant">
           <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">日付</th>
           <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">収集</th>
           <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">週次候補</th>
@@ -792,11 +832,11 @@ def generate_index_html(recent: list[tuple[date, list[dict]]]) -> str:
       </table>
     </div>
   </section>
-  <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+  <footer class="mt-gutter pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
     ai-research システムにより自動生成 | {now_str}
   </footer>
-</div>
 </main>
+</div>
 </body></html>"""
 
 

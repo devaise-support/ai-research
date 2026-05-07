@@ -7,8 +7,9 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }</style>
 <script id="tailwind-config">
 tailwind.config = {
   darkMode: "class",
@@ -44,13 +45,13 @@ tailwind.config = {
       borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
       spacing: { xs: "4px", xl: "32px", sm: "8px", margin: "24px", md: "16px", gutter: "20px", unit: "4px", lg: "24px" },
       fontFamily: {
-        "body-md": ["Noto Sans JP","Inter","sans-serif"],
+        "body-md": ["Inter","sans-serif"],
         "data-mono": ["Inter","sans-serif"],
-        "h2": ["Noto Sans JP","Inter","sans-serif"],
-        "label-sm": ["Noto Sans JP","Inter","sans-serif"],
-        "body-lg": ["Noto Sans JP","Inter","sans-serif"],
-        "h1": ["Noto Sans JP","Inter","sans-serif"],
-        "h3": ["Noto Sans JP","Inter","sans-serif"]
+        "h2": ["Inter","sans-serif"],
+        "label-sm": ["Inter","sans-serif"],
+        "body-lg": ["Inter","sans-serif"],
+        "h1": ["Inter","sans-serif"],
+        "h3": ["Inter","sans-serif"]
       },
       fontSize: {
         "body-md": ["14px", {"lineHeight":"20px","fontWeight":"400"}],
@@ -66,188 +67,226 @@ tailwind.config = {
 }
 </script>
 </head>
-<body class="flex min-h-screen bg-surface-container-lowest font-body-md text-on-surface">
-<nav class="bg-surface-container-low border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col gap-sm p-md z-50 hidden md:flex">
-<div class="mb-lg px-xs">
-  <h1 class="font-h3 text-h3 font-bold text-primary">AI Research JP</h1>
-  <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Analytical Dashboard</p>
-</div>
-<div class="flex-1 flex flex-col gap-xs">
-  <a class="flex items-center gap-md text-brand-blue font-bold bg-[#4F8EF7]/10 rounded-lg px-4 py-2 border border-brand-blue/20" href="index.html"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">dashboard</span><span class="font-body-md text-body-md">ダッシュボード</span></a>
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">article</span><span class="font-body-md text-body-md">今日の最新レポート</span></a>
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">calendar_view_week</span><span class="font-body-md text-body-md">今週のまとめ</span></a>
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">menu_book</span><span class="font-body-md text-body-md">AI用語図鑑</span></a>
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">trending_up</span><span class="font-body-md text-body-md">トレンド分析</span></a>
-  <a class="flex items-center gap-md text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all rounded-lg" href="#"><span class="material-symbols-outlined">business</span><span class="font-body-md text-body-md">業界への影響</span></a>
-</div>
-<div class="mt-auto pt-md border-t border-outline-variant px-xs">
-  <p class="font-label-sm text-label-sm text-on-surface-variant">ai-research / devaise-support</p>
-</div>
-</nav>
-<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
-<header class="flex justify-between items-center w-full h-16 px-margin bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-10">
-  <div class="flex items-center gap-md lg:hidden">
-    <span class="material-symbols-outlined text-on-surface cursor-pointer">menu</span>
-    <span class="font-h3 text-h3 font-bold text-primary">ai-research</span>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-hidden flex h-screen">
+<aside class="bg-surface-container-lowest border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col py-6 z-20 hidden md:flex">
+<div class="px-6 mb-8">
+  <div class="flex items-center gap-3 mb-1">
+    <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+    </div>
+    <span class="font-h2 text-h2 font-bold tracking-tight text-primary">ai-research</span>
   </div>
-  <div class="hidden lg:flex items-center"></div>
-  <div class="flex items-center gap-margin">
-    <span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline-block">最終更新: 2026-05-07 15:46 UTC</span>
+  <p class="font-label-sm text-label-sm text-on-surface-variant">Analytical Intelligence</p>
+</div>
+<nav class="flex-1 flex flex-col space-y-1 px-2">
+  <a class="flex items-center gap-3 px-4 py-3 text-primary bg-secondary-container/30 font-bold border-r-4 border-primary" href="index.html"><span class="material-symbols-outlined">dashboard</span><span class="font-body-md text-body-md">ダッシュボード</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#"><span class="material-symbols-outlined">description</span><span class="font-body-md text-body-md">今日の最新レポート</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#"><span class="material-symbols-outlined">calendar_view_week</span><span class="font-body-md text-body-md">今週のまとめ</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#"><span class="material-symbols-outlined">menu_book</span><span class="font-body-md text-body-md">AI用語図鑑</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#"><span class="material-symbols-outlined">trending_up</span><span class="font-body-md text-body-md">トレンド分析</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#"><span class="material-symbols-outlined">business</span><span class="font-body-md text-body-md">業界への影響</span></a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant px-4">
+  <div class="flex items-center gap-2">
+    <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center">
+      <span class="material-symbols-outlined text-primary">science</span>
+    </div>
+    <span class="font-label-sm text-label-sm text-on-surface-variant">devaise-support</span>
+  </div>
+</div>
+</aside>
+<div class="flex-1 ml-64 flex flex-col relative min-h-screen">
+<header class="bg-surface-bright fixed top-0 right-0 w-[calc(100%-16rem)] z-10 border-b border-outline-variant flex justify-between items-center px-6 h-16">
+  <h1 class="font-h3 text-h3 text-on-background">Dashboard</h1>
+  <div class="flex items-center gap-4">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">最終更新: 2026-05-07 17:33 UTC</span>
+    <div class="flex items-center gap-2">
+      <button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high">
+        <span class="material-symbols-outlined">refresh</span>
+      </button>
+      <button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+    </div>
   </div>
 </header>
-<div class="p-margin flex flex-col gap-xl w-full max-w-7xl mx-auto">
-  <section class="grid grid-cols-2 lg:grid-cols-4 gap-gutter">
-  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
-    <span class="font-label-sm text-label-sm text-on-surface-variant">本日の収集記事</span>
-    <div class="flex items-baseline gap-sm">
-      <span class="font-h1 text-h1 text-on-surface">11</span>
-      <span class="material-symbols-outlined text-primary text-sm">article</span>
+<main class="flex-1 mt-16 p-margin overflow-y-auto">
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-gutter">
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-200">
+    <div class="flex justify-between items-start mb-4">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">本日の収集記事</span>
+      <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[18px]">article</span>
+      </div>
     </div>
+    <span class="font-h1 text-h1 text-on-background">11</span>
   </div>
-  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
-    <span class="font-label-sm text-label-sm text-on-surface-variant">週次候補</span>
-    <div class="flex items-baseline gap-sm">
-      <span class="font-h1 text-h1 text-on-surface">5</span>
-      <span class="material-symbols-outlined text-secondary text-sm">stars</span>
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-200">
+    <div class="flex justify-between items-start mb-4">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">週次候補</span>
+      <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[18px]">star</span>
+      </div>
     </div>
+    <span class="font-h1 text-h1 text-on-background">5</span>
   </div>
-  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
-    <span class="font-label-sm text-label-sm text-on-surface-variant">コンテンツ候補</span>
-    <div class="flex items-baseline gap-sm">
-      <span class="font-h1 text-h1 text-on-surface">2</span>
-      <span class="material-symbols-outlined text-secondary text-sm">edit_document</span>
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-200">
+    <div class="flex justify-between items-start mb-4">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">コンテンツ候補</span>
+      <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[18px]">lightbulb</span>
+      </div>
     </div>
+    <span class="font-h1 text-h1 text-on-background">2</span>
   </div>
-  <div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-xs hover:shadow-sm transition-shadow">
-    <span class="font-label-sm text-label-sm text-on-surface-variant">新出AI用語</span>
-    <div class="flex items-baseline gap-sm">
-      <span class="font-h1 text-h1 text-on-surface">8</span>
-      <span class="material-symbols-outlined text-tertiary text-sm">library_books</span>
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-200">
+    <div class="flex justify-between items-start mb-4">
+      <span class="font-label-sm text-label-sm text-on-surface-variant">新出AI用語</span>
+      <div class="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+        <span class="material-symbols-outlined text-[18px]">new_releases</span>
+      </div>
     </div>
+    <span class="font-h1 text-h1 text-on-background">8</span>
   </div>
 </section>
-  <section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-    <div class="lg:col-span-7 flex flex-col gap-md">
-      <h3 class="font-h3 text-h3 text-on-surface border-b border-outline-variant pb-xs">
-        🏆 本日のトップ記事
-        <a href="daily/2026-05-07.html" class="text-brand-blue font-label-sm text-label-sm ml-sm hover:underline">全11件を見る →</a>
-      </h3>
-      <div class="flex flex-col gap-sm"><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
-  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-primary bg-primary/10 shadow-sm"><span class="font-bold text-primary">4.7</span></div>
-  <div class="flex-1 min-w-0">
-    <div class="flex justify-between items-start mb-xs gap-sm">
-      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+    <div class="lg:col-span-8 flex flex-col gap-gutter">
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-0 overflow-hidden">
+        <div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+          <h2 class="font-h3 text-h3 text-on-background">Today's Top Articles</h2>
+          <a href="daily/2026-05-07.html" class="font-label-sm text-label-sm text-primary hover:underline">全11件を見る</a>
+        </div>
+        <div class="divide-y divide-outline-variant"><div class="p-lg hover:bg-surface-container-low transition-colors duration-150 group">
+  <div class="flex justify-between items-start gap-4 mb-2">
+    <div class="flex-1">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="bg-primary/10 text-primary font-data-mono text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">psychology</span>4.7
+        </span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ビジネス活用事例</span>
+        <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">2026-05-07</span>
+      </div>
+      <h3 class="font-h3 text-body-lg font-semibold text-on-background group-hover:text-primary transition-colors">
         <a href="https://openai.com/index/parloa" target="_blank" rel="noopener">Parloa builds service agents customers want to talk to</a>
-      </h4>
-      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ビジネス活用事例</span>
-    </div>
-    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">Parloa leverages OpenAI models to power scalable, voice-driven AI customer service agents, enabling </p>
-    <div class="flex items-center gap-xs flex-wrap">
-      <span class="font-label-sm text-label-sm text-on-surface-variant">OpenAI Blog</span>
-      <span class="text-outline-variant">·</span>
-      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span> <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-green-200">月次候補</span> <span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-orange-200">コンテンツ候補</span> <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-purple-200">X投稿候補</span> <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-label-sm text-label-sm border border-gray-200">一次情報</span>
+      </h3>
     </div>
   </div>
-</div><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
-  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-primary bg-primary/10 shadow-sm"><span class="font-bold text-primary">4.2</span></div>
-  <div class="flex-1 min-w-0">
-    <div class="flex justify-between items-start mb-xs gap-sm">
-      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+  <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 w-11/12">Parloa leverages OpenAI models to power scalable, voice-driven AI customer service agents, enabling enterprises to desig</p>
+</div><div class="p-lg hover:bg-surface-container-low transition-colors duration-150 group">
+  <div class="flex justify-between items-start gap-4 mb-2">
+    <div class="flex-1">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="bg-primary/10 text-primary font-data-mono text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">psychology</span>4.2
+        </span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ビジネス活用事例</span>
+        <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">2026-05-07</span>
+      </div>
+      <h3 class="font-h3 text-body-lg font-semibold text-on-background group-hover:text-primary transition-colors">
         <a href="https://zenn.dev/nascimento_qa/articles/916dd983e10add" target="_blank" rel="noopener">AI時代のQAは『書いて回す』から『生成・解釈・判断する』へ ─ 仕様駆動 × 探索駆動の二刀流</a>
-      </h4>
-      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ビジネス活用事例</span>
-    </div>
-    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">はじめに QAエンジニアの仕事は「テストケースを手で起こし、手で回し、結果を Excel に貼る」だった時代から、ここ1〜2年で大きく形を変えつつあります。Playwright のような自動化基盤、C</p>
-    <div class="flex items-center gap-xs flex-wrap">
-      <span class="font-label-sm text-label-sm text-on-surface-variant">Zenn AI トピック</span>
-      <span class="text-outline-variant">·</span>
-      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span> <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-green-200">月次候補</span> <span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-orange-200">コンテンツ候補</span>
+      </h3>
     </div>
   </div>
-</div><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
-  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-tertiary bg-tertiary/10 shadow-sm"><span class="font-bold text-tertiary">3.9</span></div>
-  <div class="flex-1 min-w-0">
-    <div class="flex justify-between items-start mb-xs gap-sm">
-      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+  <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 w-11/12">はじめに QAエンジニアの仕事は「テストケースを手で起こし、手で回し、結果を Excel に貼る」だった時代から、ここ1〜2年で大きく形を変えつつあります。Playwright のような自動化基盤、Claude Code のようなAIエージ</p>
+</div><div class="p-lg hover:bg-surface-container-low transition-colors duration-150 group">
+  <div class="flex justify-between items-start gap-4 mb-2">
+    <div class="flex-1">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="bg-primary/10 text-primary font-data-mono text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">psychology</span>3.9
+        </span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ビジネス活用事例</span>
+        <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">2026-05-07</span>
+      </div>
+      <h3 class="font-h3 text-body-lg font-semibold text-on-background group-hover:text-primary transition-colors">
         <a href="https://zenn.dev/kenimo49/articles/vibe-coding-fails-document-first-6-mds" target="_blank" rel="noopener">Vibe Codingが3回目で破綻する理由 6つの定義書と3つの記憶ファイルで「いい感じ」をやめる</a>
-      </h4>
-      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ビジネス活用事例</span>
-    </div>
-    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">「いい感じに作って」と言って、3回目で破綻する Claude Codeに「いい感じにログイン画面を作って」と頼む。それなりのコードが出てくる。動く。ここまでは気持ちいい瞬間です。 問題は2回目の修正か</p>
-    <div class="flex items-center gap-xs flex-wrap">
-      <span class="font-label-sm text-label-sm text-on-surface-variant">Zenn AI トピック</span>
-      <span class="text-outline-variant">·</span>
-      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span>
+      </h3>
     </div>
   </div>
-</div><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
-  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-tertiary bg-tertiary/10 shadow-sm"><span class="font-bold text-tertiary">3.9</span></div>
-  <div class="flex-1 min-w-0">
-    <div class="flex justify-between items-start mb-xs gap-sm">
-      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+  <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 w-11/12">「いい感じに作って」と言って、3回目で破綻する Claude Codeに「いい感じにログイン画面を作って」と頼む。それなりのコードが出てくる。動く。ここまでは気持ちいい瞬間です。 問題は2回目の修正からです。「ボタン位置を変えて」と頼むと、</p>
+</div><div class="p-lg hover:bg-surface-container-low transition-colors duration-150 group">
+  <div class="flex justify-between items-start gap-4 mb-2">
+    <div class="flex-1">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="bg-primary/10 text-primary font-data-mono text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">psychology</span>3.9
+        </span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ニュース・動向</span>
+        <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">2026-05-07</span>
+      </div>
+      <h3 class="font-h3 text-body-lg font-semibold text-on-background group-hover:text-primary transition-colors">
         <a href="https://zenn.dev/sktt_panda/articles/claude-code-rate-limit-relax-2026-05" target="_blank" rel="noopener">【2026/5/7】Claude Code 5時間制限が2倍化、SpaceX 300MW提携で全プラン緩和</a>
-      </h4>
-      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ニュース・動向</span>
-    </div>
-    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">2026年5月7日（米国時間 5/6）、Anthropic が SpaceX とのコンピュート提携と、Claude Code の使用上限を一斉に引き上げる発表を行った。Pro / Max / Team</p>
-    <div class="flex items-center gap-xs flex-wrap">
-      <span class="font-label-sm text-label-sm text-on-surface-variant">Zenn AI トピック</span>
-      <span class="text-outline-variant">·</span>
-      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span>
+      </h3>
     </div>
   </div>
-</div><div class="bg-surface border border-outline-variant rounded-lg p-md flex items-start gap-md hover:bg-surface-container-low transition-colors group">
-  <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 text-base rounded-full border-[3px] border-tertiary bg-tertiary/10 shadow-sm"><span class="font-bold text-tertiary">3.5</span></div>
-  <div class="flex-1 min-w-0">
-    <div class="flex justify-between items-start mb-xs gap-sm">
-      <h4 class="font-body-lg text-body-lg font-semibold text-on-surface group-hover:text-primary transition-colors line-clamp-2">
+  <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 w-11/12">2026年5月7日（米国時間 5/6）、Anthropic が SpaceX とのコンピュート提携と、Claude Code の使用上限を一斉に引き上げる発表を行った。Pro / Max / Team / シートベース Enterprise</p>
+</div><div class="p-lg hover:bg-surface-container-low transition-colors duration-150 group">
+  <div class="flex justify-between items-start gap-4 mb-2">
+    <div class="flex-1">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="bg-primary/10 text-primary font-data-mono text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">psychology</span>3.5
+        </span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">ビジネス活用事例</span>
+        <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">2026-05-07</span>
+      </div>
+      <h3 class="font-h3 text-body-lg font-semibold text-on-background group-hover:text-primary transition-colors">
         <a href="https://www.itmedia.co.jp/enterprise/articles/2605/07/news113.html" target="_blank" rel="noopener">M365 Copilotの定着に万全なサポートは逆効果？　社内利用率95％の企業が実践する5つの鉄則</a>
-      </h4>
-      <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-2 py-1 rounded flex-shrink-0">ビジネス活用事例</span>
-    </div>
-    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-xs">務効率化が期待されるMicrosoft 365 Copilot。だが、実際は従業員の間で利用に差が生じ、思うように活用が進まないことも。本ブックレットでは、導入事例と専門家の解説を通じ、運用の盲点と定</p>
-    <div class="flex items-center gap-xs flex-wrap">
-      <span class="font-label-sm text-label-sm text-on-surface-variant">ITmedia AI</span>
-      <span class="text-outline-variant">·</span>
-      <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span>
+      </h3>
     </div>
   </div>
-</div></div>
-    </div>
-    <div class="lg:col-span-5 flex flex-col gap-lg">
-      <div class="bg-surface border border-outline-variant rounded-lg p-md">
-        <h3 class="font-h3 text-h3 text-on-surface mb-md">カテゴリ別内訳</h3>
-        <div class="flex flex-col gap-sm"><div class="flex items-center gap-sm">
-  <div class="w-28 font-label-sm text-label-sm text-on-surface-variant truncate">ビジネス活用事例</div>
-  <div class="flex-1 h-5 bg-surface-variant rounded-full overflow-hidden">
-    <div class="h-full bg-primary rounded-full" style="width:54%"></div>
-  </div>
-  <div class="w-12 text-right font-data-mono text-data-mono text-on-surface-variant">6件</div>
-</div><div class="flex items-center gap-sm">
-  <div class="w-28 font-label-sm text-label-sm text-on-surface-variant truncate">ニュース・動向</div>
-  <div class="flex-1 h-5 bg-surface-variant rounded-full overflow-hidden">
-    <div class="h-full bg-primary-container rounded-full" style="width:36%"></div>
-  </div>
-  <div class="w-12 text-right font-data-mono text-data-mono text-on-surface-variant">4件</div>
-</div><div class="flex items-center gap-sm">
-  <div class="w-28 font-label-sm text-label-sm text-on-surface-variant truncate">動画・チュートリアル</div>
-  <div class="flex-1 h-5 bg-surface-variant rounded-full overflow-hidden">
-    <div class="h-full bg-secondary rounded-full" style="width:9%"></div>
-  </div>
-  <div class="w-12 text-right font-data-mono text-data-mono text-on-surface-variant">1件</div>
+  <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 w-11/12">務効率化が期待されるMicrosoft 365 Copilot。だが、実際は従業員の間で利用に差が生じ、思うように活用が進まないことも。本ブックレットでは、導入事例と専門家の解説を通じ、運用の盲点と定着のポイントを解説する。</p>
 </div></div>
       </div>
-      <div class="bg-surface border border-outline-variant rounded-lg p-md">
-        <h3 class="font-h3 text-h3 text-on-surface mb-md">🆕 新出AI用語</h3>
-        <div class="flex flex-wrap gap-xs"><span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">voice-driven AI agents</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">service agent simulation</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">仕様駆動 × 探索駆動</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Claude スキル群</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Model Context Protocol活用したテスト</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Vibe Coding</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Claude Code レート制限</span> <span class="inline-flex items-center px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm border border-tertiary-fixed-dim">Opus API レート制限</span></div>
+    </div>
+    <div class="lg:col-span-4 flex flex-col gap-gutter">
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+        <h2 class="font-h3 text-h3 text-on-background mb-6">Category Breakdown</h2>
+        <div class="space-y-4"><div>
+  <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mb-1.5">
+    <span>ビジネス活用事例</span>
+    <span class="font-data-mono">54%</span>
+  </div>
+  <div class="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+    <div class="bg-primary h-2 rounded-full" style="width:54%"></div>
+  </div>
+</div><div>
+  <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mb-1.5">
+    <span>ニュース・動向</span>
+    <span class="font-data-mono">36%</span>
+  </div>
+  <div class="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+    <div class="bg-primary-container h-2 rounded-full" style="width:36%"></div>
+  </div>
+</div><div>
+  <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mb-1.5">
+    <span>動画・チュートリアル</span>
+    <span class="font-data-mono">9%</span>
+  </div>
+  <div class="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+    <div class="bg-secondary h-2 rounded-full" style="width:9%"></div>
+  </div>
+</div></div>
+      </div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex-1">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="font-h3 text-h3 text-on-background">Recent New Terms</h2>
+          <span class="material-symbols-outlined text-outline">local_offer</span>
+        </div>
+        <div class="flex flex-wrap gap-2"><span class="bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-3 py-1.5 rounded-full cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors">voice-driven AI agents</span> <span class="bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-3 py-1.5 rounded-full cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors">service agent simulation</span> <span class="bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-3 py-1.5 rounded-full cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors">仕様駆動 × 探索駆動</span> <span class="bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-3 py-1.5 rounded-full cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors">Claude スキル群</span> <span class="bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-3 py-1.5 rounded-full cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors">Model Context Protocol活用したテスト</span> <span class="bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-3 py-1.5 rounded-full cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors">Vibe Coding</span> <span class="bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-3 py-1.5 rounded-full cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors">Claude Code レート制限</span> <span class="bg-surface-container-high text-on-surface-variant border border-outline-variant font-label-sm text-label-sm px-3 py-1.5 rounded-full cursor-pointer hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors">Opus API レート制限</span></div>
       </div>
     </div>
-  </section>
-  <section class="mt-md">
-    <h3 class="font-h3 text-h3 text-on-surface border-b border-outline-variant pb-xs mb-md">📅 直近のレポート履歴</h3>
-    <div class="bg-surface border border-outline-variant rounded-lg overflow-hidden">
+  </div>
+  <section class="mt-gutter">
+    <h2 class="font-h3 text-h3 text-on-background mb-4">📅 直近のレポート履歴</h2>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
       <table class="w-full text-left border-collapse">
-        <thead><tr class="bg-surface-container-low border-b border-outline-variant">
+        <thead><tr class="bg-surface-bright border-b border-outline-variant">
           <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">日付</th>
           <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">収集</th>
           <th class="p-md font-label-sm text-label-sm text-on-surface-variant font-medium">週次候補</th>
@@ -280,9 +319,9 @@ tailwind.config = {
       </table>
     </div>
   </section>
-  <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
-    ai-research システムにより自動生成 | 2026-05-07 15:46 UTC
+  <footer class="mt-gutter pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+    ai-research システムにより自動生成 | 2026-05-07 17:33 UTC
   </footer>
-</div>
 </main>
+</div>
 </body></html>
