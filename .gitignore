@@ -31,3 +31,7 @@ Thumbs.db
 
 # ログファイル（大量になる場合）
 *.log
+
+# Stitch 一時ダウンロードファイル（スキル化後は不要）
+stitch_*.html
+screen_*.html
