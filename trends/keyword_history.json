@@ -1,3 +1,34 @@
 {
-  "2026-W19": {}
+  "2026-W19": {
+    "Claude Code": 2,
+    "Vibe Coding": 2,
+    "TechCrunch Disrupt": 2,
+    "イベント": 2,
+    "音声AI": 1,
+    "カスタマーサービス": 1,
+    "AIエージェント": 1,
+    "OpenAI": 1,
+    "企業向けSaaS": 1,
+    "音声対話": 1,
+    "voice-driven AI agents": 1,
+    "service agent simulation": 1,
+    "QA自動化": 1,
+    "MCP": 1,
+    "テスト自動化": 1,
+    "AI時代の働き方": 1,
+    "仕様駆動テスト": 1,
+    "仕様駆動 × 探索駆動": 1,
+    "Claude スキル群": 1,
+    "Model Context Protocol活用したテスト": 1,
+    "プロンプトエンジニアリング": 1,
+    "AI開発効率化": 1,
+    "定義書": 1,
+    "メモリ管理": 1,
+    "Claude": 1,
+    "Anthropic": 1,
+    "SpaceX": 1,
+    "コンピュート提携": 1,
+    "レート制限": 1,
+    "AI開発効率": 1
+  }
 }
