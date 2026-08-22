@@ -1,16 +1,11 @@
 # 規制・政策・倫理
 
-> 最終更新: 2026-08-15 22:14 UTC | 累計記事数: 2件
+> 最終更新: 2026-08-22 22:14 UTC | 累計記事数: 4件
 
 ## 概要
 
-# 規制・政策・倫理分野の最新動向
-
-収集された記事が限定的なため、明確な政策トレンドの判断は困難ですが、以下の動向が見られます。
-
-**ガバナンス体系の理論的基盤構築**が進行中です。モノイダル圏論（複雑なシステムの振る舞いを数学的に記述する理論）を用いて、AIシステムの実行管理を厳密に定義する研究が行われており、規制可能なAI設計の土台作りが学術レベルで進んでいます。
-
-また、**説明可能なAI意思決定システム**の実装も注目されています。知識駆動型のLLM（大規模言語モデル）を活用した意思決定支援システムが開発されており、AI判断の透明性確保と倫理的配慮が実用レベルで求められていることを示しています。これは今後の企業のAI導入において、説明責任を果たすための重要な技術動向といえます。
+*規制・政策・倫理に関する情報を自動収集・整理しています。*
+*（APIキー設定でAI生成サマリーが有効になります）*
 
 ## 最新ニュース TOP5
 
@@ -19,16 +14,27 @@
 
 （APIキー未設定のためモックスコアを使用）
 
-### 2. [A Knowledge-Driven LLM-Based Decision-Support System fo](https://arxiv.org/abs/2605.01100)
+### 2. [Offering Zero Data Retention for frontier models](https://openai.com/index/offering-zero-data-retention-for-frontier-models)
+**3.6 ★★★☆☆** | OpenAI Blog | 2026-08-19
+
+（スコアリングAPIエラー）
+
+### 3. [A Knowledge-Driven LLM-Based Decision-Support System fo](https://arxiv.org/abs/2605.01100)
 **3.5 ★★★☆☆** | arXiv cs.AI | 2026-05-06
 
 （APIキー未設定のためモックスコアを使用）
+
+### 4. [OpenAI says California should strengthen its AI safety ](https://techcrunch.com/2026/08/22/openai-says-california-should-strengthen-its-ai-safety-bill/)
+**2.9 ★★☆☆☆** | TechCrunch AI | 2026-08-22
+
+（スコアリングAPIエラー）
 
 
 ## 月別収集件数（時系列）
 
 | 月 | 件数 |
 |-----|------|
+| 2026-08 | 2件 |
 | 2026-05 | 2件 |
 
 ---
