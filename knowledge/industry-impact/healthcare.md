@@ -1,6 +1,6 @@
 # 医療・ヘルスケア — AI活用インパクトスコア
 
-> 最終更新: 2026-08-22 22:14 UTC | 関連記事数: 2件
+> 最終更新: 2026-08-29 23:47 UTC | 関連記事数: 5件
 
 ## 月別インパクトスコア推移
 
@@ -9,12 +9,12 @@ xychart-beta
   title "医療・ヘルスケア 月別インパクトスコア"
   x-axis [2026-05, 2026-08]
   y-axis "スコア" 0 --> 5
-  bar [3.41, 3.0]
+  bar [3.41, 3.11]
 ```
 
 | 月 | 関連記事数 | 平均スコア |
 |-----|-----------|-----------|
-| 2026-08 | 1件 | 3.00 |
+| 2026-08 | 4件 | 3.11 |
 | 2026-05 | 1件 | 3.41 |
 
 ## 注目記事 TOP3
@@ -24,8 +24,13 @@ xychart-beta
 
 （APIキー未設定のためモックスコアを使用）
 
-### 2. [毎週AIエージェントにBTOパソコン約1,000機種を調査させて、コスパの良い機種に絞って自サイトに掲載してい](https://zenn.dev/specsense/articles/00122f738901db)
-**3.0 ★★★☆☆** | Zenn AI トピック | 2026-08-21
+### 2. [Standalone LLM and a Pre-specified Agentic Pipeline for](https://arxiv.org/abs/2608.26109)
+**3.3 ★★★☆☆** | arXiv cs.AI | 2026-08-28
+
+（スコアリングAPIエラー）
+
+### 3. [Methodological and Conceptual Framework for 5D Multi-Ta](https://arxiv.org/abs/2608.26149)
+**3.3 ★★★☆☆** | arXiv cs.AI | 2026-08-29
 
 （スコアリングAPIエラー）
 

@@ -1,6 +1,6 @@
 # 規制・政策・倫理
 
-> 最終更新: 2026-08-22 22:14 UTC | 累計記事数: 4件
+> 最終更新: 2026-08-29 23:47 UTC | 累計記事数: 5件
 
 ## 概要
 
@@ -29,12 +29,17 @@
 
 （スコアリングAPIエラー）
 
+### 5. [Flock CEO calls for ‘compromise’ as surveillance compan](https://techcrunch.com/2026/08/23/flock-ceo-calls-for-compromise-as-surveillance-company-faces-growing-backlash/)
+**2.9 ★★☆☆☆** | TechCrunch AI | 2026-08-23
+
+（スコアリングAPIエラー）
+
 
 ## 月別収集件数（時系列）
 
 | 月 | 件数 |
 |-----|------|
-| 2026-08 | 2件 |
+| 2026-08 | 3件 |
 | 2026-05 | 2件 |
 
 ---
