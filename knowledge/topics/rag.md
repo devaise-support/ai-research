@@ -1,6 +1,6 @@
 # RAG・検索拡張
 
-> 最終更新: 2026-08-29 23:47 UTC | 累計記事数: 3件
+> 最終更新: 2026-09-05 23:29 UTC | 累計記事数: 5件
 
 ## 概要
 
@@ -30,11 +30,22 @@ ParloaがOpenAIのモデルを活用し、音声駆動型のAIカスタマーサ
 
 （スコアリングAPIエラー）
 
+### 4. [Google’s Android update tackles motion sickness, access](https://techcrunch.com/2026/09/01/googles-android-update-tackles-motion-sickness-accessibility-and-more/)
+**2.9 ★★☆☆☆** | TechCrunch AI | 2026-09-01
+
+（スコアリングAPIエラー）
+
+### 5. [Meta is paying to peek at how you use their latest AI m](https://techcrunch.com/2026/09/03/meta-is-paying-to-peek-at-how-you-use-their-latest-ai-model/)
+**2.9 ★★☆☆☆** | TechCrunch AI | 2026-09-03
+
+（スコアリングAPIエラー）
+
 
 ## 月別収集件数（時系列）
 
 | 月 | 件数 |
 |-----|------|
+| 2026-09 | 2件 |
 | 2026-08 | 1件 |
 | 2026-05 | 2件 |
 

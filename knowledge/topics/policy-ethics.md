@@ -1,6 +1,6 @@
 # 規制・政策・倫理
 
-> 最終更新: 2026-08-29 23:47 UTC | 累計記事数: 5件
+> 最終更新: 2026-09-05 23:29 UTC | 累計記事数: 9件
 
 ## 概要
 
@@ -24,13 +24,13 @@
 
 （APIキー未設定のためモックスコアを使用）
 
-### 4. [OpenAI says California should strengthen its AI safety ](https://techcrunch.com/2026/08/22/openai-says-california-should-strengthen-its-ai-safety-bill/)
-**2.9 ★★☆☆☆** | TechCrunch AI | 2026-08-22
+### 4. [MasterControl Seventeen Every Time](https://arxiv.org/abs/2609.03209)
+**3.3 ★★★☆☆** | arXiv cs.AI | 2026-09-04
 
 （スコアリングAPIエラー）
 
-### 5. [Flock CEO calls for ‘compromise’ as surveillance compan](https://techcrunch.com/2026/08/23/flock-ceo-calls-for-compromise-as-surveillance-company-faces-growing-backlash/)
-**2.9 ★★☆☆☆** | TechCrunch AI | 2026-08-23
+### 5. [「本音で」では抜けない安全域。AIに『最悪案』を出させる脱抑制プロンプトを試した](https://zenn.dev/every_ai_recipe/articles/ai-worst-idea-cost-cutting)
+**3.0 ★★★☆☆** | Zenn AI トピック | 2026-09-01
 
 （スコアリングAPIエラー）
 
@@ -39,6 +39,7 @@
 
 | 月 | 件数 |
 |-----|------|
+| 2026-09 | 4件 |
 | 2026-08 | 3件 |
 | 2026-05 | 2件 |
 
