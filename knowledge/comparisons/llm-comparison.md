@@ -1,6 +1,6 @@
 # LLM比較（GPT vs Claude vs Gemini）
 
-> 最終更新: 2026-09-05 23:29 UTC
+> 最終更新: 2026-09-12 23:38 UTC
 
 > ⚠️ 本ページはスコアリング記事から自動生成されたものです。最新情報は公式ドキュメントをご確認ください。
 
@@ -9,9 +9,9 @@
 | モデル/ツール | 言及記事数 | 最新記事 |
 |--------------|-----------|---------|
 | **GPT-4** | 0件 |  |
-| **GPT-5** | 3件 | 2026-08-22 |
-| **Claude** | 28件 | 2026-09-05 |
-| **Gemini** | 9件 | 2026-09-05 |
+| **GPT-5** | 5件 | 2026-09-08 |
+| **Claude** | 34件 | 2026-09-12 |
+| **Gemini** | 11件 | 2026-09-09 |
 | **Llama** | 2件 | 2026-08-26 |
 | **Mistral** | 0件 |  |
 
@@ -19,7 +19,7 @@
 
 - [Replit expands access to software creation with GPT-5.6](https://openai.com/index/replit) ★3.6 | 2026-08-19
 - [Previewing Ultrafast mode: GPT-5.6 Sol at up to 14X the](https://openai.com/index/previewing-ultrafast) ★3.6 | 2026-08-13
-- [OpenAI、「GPT-5.6 Sol」のAPI料金を値下げ　入力20％出力33％安く、11月21日まで](https://www.itmedia.co.jp/aiplus/article/2608/23/2000000700/) ★3.0 | 2026-08-22
+- [How GPT-5.6 Sol helps run quantum computing experiments](https://openai.com/index/codex-quantum-computing-experiments) ★3.6 | 2026-09-08
 
 ### Claude の最新記事
 

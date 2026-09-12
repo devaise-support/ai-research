@@ -1,6 +1,6 @@
 # AIエージェント
 
-> 最終更新: 2026-09-05 23:29 UTC | 累計記事数: 37件
+> 最終更新: 2026-09-12 23:38 UTC | 累計記事数: 52件
 
 ## 概要
 
@@ -27,27 +27,27 @@ QAエンジニアの業務がAI時代に転換。従来の手動テストケー�
 
 `QA自動化` `Claude Code` `MCP` `テスト自動化`
 
-### 3. [Virtual Speech Therapist: A Clinician-in-the-Loop AI Sp](https://arxiv.org/abs/2605.01101)
+### 3. [Research acceleration: The view inside OpenAI](https://openai.com/index/research-acceleration-view-inside-openai)
+**3.6 ★★★☆☆** | OpenAI Blog | 2026-09-06
+
+（スコアリングAPIエラー）
+
+### 4. [How GPT-5.6 Sol helps run quantum computing experiments](https://openai.com/index/codex-quantum-computing-experiments)
+**3.6 ★★★☆☆** | OpenAI Blog | 2026-09-08
+
+（スコアリングAPIエラー）
+
+### 5. [Virtual Speech Therapist: A Clinician-in-the-Loop AI Sp](https://arxiv.org/abs/2605.01101)
 **3.4 ★★★☆☆** | arXiv cs.AI | 2026-05-06
 
 （APIキー未設定のためモックスコアを使用）
-
-### 4. [運用編：スカウト評価システムをどう使ったか](https://zenn.dev/tsukitsukiss/articles/copilot-scout-eval-operation)
-**3.3 ★★★☆☆** | Zenn AI トピック | 2026-05-06
-
-（APIキー未設定のためモックスコアを使用）
-
-### 5. [Standalone LLM and a Pre-specified Agentic Pipeline for](https://arxiv.org/abs/2608.26109)
-**3.3 ★★★☆☆** | arXiv cs.AI | 2026-08-28
-
-（スコアリングAPIエラー）
 
 
 ## 月別収集件数（時系列）
 
 | 月 | 件数 |
 |-----|------|
-| 2026-09 | 11件 |
+| 2026-09 | 26件 |
 | 2026-08 | 21件 |
 | 2026-05 | 5件 |
 

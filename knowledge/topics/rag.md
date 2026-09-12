@@ -1,6 +1,6 @@
 # RAG・検索拡張
 
-> 最終更新: 2026-09-05 23:29 UTC | 累計記事数: 5件
+> 最終更新: 2026-09-12 23:38 UTC | 累計記事数: 7件
 
 ## 概要
 
@@ -20,23 +20,23 @@ ParloaがOpenAIのモデルを活用し、音声駆動型のAIカスタマーサ
 
 `音声AI` `カスタマーサービス` `AIエージェント` `OpenAI`
 
-### 2. [A Knowledge-Driven LLM-Based Decision-Support System fo](https://arxiv.org/abs/2605.01100)
+### 2. [Rapidly scaling online storage to serve over 1 billion ](https://openai.com/index/scaling-storage-one-billion-users-part-one)
+**3.6 ★★★☆☆** | OpenAI Blog | 2026-09-11
+
+（スコアリングAPIエラー）
+
+### 3. [A Knowledge-Driven LLM-Based Decision-Support System fo](https://arxiv.org/abs/2605.01100)
 **3.5 ★★★☆☆** | arXiv cs.AI | 2026-05-06
 
 （APIキー未設定のためモックスコアを使用）
 
-### 3. [Large Models for Battery Prognostics and Health Managem](https://arxiv.org/abs/2608.26111)
+### 4. [Large Models for Battery Prognostics and Health Managem](https://arxiv.org/abs/2608.26111)
 **3.3 ★★★☆☆** | arXiv cs.AI | 2026-08-28
 
 （スコアリングAPIエラー）
 
-### 4. [Google’s Android update tackles motion sickness, access](https://techcrunch.com/2026/09/01/googles-android-update-tackles-motion-sickness-accessibility-and-more/)
-**2.9 ★★☆☆☆** | TechCrunch AI | 2026-09-01
-
-（スコアリングAPIエラー）
-
-### 5. [Meta is paying to peek at how you use their latest AI m](https://techcrunch.com/2026/09/03/meta-is-paying-to-peek-at-how-you-use-their-latest-ai-model/)
-**2.9 ★★☆☆☆** | TechCrunch AI | 2026-09-03
+### 5. [From Matching Models to Recruiting Agents: A Systematiz](https://arxiv.org/abs/2609.04286)
+**3.3 ★★★☆☆** | arXiv cs.AI | 2026-09-07
 
 （スコアリングAPIエラー）
 
@@ -45,7 +45,7 @@ ParloaがOpenAIのモデルを活用し、音声駆動型のAIカスタマーサ
 
 | 月 | 件数 |
 |-----|------|
-| 2026-09 | 2件 |
+| 2026-09 | 4件 |
 | 2026-08 | 1件 |
 | 2026-05 | 2件 |
 

@@ -1,6 +1,6 @@
 # 規制・政策・倫理
 
-> 最終更新: 2026-09-05 23:29 UTC | 累計記事数: 9件
+> 最終更新: 2026-09-12 23:38 UTC | 累計記事数: 14件
 
 ## 概要
 
@@ -19,18 +19,18 @@
 
 （スコアリングAPIエラー）
 
-### 3. [A Knowledge-Driven LLM-Based Decision-Support System fo](https://arxiv.org/abs/2605.01100)
+### 3. [Paul Christiano joins OpenAI Foundation Board](https://openai.com/index/paul-christiano-joins-openai-foundation-board)
+**3.6 ★★★☆☆** | OpenAI Blog | 2026-09-09
+
+（スコアリングAPIエラー）
+
+### 4. [A Knowledge-Driven LLM-Based Decision-Support System fo](https://arxiv.org/abs/2605.01100)
 **3.5 ★★★☆☆** | arXiv cs.AI | 2026-05-06
 
 （APIキー未設定のためモックスコアを使用）
 
-### 4. [MasterControl Seventeen Every Time](https://arxiv.org/abs/2609.03209)
+### 5. [MasterControl Seventeen Every Time](https://arxiv.org/abs/2609.03209)
 **3.3 ★★★☆☆** | arXiv cs.AI | 2026-09-04
-
-（スコアリングAPIエラー）
-
-### 5. [「本音で」では抜けない安全域。AIに『最悪案』を出させる脱抑制プロンプトを試した](https://zenn.dev/every_ai_recipe/articles/ai-worst-idea-cost-cutting)
-**3.0 ★★★☆☆** | Zenn AI トピック | 2026-09-01
 
 （スコアリングAPIエラー）
 
@@ -39,7 +39,7 @@
 
 | 月 | 件数 |
 |-----|------|
-| 2026-09 | 4件 |
+| 2026-09 | 9件 |
 | 2026-08 | 3件 |
 | 2026-05 | 2件 |
 
