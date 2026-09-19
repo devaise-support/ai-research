@@ -1,6 +1,6 @@
 # AIエージェント
 
-> 最終更新: 2026-09-12 23:38 UTC | 累計記事数: 52件
+> 最終更新: 2026-09-19 23:49 UTC | 累計記事数: 68件
 
 ## 概要
 
@@ -37,17 +37,17 @@ QAエンジニアの業務がAI時代に転換。従来の手動テストケー�
 
 （スコアリングAPIエラー）
 
-### 5. [Virtual Speech Therapist: A Clinician-in-the-Loop AI Sp](https://arxiv.org/abs/2605.01101)
-**3.4 ★★★☆☆** | arXiv cs.AI | 2026-05-06
+### 5. [Reimagining advertising with AI](https://openai.com/index/reimagining-advertising-with-ai)
+**3.6 ★★★☆☆** | OpenAI Blog | 2026-09-16
 
-（APIキー未設定のためモックスコアを使用）
+（スコアリングAPIエラー）
 
 
 ## 月別収集件数（時系列）
 
 | 月 | 件数 |
 |-----|------|
-| 2026-09 | 26件 |
+| 2026-09 | 42件 |
 | 2026-08 | 21件 |
 | 2026-05 | 5件 |
 

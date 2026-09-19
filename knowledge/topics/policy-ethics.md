@@ -1,6 +1,6 @@
 # 規制・政策・倫理
 
-> 最終更新: 2026-09-12 23:38 UTC | 累計記事数: 14件
+> 最終更新: 2026-09-19 23:49 UTC | 累計記事数: 24件
 
 ## 概要
 
@@ -24,13 +24,13 @@
 
 （スコアリングAPIエラー）
 
-### 4. [A Knowledge-Driven LLM-Based Decision-Support System fo](https://arxiv.org/abs/2605.01100)
-**3.5 ★★★☆☆** | arXiv cs.AI | 2026-05-06
+### 4. [The AI policy window is open. We need to act.](https://openai.com/index/ai-policy-window)
+**3.6 ★★★☆☆** | OpenAI Blog | 2026-09-09
 
-（APIキー未設定のためモックスコアを使用）
+（スコアリングAPIエラー）
 
-### 5. [MasterControl Seventeen Every Time](https://arxiv.org/abs/2609.03209)
-**3.3 ★★★☆☆** | arXiv cs.AI | 2026-09-04
+### 5. [Introducing the Australian Youth Safety Blueprint](https://openai.com/index/australian-youth-safety-blueprint)
+**3.6 ★★★☆☆** | OpenAI Blog | 2026-09-18
 
 （スコアリングAPIエラー）
 
@@ -39,7 +39,7 @@
 
 | 月 | 件数 |
 |-----|------|
-| 2026-09 | 9件 |
+| 2026-09 | 19件 |
 | 2026-08 | 3件 |
 | 2026-05 | 2件 |
 
