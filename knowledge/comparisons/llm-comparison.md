@@ -1,6 +1,6 @@
 # LLM比較（GPT vs Claude vs Gemini）
 
-> 最終更新: 2026-09-19 23:49 UTC
+> 最終更新: 2026-09-27 00:05 UTC
 
 > ⚠️ 本ページはスコアリング記事から自動生成されたものです。最新情報は公式ドキュメントをご確認ください。
 
@@ -10,8 +10,8 @@
 |--------------|-----------|---------|
 | **GPT-4** | 0件 |  |
 | **GPT-5** | 5件 | 2026-09-08 |
-| **Claude** | 41件 | 2026-09-19 |
-| **Gemini** | 14件 | 2026-09-19 |
+| **Claude** | 49件 | 2026-09-26 |
+| **Gemini** | 15件 | 2026-09-24 |
 | **Llama** | 3件 | 2026-09-18 |
 | **Mistral** | 0件 |  |
 
@@ -31,7 +31,7 @@
 
 - [Intelligent transcription with Gemini 3.5 Transcribe](https://deepmind.google/blog/intelligent-transcription-with-gemini-3-5-transcribe/) ★3.6 | 2026-08-26
 - [Introducing Gemini 3.8 Live and 3.8 Live Extended Think](https://deepmind.google/blog/introducing-gemini-3-8-live-and-3-8-live-extended-thinking/) ★3.6 | 2026-09-15
-- [GoogleはAI競争に負けたのか　「最強のAI」ではなく「AIの“電力網”」を選ぶ賭け](https://atmarkit.itmedia.co.jp/ait/articles/2608/21/news006.html) ★3.0 | 2026-08-20
+- [Introducing Gemini 3.8 Live with Live Avatar](https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar/) ★3.6 | 2026-09-24
 
 ### Llama の最新記事
 
