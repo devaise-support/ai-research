@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI情報まとめ — 2026年10月1日（木） | ai-research</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; } body { line-height: 1.8; } p, li, td, th { line-height: 1.8; }</style>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "brand-blue": "#4F8EF7",
+        "surface-dim": "#d8d9e2", "on-secondary": "#ffffff",
+        "secondary-fixed": "#d3e4fe", "on-primary-fixed": "#001a40",
+        "surface-container-low": "#f2f3fc", "on-error": "#ffffff",
+        "on-tertiary-container": "#fffbff", "tertiary": "#894e00",
+        "on-secondary-container": "#54647a", "surface-bright": "#f9f9ff",
+        "on-primary-container": "#fefcff", "surface-variant": "#e1e2eb",
+        "surface-container-high": "#e7e8f1", "primary": "#0059ba",
+        "tertiary-fixed": "#ffdcbf", "on-secondary-fixed-variant": "#38485d",
+        "on-primary-fixed-variant": "#004492", "error": "#ba1a1a",
+        "outline": "#727784", "primary-container": "#2c72d9",
+        "secondary-container": "#d0e1fb", "inverse-surface": "#2e3037",
+        "surface-container-lowest": "#ffffff", "inverse-primary": "#acc7ff",
+        "surface-container": "#ecedf6", "on-primary": "#ffffff",
+        "on-surface": "#191c22", "surface": "#f9f9ff",
+        "on-tertiary-fixed": "#2d1600", "outline-variant": "#c2c6d5",
+        "inverse-on-surface": "#eff0f9", "on-background": "#191c22",
+        "primary-fixed": "#d7e2ff", "on-secondary-fixed": "#0b1c30",
+        "on-tertiary-fixed-variant": "#6a3b00", "secondary": "#505f76",
+        "surface-tint": "#005bbf", "error-container": "#ffdad6",
+        "primary-fixed-dim": "#acc7ff", "on-tertiary": "#ffffff",
+        "background": "#f8f7f6", "tertiary-container": "#ac6300",
+        "secondary-fixed-dim": "#b7c8e1", "on-surface-variant": "#424753",
+        "surface-container-highest": "#e1e2eb", "on-error-container": "#93000a",
+        "tertiary-fixed-dim": "#ffb873"
+      },
+      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+      spacing: { xs: "4px", xl: "32px", sm: "8px", margin: "24px", md: "16px", gutter: "20px", unit: "4px", lg: "24px" },
+      fontFamily: {
+        "body-md": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "data-mono": ["Inter", "sans-serif"],
+        "h2": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "label-sm": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "body-lg": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "h1": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"],
+        "h3": ["Inter", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "sans-serif"]
+      },
+      fontSize: {
+        "body-md": ["14px", {"lineHeight":"20px","fontWeight":"400"}],
+        "data-mono": ["14px", {"lineHeight":"20px","fontWeight":"500"}],
+        "h2": ["24px", {"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],
+        "label-sm": ["12px", {"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],
+        "body-lg": ["16px", {"lineHeight":"24px","fontWeight":"400"}],
+        "h1": ["30px", {"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],
+        "h3": ["20px", {"lineHeight":"28px","fontWeight":"600"}]
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<aside class="bg-surface-container-lowest border-r border-outline-variant fixed left-0 top-0 h-full w-64 flex flex-col py-6 z-20 hidden md:flex">
+<div class="px-6 mb-8">
+  <div class="flex items-center gap-3 mb-1">
+    <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+    </div>
+    <span class="font-h2 text-h2 font-bold tracking-tight text-primary">ai-research</span>
+  </div>
+  <p class="font-label-sm text-label-sm text-on-surface-variant">Analytical Intelligence</p>
+</div>
+<nav class="flex-1 flex flex-col space-y-1 px-2">
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="../index.html"><span class="material-symbols-outlined">dashboard</span><span class="font-body-md text-body-md">ダッシュボード</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-primary bg-secondary-container/30 font-bold border-r-4 border-primary" href="../daily/2026-10-01.html"><span class="material-symbols-outlined">description</span><span class="font-body-md text-body-md">今日の最新レポート</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="../weekly.html"><span class="material-symbols-outlined">calendar_view_week</span><span class="font-body-md text-body-md">今週のまとめ</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="../glossary.html"><span class="material-symbols-outlined">menu_book</span><span class="font-body-md text-body-md">AI用語図鑑</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="../trends.html"><span class="material-symbols-outlined">trending_up</span><span class="font-body-md text-body-md">トレンド分析</span></a>
+  <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="../industry.html"><span class="material-symbols-outlined">business</span><span class="font-body-md text-body-md">業界への影響</span></a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant px-4">
+  <div class="flex items-center gap-2">
+    <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center">
+      <span class="material-symbols-outlined text-primary">science</span>
+    </div>
+    <span class="font-label-sm text-label-sm text-on-surface-variant">devaise-support</span>
+  </div>
+</div>
+</aside>
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen bg-surface w-full">
+<header class="bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center w-full h-16 px-margin sticky top-0 z-40">
+  <div class="flex items-center gap-md">
+    <a class="flex items-center gap-xs text-on-surface-variant hover:text-brand-blue transition-colors" href="../index.html">
+      <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+      <span class="font-label-sm text-label-sm">ダッシュボードへ</span>
+    </a>
+    <div class="h-6 w-px bg-outline-variant mx-sm"></div>
+    <h2 class="font-h3 text-h3 font-bold text-on-surface hidden sm:block">📰 AI情報まとめ — 2026年10月1日（木）</h2>
+  </div>
+  <span class="font-label-sm text-label-sm text-on-surface-variant hidden lg:inline">更新: 2026-10-01 00:21 UTC</span>
+</header>
+<div class="bg-surface-container-lowest/90 backdrop-blur-sm border-b border-outline-variant sticky top-16 z-30 px-margin py-md flex flex-wrap items-center justify-between gap-md">
+  <div class="flex items-center gap-sm flex-wrap">
+    <button onclick="filterArticles('all')" id="filter-all" class="px-md py-sm bg-brand-blue text-white rounded-full font-label-sm text-label-sm shadow-sm">すべて</button><button onclick="filterArticles('ニュース・動向')" class="px-md py-sm bg-surface text-on-surface border border-outline-variant rounded-full font-label-sm text-label-sm hover:border-brand-blue hover:text-brand-blue transition-colors">ニュース・動向</button>
+  </div>
+  <div class="flex items-center gap-sm">
+    <span class="font-label-sm text-label-sm text-on-surface-variant">スコア:</span>
+    <select onchange="filterByScore(this.value)" class="bg-surface border border-outline-variant text-on-surface font-body-md text-body-md rounded-md px-sm py-xs outline-none">
+      <option value="0">すべて</option>
+      <option value="4.0">4.0以上</option>
+      <option value="3.5">3.5以上</option>
+      <option value="3.0">3.0以上</option>
+    </select>
+    <span id="article-count" class="font-label-sm text-label-sm text-on-surface-variant">10件表示中</span>
+  </div>
+</div>
+<div class="p-margin flex flex-col gap-xl max-w-5xl mx-auto w-full">
+  <p class="font-body-md text-body-md text-on-surface-variant">
+    収集10件 · 週次候補1件 · コンテンツ候補0件
+  </p>
+  <section id="articles-list" class="flex flex-col gap-lg">
+    <article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="3.6">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-tertiary bg-tertiary/10 shadow-sm"><span class="font-bold text-tertiary">3.6</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm border border-blue-200 flex-shrink-0">EN→JP</span>
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md"></p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">Gemini 4 Argon: our next era of frontier intelligence</p>
+            <a href="https://deepmind.google/blog/gemini-4-argon-our-next-era-of-frontier-intelligence/" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Google DeepMind Blog · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-ce56aa83d006')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-ce56aa83d006">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-label-sm text-label-sm border border-blue-200">週次候補</span></div>
+      <div id="card-ce56aa83d006" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article><article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="3.0">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-secondary bg-secondary/10 shadow-sm"><span class="font-bold text-secondary">3.0</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">AIの活用が進むほど、企業は外部のサービスやインフラへの依存を深める。データやモデルへのコントロールを保ち、自らの意思で選択できる状態を守る「AI主権」はなぜ経営課題になったのか、4つの観点から解説する。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">AI主権はなぜ「切実な経営課題」になったのか　モデル“禁輸”問題が示した「選択肢を持つこと」の重要性</p>
+            <a href="https://www.itmedia.co.jp/aiplus/article/2610/01/2000001909/" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">ITmedia AI · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-afca89ff4f38')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-afca89ff4f38">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="text-on-surface-variant font-label-sm text-label-sm">—</span></div>
+      <div id="card-afca89ff4f38" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article><article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="3.0">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-secondary bg-secondary/10 shadow-sm"><span class="font-bold text-secondary">3.0</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">日立製作所とファナックはフィジカルAI（人工知能）実装の共同事業化に向けた戦略的パートナーシップを締結した。日立のAI技術とファナックの産業用ロボットを組み合わせたフィジカルAIの共同実証と共同展開を推進する。共同実証で得られたフィジカルAIの実装／運用ノウハウを生かして、2027年度からグローバルなインストールベースを活用して展開する。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">日立とファナックがフィジカルAI協業　日立エッジAI×ファナックロボ有効性も検証</p>
+            <a href="https://monoist.itmedia.co.jp/mn/articles/2610/01/news031.html" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">ITmedia AI · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-312dfd68afa3')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-312dfd68afa3">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="text-on-surface-variant font-label-sm text-label-sm">—</span></div>
+      <div id="card-312dfd68afa3" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article><article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="3.0">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-secondary bg-secondary/10 shadow-sm"><span class="font-bold text-secondary">3.0</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">Googleは、次世代フロンティアモデル「Gemini 4 Argon」を発表した。最大出力100万トークンに対応し、長時間に及ぶ業務処理や自律的なサイバー脆弱性修正に強みを持つ。安全対策を強化した上で、まずは信頼できるサイバー防御組織に先行提供し、有料APIなどで順次拡大する。</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">Google、「Gemini 4 Pro」ではなく「Gemini 4 Agron」発表　まずはサイバー防御組織に限定提供、出力上限は100万トークンに</p>
+            <a href="https://www.itmedia.co.jp/news/article/2610/01/2000001912/" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">ITmedia AI · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-e33c8aca16df')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-e33c8aca16df">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="text-on-surface-variant font-label-sm text-label-sm">—</span></div>
+      <div id="card-e33c8aca16df" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article><article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="3.0">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-secondary bg-secondary/10 shadow-sm"><span class="font-bold text-secondary">3.0</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">大きな不正アクセスや情報漏えいのニュースが、ここのところ続いています。 そのたびに気になるのが、自分が普段使っているサイトは大丈夫なのかということです。カード番号を入れているあのサイトは？ 会員登録しているあのサービスは？ もちろん、外から見ただけで「安全」とは言えません。でも、外から見て分かる「危なそうなサイン」はあります。何年も前にサポートが終わったフレームワークを使っている。カード番号をサイト自身のフォームでそのまま受け取っている。サーバーのバージョンを堂々と公開している。そういうことです。 もう 1 つ気になるのが、そもそも本物のショップなのかです。偽の通販サイトの被害も、警察や...</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">このサイト、本当に大丈夫？ LLMと相談して、ブラウザだけで動く簡易診断ツール SafePeek を作った</p>
+            <a href="https://zenn.dev/singularity/articles/safepeek-site-check" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Zenn AI トピック · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-65f7c1090b57')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-65f7c1090b57">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="text-on-surface-variant font-label-sm text-label-sm">—</span></div>
+      <div id="card-65f7c1090b57" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article><article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="3.0">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-secondary bg-secondary/10 shadow-sm"><span class="font-bold text-secondary">3.0</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">TL;DR 本日、AI生成された臭くて読みにくい日本語を、自然で読みやすい日本語へ書き直すスキル『yomiyasu（よみやす）』をリリースしました。 従来のAI-Slop対策スキルで用いられてきた 「単語を禁止する」手法から改善し、統語構造（=誰が・何を・どうした）の復元と、比喩動詞の具体化に特化していることが特徴です。 Claude Code, Codex, Cursorなどの主要なAI Agentで/yomiyasuで呼び出せます。 // 導入コマンド npx skills add nanaism/yomiyasu リポジトリは以下です。 https://github.com/n...</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">AI-Slopな日本語を構造レベルで読みやすくするSkill『yomiyasu（よみやす）』を作りました</p>
+            <a href="https://zenn.dev/algoartis/articles/0b1c731881b25c" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Zenn AI トピック · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-0a6e25d0cfff')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-0a6e25d0cfff">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="text-on-surface-variant font-label-sm text-label-sm">—</span></div>
+      <div id="card-0a6e25d0cfff" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article><article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="3.0">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-secondary bg-secondary/10 shadow-sm"><span class="font-bold text-secondary">3.0</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">知りたかったのは、AI がどこで間違え、どこで人の目が要るか 機密を扱う仕事で AI を使うなら、できるだけ手元のローカル LLM で済ませたい。では、どこまでならローカル LLM に任せられるのか。この記事は、その境界線を探すための実験の記録で、2 回に分けて書きます。 第 1 回（この記事）：AI が書いたアプリの欠陥は、どこで間違い、どの工程で捕まり、どの工程では捕まらなかったか 第 2 回：どうすれば防げるか。要件に書けば防げたこと、書いても防げないこと、人と AI の分担 同じ要件定義書を、ローカル LLM とクラウド AI にそれぞれ渡してアプリを実装させ、両方...</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">ローカル LLM とクラウド AI に同じアプリを作らせた — AI はどこで間違えるか（第 1 回）</p>
+            <a href="https://zenn.dev/exapolicy/articles/08ea0fdc7ea660" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Zenn AI トピック · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-2e9ccdcc709e')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-2e9ccdcc709e">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="text-on-surface-variant font-label-sm text-label-sm">—</span></div>
+      <div id="card-2e9ccdcc709e" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article><article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="2.85">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-secondary bg-secondary/10 shadow-sm"><span class="font-bold text-secondary">2.9</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm border border-blue-200 flex-shrink-0">EN→JP</span>
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">Google has released its latest Gemini model, marketing it as a workhorse for coding and cybersecurity work.</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">Google releases Gemini 4 Argon, called its most powerful model yet</p>
+            <a href="https://techcrunch.com/2026/09/30/google-releases-gemini-4-argon-called-its-most-powerful-model-yet/" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">TechCrunch AI · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-0de5978e2c8e')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-0de5978e2c8e">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="text-on-surface-variant font-label-sm text-label-sm">—</span></div>
+      <div id="card-0de5978e2c8e" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article><article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="2.85">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-secondary bg-secondary/10 shadow-sm"><span class="font-bold text-secondary">2.9</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm border border-blue-200 flex-shrink-0">EN→JP</span>
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">Flow Engineering, which is bringing AI agents to hardware design, also landed Roelof Botha as an angel investor and board member.</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">Valor, Atreides, and Sequoia back AI startup Flow Engineering at $750M valuation</p>
+            <a href="https://techcrunch.com/2026/09/30/valor-atreides-and-sequoia-back-ai-startup-flow-engineering-at-750m-valuation/" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">TechCrunch AI · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-131c3b052433')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-131c3b052433">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="text-on-surface-variant font-label-sm text-label-sm">—</span></div>
+      <div id="card-131c3b052433" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article><article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow" data-category="ニュース・動向" data-score="2.85">
+  <div class="flex gap-lg items-start">
+    <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-lg rounded-full border-[3px] border-secondary bg-secondary/10 shadow-sm"><span class="font-bold text-secondary">2.9</span></div>
+    <div class="flex-1 flex flex-col gap-sm">
+      <div class="flex items-start justify-between gap-md">
+        <div class="flex-1">
+          <!-- カテゴリ + 言語バッジ -->
+          <div class="flex items-center gap-xs flex-wrap mb-sm">
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">ニュース・動向</span>
+            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-label-sm text-label-sm border border-blue-200 flex-shrink-0">EN→JP</span>
+          </div>
+          <!-- ★ 日本語要約をメインコンテンツとして大きく表示 -->
+          <p class="font-body-lg text-body-lg text-on-surface leading-relaxed line-clamp-4 mb-md">OpenAI's &quot;Decisions API&quot; is a Jev clone that confirms the importance of fast, cheap intelligence.</p>
+          <!-- 元記事タイトル（小さめ）+ リンク -->
+          <div class="flex items-start justify-between gap-sm flex-wrap">
+            <p class="font-label-sm text-label-sm text-on-surface-variant line-clamp-2 flex-1">OpenAI’s Jev clone could help the frontier lab stop its swarming agents</p>
+            <a href="https://techcrunch.com/2026/09/30/openais-jev-clone-could-help-the-frontier-lab-stop-its-swarming-agents/" target="_blank" rel="noopener"
+               class="flex items-center gap-xs text-primary font-label-sm text-label-sm hover:underline flex-shrink-0 mt-xs">
+              記事を読む
+              <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">TechCrunch AI · 2026-09-30</p>
+        </div>
+        <button onclick="toggleDetails('card-348f0c13d3c0')" class="text-on-surface-variant hover:text-brand-blue transition-colors flex-shrink-0 mt-xs">
+          <span class="material-symbols-outlined" id="icon-card-348f0c13d3c0">expand_more</span>
+        </button>
+      </div>
+      <div class="flex items-center gap-sm flex-wrap"><span class="text-on-surface-variant font-label-sm text-label-sm">—</span></div>
+      <div id="card-348f0c13d3c0" class="hidden bg-surface-container-low rounded-lg p-md border border-outline-variant/50 flex flex-col gap-md mt-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">スコア内訳</h4>
+            <ul class="font-data-mono text-data-mono text-on-surface space-y-1"><li class="flex justify-between"><span class="text-on-surface-variant">重要度:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">新規性:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">ビジネス価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">学習価値:</span><span class="text-brand-blue font-bold">3/5</span></li><li class="flex justify-between"><span class="text-on-surface-variant">一次情報度:</span><span class="text-brand-blue font-bold">3/5</span></li></ul>
+          </div>
+          <div>
+            <h4 class="font-label-sm text-label-sm text-on-surface-variant mb-xs">タグ</h4>
+            <div class="flex flex-wrap gap-xs"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+  </section>
+  
+  <footer class="mt-xl pt-md border-t border-outline-variant font-label-sm text-label-sm text-on-surface-variant">
+    ai-research システムにより自動生成 | 2026-10-01 00:21 UTC
+  </footer>
+</div>
+</main>
+<script>
+function toggleDetails(id) {
+  const el = document.getElementById(id);
+  const icon = document.getElementById('icon-' + id);
+  if (el.classList.contains('hidden')) {
+    el.classList.remove('hidden');
+    el.classList.add('flex');
+    icon.textContent = 'expand_less';
+  } else {
+    el.classList.add('hidden');
+    el.classList.remove('flex');
+    icon.textContent = 'expand_more';
+  }
+}
+let currentCat = 'all', currentScore = 0;
+function applyFilters() {
+  const articles = document.querySelectorAll('#articles-list article');
+  let visible = 0;
+  articles.forEach(a => {
+    const cat = a.dataset.category;
+    const score = parseFloat(a.dataset.score);
+    const show = (currentCat === 'all' || cat === currentCat) && score >= currentScore;
+    a.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('article-count').textContent = visible + '件表示中';
+}
+function filterArticles(cat) {
+  currentCat = cat;
+  document.querySelectorAll('[onclick^="filterArticles"]').forEach(b => {
+    b.className = b.className.replace('bg-brand-blue text-white', 'bg-surface text-on-surface border border-outline-variant');
+  });
+  event.target.className = event.target.className.replace('bg-surface text-on-surface border border-outline-variant', 'bg-brand-blue text-white');
+  applyFilters();
+}
+function filterByScore(val) { currentScore = parseFloat(val); applyFilters(); }
+</script>
+</body></html>
