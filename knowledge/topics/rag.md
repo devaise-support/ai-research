@@ -1,6 +1,6 @@
 # RAG・検索拡張
 
-> 最終更新: 2026-10-04 00:16 UTC | 累計記事数: 9件
+> 最終更新: 2026-10-11 00:36 UTC | 累計記事数: 11件
 
 ## 概要
 
@@ -25,18 +25,18 @@ ParloaがOpenAIのモデルを活用し、音声駆動型のAIカスタマーサ
 
 （スコアリングAPIエラー）
 
-### 3. [A Knowledge-Driven LLM-Based Decision-Support System fo](https://arxiv.org/abs/2605.01100)
+### 3. [EmbeddingGemma 2: an open, lightweight multimodal embed](https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/)
+**3.6 ★★★☆☆** | Google DeepMind Blog | 2026-10-06
+
+（スコアリングAPIエラー）
+
+### 4. [A Knowledge-Driven LLM-Based Decision-Support System fo](https://arxiv.org/abs/2605.01100)
 **3.5 ★★★☆☆** | arXiv cs.AI | 2026-05-06
 
 （APIキー未設定のためモックスコアを使用）
 
-### 4. [Large Models for Battery Prognostics and Health Managem](https://arxiv.org/abs/2608.26111)
+### 5. [Large Models for Battery Prognostics and Health Managem](https://arxiv.org/abs/2608.26111)
 **3.3 ★★★☆☆** | arXiv cs.AI | 2026-08-28
-
-（スコアリングAPIエラー）
-
-### 5. [From Matching Models to Recruiting Agents: A Systematiz](https://arxiv.org/abs/2609.04286)
-**3.3 ★★★☆☆** | arXiv cs.AI | 2026-09-07
 
 （スコアリングAPIエラー）
 
@@ -45,7 +45,7 @@ ParloaがOpenAIのモデルを活用し、音声駆動型のAIカスタマーサ
 
 | 月 | 件数 |
 |-----|------|
-| 2026-10 | 1件 |
+| 2026-10 | 3件 |
 | 2026-09 | 5件 |
 | 2026-08 | 1件 |
 | 2026-05 | 2件 |

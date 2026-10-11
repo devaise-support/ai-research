@@ -1,19 +1,20 @@
 # 美容・サロン — AI活用インパクトスコア
 
-> 最終更新: 2026-10-04 00:16 UTC | 関連記事数: 2件
+> 最終更新: 2026-10-11 00:36 UTC | 関連記事数: 3件
 
 ## 月別インパクトスコア推移
 
 ```mermaid
 xychart-beta
   title "美容・サロン 月別インパクトスコア"
-  x-axis [2026-09]
+  x-axis [2026-09, 2026-10]
   y-axis "スコア" 0 --> 5
-  bar [2.92]
+  bar [2.92, 3.0]
 ```
 
 | 月 | 関連記事数 | 平均スコア |
 |-----|-----------|-----------|
+| 2026-10 | 1件 | 3.00 |
 | 2026-09 | 2件 | 2.92 |
 
 ## 注目記事 TOP3
@@ -23,7 +24,12 @@ xychart-beta
 
 （スコアリングAPIエラー）
 
-### 2. [What will Apple’s John Ternus era look like?](https://techcrunch.com/video/what-will-apples-john-ternus-era-look-like/)
+### 2. [「予約機能を作って」は失敗する。Claude Codeへの指示は「やらないこと」と判断基準を渡す(Larave](https://zenn.dev/mugen_web/articles/claude-code-instruction-granularity)
+**3.0 ★★★☆☆** | Zenn AI トピック | 2026-10-08
+
+（スコアリングAPIエラー）
+
+### 3. [What will Apple’s John Ternus era look like?](https://techcrunch.com/video/what-will-apples-john-ternus-era-look-like/)
 **2.9 ★★☆☆☆** | TechCrunch AI | 2026-09-04
 
 （スコアリングAPIエラー）
