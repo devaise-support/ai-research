@@ -1,6 +1,6 @@
 # 画像・動画生成
 
-> 最終更新: 2026-10-11 00:36 UTC | 累計記事数: 2件
+> 最終更新: 2026-10-17 23:41 UTC | 累計記事数: 3件
 
 ## 概要
 
@@ -14,7 +14,12 @@
 
 （スコアリングAPIエラー）
 
-### 2. [Stability AI, maker of image generator Stable Diffusion](https://techcrunch.com/2026/08/25/stability-ai-maker-of-image-generator-stable-diffusion-raises-76-million-in-fresh-funding/)
+### 2. [GitHubトレンドの動画生成agent skill「video-shotcraft」を実際にレンダリングして](https://zenn.dev/matsushima_a/articles/day-012-video-shotcraft-ink-press-render)
+**3.0 ★★★☆☆** | Zenn AI トピック | 2026-10-11
+
+（スコアリングAPIエラー）
+
+### 3. [Stability AI, maker of image generator Stable Diffusion](https://techcrunch.com/2026/08/25/stability-ai-maker-of-image-generator-stable-diffusion-raises-76-million-in-fresh-funding/)
 **2.9 ★★☆☆☆** | TechCrunch AI | 2026-08-25
 
 （スコアリングAPIエラー）
@@ -24,6 +29,7 @@
 
 | 月 | 件数 |
 |-----|------|
+| 2026-10 | 1件 |
 | 2026-08 | 2件 |
 
 ---
